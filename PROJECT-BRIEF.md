@@ -20,40 +20,40 @@ Pairings will go as follows:
 
 #### Week 1, January 9 - 15
 
-1. DJ & Lindsey
-2. Alena & Shelley
+1. Dara & Jairo
+2. Elizabeth & Natalia
 
 #### Week 2, January 16 - 22
 
-1. Lindsey & Alena
-2. DJ & Shelley
+1. Jairo & Elizabeth
+2. Dara & Natalia
 
 #### Week 3, January 23 - 29
 
-1. Alena & DJ
-2. Shelley & Lindsey
+1. Elizabeth & Dara
+2. Natalia & Jairo
 
 #### Week 4, January 30 - February 5
 
-1. DJ & Lindsey
-2. Alena & Shelley
+1. Dara & Jairo
+2. Elizabeth & Natalia
 
 #### Week 5, February 6 - 12
 
-1. Lindsey & Alena
-2. DJ & Shelley
+1. Jairo & Elizabeth
+2. Dara & Natalia
 
 #### Week 6, February 13 - 19
 
-1. Alena & DJ
-2. Shelley & Lindsey
+1. Elizabeth & Dara
+2. Natalia & Jairo
 
 #### Week 7, February 20 - 26
 
-1. DJ & Lindsey
-2. Alena & Shelley
+1. Dara & Jairo
+2. Elizabeth & Natalia
 
 #### Week 8, February 27 - March 5
 
-1. Lindsey & Alena
-2. DJ & Shelley
+1. Jairo & Elizabeth
+2. Dara & Natalia
