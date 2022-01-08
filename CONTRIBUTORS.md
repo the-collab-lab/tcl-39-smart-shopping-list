@@ -8,6 +8,7 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 - [Elizabeth Rivera](https://github.com/elizabethriver) 🍫
 - [Jairo Espinel](https://github.com/JGitHub25) 🚀
+- [Dara Inampuez](https://github.com/Dara97) ⚡
 
 ## Mentors
 
