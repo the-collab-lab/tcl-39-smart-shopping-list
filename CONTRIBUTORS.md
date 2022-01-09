@@ -15,5 +15,6 @@ Add yourself as a contributor to this project as a Markdown link that links your
 
 - [Alejandro Coca](https://github.com/alxmcr) 😄
 - [Camila Parada Valderrama](https://github.com/candrepa1) ✨
+- [Fauricio Valencia](https://github.com/FauricioValencia) 👾
 
 ## Code of Conduct Contacts
