@@ -1,12 +1,10 @@
 import React from 'react';
-
-// import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div>
-      <h1>Bookkeeper!</h1>
+      <h1>Shopping List!</h1>
     </div>
   );
 }
