@@ -1,6 +1,6 @@
 /* @import "../index.css"; */
 
-.container-nav {
+nav {
   position: fixed;
   bottom: 2rem;
 }

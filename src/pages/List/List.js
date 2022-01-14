@@ -2,8 +2,8 @@ import React from 'react';
 
 export const List = () => {
   return (
-    <div>
+    <main>
       <h1>List</h1>
-    </div>
+    </main>
   );
 };

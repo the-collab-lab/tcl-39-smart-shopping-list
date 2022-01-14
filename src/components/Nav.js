@@ -4,7 +4,7 @@ import './Nav.css';
 
 export const Nav = () => {
   return (
-    <div className="container-nav">
+    <nav className="container-nav">
       <NavLink
         className={'nav-link'}
         style={({ isActive }) => ({
@@ -27,6 +27,6 @@ export const Nav = () => {
       >
         Add Item
       </NavLink>
-    </div>
+    </nav>
   );
 };
