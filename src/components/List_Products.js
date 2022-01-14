@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getItems, saveItem } from '../lib/api';
 
-function List_Products() {
+function ListProducts() {
   const [Items, setItems] = useState(null);
   const [ItemName, setItemName] = useState(null);
 
@@ -36,4 +36,4 @@ function List_Products() {
   );
 }
 
-export default List_Products;
+export default ListProducts;
