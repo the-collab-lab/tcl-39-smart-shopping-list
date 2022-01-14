@@ -15,19 +15,24 @@ function ListProducts() {
   };
 
   /* Save Item */
-  const saveItemName = async () => {
+  const saveItemName = async (e) => {
+    e.preventDefault();
     await saveItem(ItemName);
+    setItemName('');
     getItemsData();
   };
 
   return (
     <div>
-      <button onClick={saveItemName}>Save</button>
-      <input
-        type="text"
-        onChange={(e) => setItemName(e.target.value)}
-        placeholder="Name"
-      />
+      <form onSubmit={saveItemName}>
+        <input
+          value={ItemName}
+          type="text"
+          onChange={(e) => setItemName(e.target.value)}
+          placeholder="Name"
+        />
+        <button type="submit">Save</button>
+      </form>
       {Items &&
         Items.map((Itm) => (
           <div key={Itm.id}> Products: {Itm.data().item} </div>
