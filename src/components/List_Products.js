@@ -2,22 +2,22 @@ import React, { useEffect, useState } from 'react';
 import { getItems, saveItem } from '../lib/api';
 
 function ListProducts() {
-  const [Items, setItems] = useState(null);
-  const [ItemName, setItemName] = useState(null);
+  const [items, setItems] = useState(null);
+  const [itemName, setItemName] = useState('');
 
-  /* Get Items */
+  /* Get items */
   useEffect(() => {
     getItemsData();
   }, []);
   const getItemsData = async () => {
-    const Itm = await getItems();
-    setItems(Itm.docs);
+    const itm = await getItems();
+    setItems(itm.docs);
   };
 
   /* Save Item */
   const saveItemName = async (e) => {
     e.preventDefault();
-    await saveItem(ItemName);
+    await saveItem(itemName);
     setItemName('');
     getItemsData();
   };
@@ -26,16 +26,16 @@ function ListProducts() {
     <div>
       <form onSubmit={saveItemName}>
         <input
-          value={ItemName}
+          value={itemName}
           type="text"
           onChange={(e) => setItemName(e.target.value)}
           placeholder="Name"
         />
         <button type="submit">Save</button>
       </form>
-      {Items &&
-        Items.map((Itm) => (
-          <div key={Itm.id}> Products: {Itm.data().item} </div>
+      {items &&
+        items.map((itm) => (
+          <div key={itm.id}> Products: {itm.data().item} </div>
         ))}
     </div>
   );

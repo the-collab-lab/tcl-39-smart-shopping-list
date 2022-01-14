@@ -2,7 +2,10 @@ import { db } from './firebase';
 import { collection, getDocs, query, addDoc } from 'firebase/firestore';
 
 export const saveItem = (item) => {
-  addDoc(collection(db, 'Products'), { item });
+  if (item) {
+    addDoc(collection(db, 'Products'), { item });
+  }
+  return;
 };
 
 export const getItems = async () => {
