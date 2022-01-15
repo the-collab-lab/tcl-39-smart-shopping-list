@@ -1,11 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import './index.css';
 import App from './App';
 import { Nav } from './components/Nav';
 import { AddItems } from './pages/Add-items/Add-items';
 import { List } from './pages/List/List';
+import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 const rootElement = document.getElementById('root');
