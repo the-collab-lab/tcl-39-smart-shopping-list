@@ -6,7 +6,7 @@ export const Nav = () => {
   return (
     <nav>
       <NavLink
-        className={'nav-link'}
+        className="nav-link"
         style={({ isActive }) => ({
           fontWeight: isActive ? 600 : 400,
           color: isActive ? '#000' : '#AAA7AA',
