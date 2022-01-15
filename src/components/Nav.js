@@ -4,7 +4,7 @@ import './Nav.css';
 
 export const Nav = () => {
   return (
-    <nav className="container-nav">
+    <nav>
       <NavLink
         className={'nav-link'}
         style={({ isActive }) => ({
