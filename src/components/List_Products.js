@@ -5,7 +5,7 @@ import { db } from '../lib/firebase';
 import { saveItem } from '../lib/api';
 
 function ListProducts() {
-  const [items, setItems] = useState(null);
+  const [items, setItems] = useState([]);
   const [itemName, setItemName] = useState('');
 
   /* Get items */
