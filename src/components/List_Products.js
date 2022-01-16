@@ -31,13 +31,17 @@ function ListProducts() {
     setItemName('');
   };
 
+  const handleChange = (e) => {
+    setItemName(e.target.value);
+  };
+
   return (
     <>
       <form onSubmit={saveItemName}>
         <input
           value={itemName}
           type="text"
-          onChange={(e) => setItemName(e.target.value)}
+          onChange={handleChange}
           placeholder="Type your product..."
         />
         <button type="submit">Save</button>
