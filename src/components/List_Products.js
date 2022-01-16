@@ -24,7 +24,7 @@ function ListProducts() {
   }, []);
 
   /* Save Item */
-  const saveItemName = async (e) => {
+  const saveItemName = (e) => {
     e.preventDefault();
     saveItem(itemName);
     setItemName('');
@@ -45,8 +45,9 @@ function ListProducts() {
         />
         <button type="submit">Save</button>
       </form>
-      {items &&
-        items.map((item) => <div key={item.id}> Products: {item.item} </div>)}
+      {items.map((item) => (
+        <div key={item.id}> Products: {item.item} </div>
+      ))}
     </>
   );
 }
