@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { collection, onSnapshot } from 'firebase/firestore';
+import { onSnapshot } from 'firebase/firestore';
 
-import { db } from '../lib/firebase';
-import { saveItem } from '../lib/api';
+import { productsCollection, saveItem } from '../lib/api';
 
 function ListProducts() {
   const [items, setItems] = useState([]);
@@ -10,7 +9,7 @@ function ListProducts() {
 
   /* Get items */
   useEffect(() => {
-    const unsubscribe = onSnapshot(collection(db, 'Products'), (snapshot) => {
+    const unsubscribe = onSnapshot(productsCollection, (snapshot) => {
       let products = [];
 
       snapshot.forEach((doc) => {
