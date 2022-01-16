@@ -1,0 +1,12 @@
+/* @import "../index.css"; */
+
+nav {
+  position: fixed;
+  bottom: 2rem;
+}
+
+.nav-link {
+  padding: 2px 12px;
+
+  text-decoration: none;
+}
