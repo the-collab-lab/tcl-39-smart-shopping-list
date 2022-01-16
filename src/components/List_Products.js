@@ -17,13 +17,11 @@ function ListProducts() {
         products.push({ ...doc.data(), id: doc.id });
       });
 
-      console.log(products);
       setItems(products);
-
-      return () => {
-        unsubscribe();
-      };
     });
+    return () => {
+      unsubscribe();
+    };
   }, []);
 
   /* Save Item */
