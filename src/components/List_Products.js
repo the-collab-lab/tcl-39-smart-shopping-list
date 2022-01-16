@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { saveItem } from '../lib/api';
-import { db } from '../lib/firebase';
 import { collection, onSnapshot } from 'firebase/firestore';
+
+import { db } from '../lib/firebase';
+import { saveItem } from '../lib/api';
 
 function ListProducts() {
   const [items, setItems] = useState(null);
