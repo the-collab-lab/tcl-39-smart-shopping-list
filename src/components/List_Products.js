@@ -32,7 +32,7 @@ function ListProducts() {
   };
 
   return (
-    <div>
+    <>
       <form onSubmit={saveItemName}>
         <input
           value={itemName}
@@ -44,7 +44,7 @@ function ListProducts() {
       </form>
       {items &&
         items.map((item) => <div key={item.id}> Products: {item.item} </div>)}
-    </div>
+    </>
   );
 }
 
