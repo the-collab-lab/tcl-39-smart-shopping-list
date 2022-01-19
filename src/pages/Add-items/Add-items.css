@@ -1,0 +1,24 @@
+main {
+  display: grid;
+  justify-items: center;
+}
+form {
+  padding: 2rem 0;
+}
+
+fieldset {
+  border: none;
+  margin: 1rem 0;
+}
+input {
+  border: 1px solid #9e9e9e;
+  background-color: #ececec;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+button {
+  padding: 0.25rem 1rem;
+}
