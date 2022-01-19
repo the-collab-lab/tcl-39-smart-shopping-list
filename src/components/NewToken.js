@@ -2,7 +2,7 @@ import React from 'react';
 import { getToken, words } from '@the-collab-lab/shopping-list-utils';
 import { useNavigate } from 'react-router-dom';
 
-const CreateList = () => {
+const NewToken = () => {
   let navigate = useNavigate();
   function token() {
     navigate('/list');
@@ -11,10 +11,9 @@ const CreateList = () => {
   }
   return (
     <>
-      <h1>Shopping List!</h1>
       <button onClick={token}>Create a new list</button>
     </>
   );
 };
 
-export default CreateList;
+export default NewToken;

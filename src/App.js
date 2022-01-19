@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import CreateList from './components/CreateList';
+import CreateList from './pages/CreateList/CreateList';
 
 function App() {
   return (
