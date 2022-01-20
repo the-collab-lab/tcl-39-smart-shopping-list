@@ -62,8 +62,17 @@ function ListProducts() {
       </form>
       <h4>This is {list.current.name}'s list</h4>
       {items.map((item, index) => (
-        <div key={`${index}${item.name}`}>
-          <p>Products: {item.name}</p>
+        <div
+          key={`${index}${item.name}`}
+          aria-label={`${
+            item.howSoon === 7
+              ? 'soon'
+              : item.howSoon === 14
+              ? 'kind of soon'
+              : 'not very soon'
+          }`}
+        >
+          <p>Product: {item.name}</p>
           <Link to={`/list/${item.name}/`} state={{ product: item }}>
             <button>details</button>
           </Link>

@@ -11,3 +11,13 @@ body {
   display: grid;
   justify-items: center;
 }
+
+[aria-label='soon'] {
+  background-color: brown;
+}
+[aria-label='kind of soon'] {
+  background-color: blue;
+}
+[aria-label='soon'] {
+  background-color: green;
+}
