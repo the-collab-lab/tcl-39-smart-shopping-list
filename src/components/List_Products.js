@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { onSnapshot } from 'firebase/firestore';
 
 import { getListFromDB, saveItem } from '../lib/api';
+import { Link, Outlet } from 'react-router-dom';
 
 function ListProducts() {
   const [items, setItems] = useState([]);
@@ -25,6 +26,14 @@ function ListProducts() {
     setItemName(e.target.value);
   };
 
+  const handleDeleteAttempt = () => {
+    if (window.confirm('Press a button!')) {
+      console.log('Deleted!');
+    } else {
+      console.log('Not deleted.');
+    }
+  };
+
   return (
     <>
       <form>
@@ -41,8 +50,15 @@ function ListProducts() {
       </form>
       <h4>This is {list.current.name}'s list</h4>
       {items.map((item, index) => (
-        <div key={`${index}${item.name}`}> Products: {item.name} </div>
+        <div key={`${index}${item.name}`}>
+          <p>Products: {item.name}</p>
+          <Link to={`/list/${item.name}/`} state={{ product: item }}>
+            <button>details</button>
+          </Link>
+          <button onClick={handleDeleteAttempt}>delete</button>
+        </div>
       ))}
+      <Outlet />
     </>
   );
 }
