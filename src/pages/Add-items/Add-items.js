@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Modal } from '../../components/modal/Modal';
 import './Add-items.css';
 
 export const AddItems = () => {
@@ -13,6 +14,14 @@ export const AddItems = () => {
     lastDateBuy: null,
   });
   console.log(product);
+  //set state class to modal
+  const [modalClass, setmodalClass] = useState(false);
+  const showModal = () => {
+    setmodalClass(true);
+  };
+  const hideModal = () => {
+    setmodalClass(false);
+  };
 
   //Handle state Product
   const handleChangeProduct = (e) => {
@@ -36,14 +45,8 @@ export const AddItems = () => {
       token: getToken,
       lastDateBuy: null,
     });
+    showModal();
   };
-
-  //List of input type radio to render at page
-  const radioInputList = [
-    { timeName: 'Pronto', value: 7 },
-    { timeName: 'Mas o menos pronto', value: 14 },
-    { timeName: 'Mas tarde', value: 30 },
-  ];
 
   return (
     <main>
@@ -59,25 +62,43 @@ export const AddItems = () => {
           />
         </label>
         <fieldset>
-          <label htmlFor="time">
-            <p>Que tan pronto lo vas a comprar?</p>
-            {radioInputList.map((radioInput, index) => (
-              <div key={index}>
-                <input
-                  type="radio"
-                  name="time"
-                  value={radioInput.value}
-                  onChange={handleChangeProduct}
-                />
-                <span>{radioInput.timeName}</span>
-              </div>
-            ))}
-          </label>
+          <p>Que tan pronto lo vas a comprar?</p>
+          <div>
+            <label htmlFor="time">"Pronto"</label>
+            <input
+              type="radio"
+              name="time"
+              required
+              value={7}
+              onChange={handleChangeProduct}
+            />
+            <label htmlFor="time">"Mas o menos pronto"</label>
+            <input
+              type="radio"
+              name="time"
+              required
+              value={14}
+              onChange={handleChangeProduct}
+            />
+            <label htmlFor="time">"Mas tarde"</label>
+            <input
+              type="radio"
+              name="time"
+              required
+              value={30}
+              onChange={handleChangeProduct}
+            />
+          </div>
         </fieldset>
         <div className="button-container">
           <button type="submit">Submit</button>
         </div>
       </form>
+      <Modal
+        children={'Your product was succesfully added'}
+        modalClass={modalClass}
+        handleClose={hideModal}
+      />
     </main>
   );
 };
