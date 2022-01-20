@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import { getToken, words } from '@the-collab-lab/shopping-list-utils';
 import { useNavigate } from 'react-router-dom';
-import { collection, addDoc } from 'firebase/firestore';
 import { db } from '../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 
