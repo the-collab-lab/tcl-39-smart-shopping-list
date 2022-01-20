@@ -14,10 +14,6 @@ function ListProducts() {
     const unsubscribe = onSnapshot(getListFromDB(token), (doc) => {
       list.current = doc.data();
       console.log(doc.data());
-      // doc.forEach((doc) => {
-      //   products.push({ ...doc.data(), id: doc.id });
-      // });
-
       setItems(doc.data().items);
     });
     return () => {
@@ -25,31 +21,27 @@ function ListProducts() {
     };
   }, []);
 
-  /* Save Item */
-  const saveItemName = (e) => {
-    e.preventDefault();
-    saveItem(itemName);
-    setItemName('');
-  };
-
   const handleChange = (e) => {
     setItemName(e.target.value);
   };
 
   return (
     <>
-      <form onSubmit={saveItemName}>
+      <form>
+        <label htmlFor="filter">Filter items</label>
+        <br />
         <input
+          id="filter"
           value={itemName}
           type="text"
           onChange={handleChange}
-          placeholder="Type your product..."
+          placeholder="Start typing a product..."
         />
         <button type="submit">Save</button>
       </form>
       <h4>This is {list.current.name}'s list</h4>
       {items.map((item, index) => (
-        <div key={`${item.index}${item.name}`}> Products: {item.name} </div>
+        <div key={`${index}${item.name}`}> Products: {item.name} </div>
       ))}
     </>
   );
