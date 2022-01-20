@@ -1,17 +1,29 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { onSnapshot } from 'firebase/firestore';
+import { getDocs, onSnapshot } from 'firebase/firestore';
 
-import { getListFromDB, saveItem } from '../lib/api';
+import { getListFromDB, listsCollection } from '../lib/api';
 import { Link, Outlet } from 'react-router-dom';
+
+const fakeSetToken = async () => {
+  //Esta función es solo para simular que ya se tiene un token guardado en localStorage.
+  let tokens = [];
+  const docs = await getDocs(listsCollection);
+  docs.forEach((doc) => {
+    tokens.push(doc.id);
+  });
+  const token = tokens[Math.floor(Math.random() * tokens.length)];
+  localStorage.setItem('token', token);
+};
 
 function ListProducts() {
   const [items, setItems] = useState([]);
   const [itemName, setItemName] = useState('');
   const list = useRef({});
-  const token = '13';
 
   /* Get items */
   useEffect(() => {
+    fakeSetToken(); //Para demostración solamente. Borrar antes de hacer merge con Issue 3.
+    const token = localStorage.getItem('token');
     const unsubscribe = onSnapshot(getListFromDB(token), (doc) => {
       list.current = doc.data();
       console.log(doc.data());

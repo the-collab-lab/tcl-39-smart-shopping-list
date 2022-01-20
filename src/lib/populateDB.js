@@ -8,6 +8,7 @@ import {
   serverTimestamp,
   setDoc,
 } from 'firebase/firestore';
+import { getToken, words } from '@the-collab-lab/shopping-list-utils';
 
 //Mock data.
 const mockData = [
@@ -188,9 +189,9 @@ export const deleteAll = async () => {
 };
 
 const createList = async (item) => {
-  const { token, name, items } = item;
+  const { name, items } = item;
   try {
-    await setDoc(doc(colRef, token), {
+    await setDoc(doc(colRef, getToken(words)), {
       name,
       items,
       createdAt: serverTimestamp(),
