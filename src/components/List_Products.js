@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { onSnapshot } from 'firebase/firestore';
 
-import { productsCollection, saveItem } from '../lib/api';
+import { getListFromDB, saveItem } from '../lib/api';
 
 function ListProducts() {
   const [items, setItems] = useState([]);
   const [itemName, setItemName] = useState('');
+  const list = useRef({});
+  const token = '13';
 
   /* Get items */
   useEffect(() => {
-    const unsubscribe = onSnapshot(productsCollection, (snapshot) => {
-      let products = [];
+    const unsubscribe = onSnapshot(getListFromDB(token), (doc) => {
+      list.current = doc.data();
+      console.log(doc.data());
+      // doc.forEach((doc) => {
+      //   products.push({ ...doc.data(), id: doc.id });
+      // });
 
-      snapshot.forEach((doc) => {
-        products.push({ ...doc.data(), id: doc.id });
-      });
-
-      setItems(products);
+      setItems(doc.data().items);
     });
     return () => {
       unsubscribe();
@@ -45,8 +47,9 @@ function ListProducts() {
         />
         <button type="submit">Save</button>
       </form>
-      {items.map((item) => (
-        <div key={item.id}> Products: {item.item} </div>
+      <h4>This is {list.current.name}'s list</h4>
+      {items.map((item, index) => (
+        <div key={`${item.index}${item.name}`}> Products: {item.name} </div>
       ))}
     </>
   );

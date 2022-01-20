@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { Modal } from '../../components/modal/Modal';
+import { deleteAll } from '../../lib/populateDB';
 import './Add-items.css';
 
 export const AddItems = () => {
+  deleteAll();
   //Get token from localStorage
   const getToken = localStorage.getItem('tokenList');
 
