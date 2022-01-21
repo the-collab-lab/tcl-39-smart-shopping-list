@@ -17,7 +17,6 @@ function ListProducts() {
     /* Get items */
     const unsubscribe = onSnapshot(getListFromDB(token), (doc) => {
       list.current = doc.data();
-      console.log(doc.data());
       setItems(doc.data().items);
     });
     return () => {

@@ -1,21 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Modal } from '../../components/modal/Modal';
 import { addProductToList } from '../../lib/api';
 import './Add-items.css';
 
 export const AddItems = () => {
   const [product, setProduct] = useState({
-    token: '',
+    token: localStorage.getItem('token'),
     name: '',
     howSoon: '7',
     lastPurch: null,
   });
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    setProduct({ ...product, token });
-    console.log(product);
-  }, []);
 
   //set state class to modal
   const [modalClass, setmodalClass] = useState(false);
