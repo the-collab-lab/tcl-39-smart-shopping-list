@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Modal } from '../../components/modal/Modal';
 import { addProductToList } from '../../lib/api';
-import { deleteAll } from '../../lib/populateDB';
 import './Add-items.css';
 
 export const AddItems = () => {
@@ -29,7 +28,6 @@ export const AddItems = () => {
 
   //Handle state Product
   const handleChangeProduct = (e) => {
-    //store target for each input
     const value = e.target.value;
     const name = e.target.name;
     //update state of Product
@@ -39,7 +37,7 @@ export const AddItems = () => {
     });
   };
 
-  // Submit data to firestore
+  // Submit and save data to firestore
   const handleSubmit = (e) => {
     e.preventDefault();
     addProductToList(product);

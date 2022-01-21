@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link, Outlet } from 'react-router-dom';
 import { onSnapshot } from 'firebase/firestore';
 
 import { getListFromDB } from '../lib/api';
-import { Link, Outlet } from 'react-router-dom';
+import './ListProducts.css';
 
 function ListProducts() {
   const [items, setItems] = useState([]);
@@ -47,11 +48,14 @@ function ListProducts() {
           placeholder="Start typing a product..."
         />
       </form>
-      <h4>{list.current.name && `${list.current.name}'s list`}</h4>
+      <h4 className="list-name">
+        {list.current.name && `${list.current.name}'s list`}
+      </h4>
       {items &&
         items.map((item, index) => (
           <div
             key={`${index}${item.name}`}
+            className="product-container"
             aria-label={`${
               item.howSoon === 7
                 ? 'soon'
@@ -60,11 +64,15 @@ function ListProducts() {
                 : 'not soon'
             }`}
           >
-            <p>Product: {item.name}</p>
-            <Link to={`/list/${item.name}/`} state={{ product: item }}>
-              <button>details</button>
-            </Link>
-            <button onClick={handleDeleteAttempt}>delete</button>
+            <p>
+              Product: <span className="item-name">{item.name}</span>
+            </p>
+            <div className="btn-container">
+              <Link to={`/list/${item.name}/`} state={{ product: item }}>
+                <button>details</button>
+              </Link>
+              <button onClick={handleDeleteAttempt}>delete</button>
+            </div>
           </div>
         ))}
       <Outlet />
