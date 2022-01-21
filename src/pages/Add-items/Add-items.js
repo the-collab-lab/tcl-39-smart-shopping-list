@@ -1,21 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from '../../components/modal/Modal';
+import { addProductToList } from '../../lib/api';
 import { deleteAll } from '../../lib/populateDB';
 import './Add-items.css';
 
 export const AddItems = () => {
-  deleteAll();
-  //Get token from localStorage
-  const getToken = localStorage.getItem('tokenList');
-
-  //set hooks for store state of item added
   const [product, setProduct] = useState({
-    rubro: '',
-    time: null,
-    token: getToken,
-    lastDateBuy: null,
+    token: '',
+    name: '',
+    howSoon: '7',
+    lastPurch: null,
   });
-  console.log(product);
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    setProduct({ ...product, token });
+    console.log(product);
+  }, []);
+
   //set state class to modal
   const [modalClass, setmodalClass] = useState(false);
   const showModal = () => {
@@ -28,9 +30,8 @@ export const AddItems = () => {
   //Handle state Product
   const handleChangeProduct = (e) => {
     //store target for each input
-    const target = e.target;
-    const value = target.value;
-    const name = target.name;
+    const value = e.target.value;
+    const name = e.target.name;
     //update state of Product
     setProduct({
       ...product,
@@ -39,14 +40,10 @@ export const AddItems = () => {
   };
 
   // Submit data to firestore
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    setProduct({
-      rubro: '',
-      time: null,
-      token: getToken,
-      lastDateBuy: null,
-    });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    addProductToList(product);
+    setProduct({ ...product, name: '', howSoon: '7', lastPurch: null });
     showModal();
   };
 
@@ -54,42 +51,57 @@ export const AddItems = () => {
     <main>
       <h1>Add Item</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="rubro">
+        <label htmlFor="name">
           <p>Product:</p>
           <input
+            id="name"
             type="text"
-            name="rubro"
-            value={product.rubro}
+            name="name"
+            value={product.name}
             onChange={handleChangeProduct}
           />
         </label>
         <fieldset>
-          <p>Que tan pronto lo vas a comprar?</p>
+          <p>How soon will you buy this again?</p>
           <div>
-            <label htmlFor="time">"Pronto"</label>
-            <input
-              type="radio"
-              name="time"
-              required
-              value={7}
-              onChange={handleChangeProduct}
-            />
-            <label htmlFor="time">"Mas o menos pronto"</label>
-            <input
-              type="radio"
-              name="time"
-              required
-              value={14}
-              onChange={handleChangeProduct}
-            />
-            <label htmlFor="time">"Mas tarde"</label>
-            <input
-              type="radio"
-              name="time"
-              required
-              value={30}
-              onChange={handleChangeProduct}
-            />
+            <label htmlFor="soon">
+              <input
+                defaultChecked
+                id="soon"
+                type="radio"
+                name="howSoon"
+                required
+                value={7}
+                onChange={handleChangeProduct}
+              />
+              Soon
+            </label>
+          </div>
+          <div>
+            <label htmlFor="kindOfSoon">
+              <input
+                id="kindOfSoon"
+                type="radio"
+                name="howSoon"
+                required
+                value={14}
+                onChange={handleChangeProduct}
+              />
+              Kind of soon
+            </label>
+          </div>
+          <div>
+            <label htmlFor="notSoon">
+              <input
+                id="notSoon"
+                type="radio"
+                name="howSoon"
+                required
+                value={30}
+                onChange={handleChangeProduct}
+              />
+              Not soon
+            </label>
           </div>
         </fieldset>
         <div className="button-container">

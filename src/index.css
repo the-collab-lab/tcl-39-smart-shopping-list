@@ -15,9 +15,11 @@ body {
 [aria-label='soon'] {
   background-color: brown;
 }
+
 [aria-label='kind of soon'] {
   background-color: blue;
 }
-[aria-label='soon'] {
+
+[aria-label='not soon'] {
   background-color: green;
 }

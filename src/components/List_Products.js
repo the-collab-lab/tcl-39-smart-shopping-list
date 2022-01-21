@@ -24,6 +24,8 @@ function ListProducts() {
   useEffect(() => {
     fakeSetToken(); //Para demostración solamente. Borrar antes de hacer merge con Issue 3.
     const token = localStorage.getItem('token');
+
+    console.log(token);
     const unsubscribe = onSnapshot(getListFromDB(token), (doc) => {
       list.current = doc.data();
       console.log(doc.data());
@@ -39,10 +41,8 @@ function ListProducts() {
   };
 
   const handleDeleteAttempt = () => {
-    if (window.confirm('Press a button!')) {
-      console.log('Deleted!');
-    } else {
-      console.log('Not deleted.');
+    if (window.confirm('Do you want to delete this product?')) {
+      alert('Deleted!');
     }
   };
 
@@ -60,25 +60,26 @@ function ListProducts() {
         />
         <button type="submit">Save</button>
       </form>
-      <h4>This is {list.current.name}'s list</h4>
-      {items.map((item, index) => (
-        <div
-          key={`${index}${item.name}`}
-          aria-label={`${
-            item.howSoon === 7
-              ? 'soon'
-              : item.howSoon === 14
-              ? 'kind of soon'
-              : 'not very soon'
-          }`}
-        >
-          <p>Product: {item.name}</p>
-          <Link to={`/list/${item.name}/`} state={{ product: item }}>
-            <button>details</button>
-          </Link>
-          <button onClick={handleDeleteAttempt}>delete</button>
-        </div>
-      ))}
+      <h4>{list.current.name && `${list.current.name}'s list`}</h4>
+      {items &&
+        items.map((item, index) => (
+          <div
+            key={`${index}${item.name}`}
+            aria-label={`${
+              item.howSoon === 7
+                ? 'soon'
+                : item.howSoon === 14
+                ? 'kind of soon'
+                : 'not soon'
+            }`}
+          >
+            <p>Product: {item.name}</p>
+            <Link to={`/list/${item.name}/`} state={{ product: item }}>
+              <button>details</button>
+            </Link>
+            <button onClick={handleDeleteAttempt}>delete</button>
+          </div>
+        ))}
       <Outlet />
     </>
   );
