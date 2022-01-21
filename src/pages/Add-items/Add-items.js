@@ -43,7 +43,7 @@ export const AddItems = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addProductToList(product);
-    setProduct({ ...product, name: '', howSoon: '7', lastPurch: null });
+    setProduct({ ...product, name: '', lastPurch: null });
     showModal();
   };
 
@@ -54,6 +54,7 @@ export const AddItems = () => {
         <label htmlFor="name">
           <p>Product:</p>
           <input
+            required
             id="name"
             type="text"
             name="name"
