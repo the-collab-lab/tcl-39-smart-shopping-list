@@ -7,13 +7,16 @@ import { AddItems } from './pages/Add-items/Add-items';
 import { List } from './pages/List/List';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
+import { ProductDetails } from './components/ProductDetails';
 
 const rootElement = document.getElementById('root');
 render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="list" element={<List />} />
+      <Route path="list" element={<List />}>
+        <Route path=":product" element={<ProductDetails />} />
+      </Route>
       <Route path="add-items" element={<AddItems />} />
     </Routes>
     <Nav />
