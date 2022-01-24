@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal } from '../../components/modal/Modal';
 import { addProductToList } from '../../lib/api';
+import { Nav } from '../../components/Nav';
 import './Add-items.css';
 
 export const AddItems = () => {
@@ -106,6 +107,7 @@ export const AddItems = () => {
         modalClass={modalClass}
         handleClose={hideModal}
       />
+      <Nav />
     </main>
   );
 };

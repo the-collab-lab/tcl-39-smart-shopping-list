@@ -2,7 +2,6 @@ import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
-import { Nav } from './components/Nav';
 import { AddItems } from './pages/Add-items/Add-items';
 import { List } from './pages/List/List';
 import './index.css';
@@ -19,7 +18,6 @@ render(
       </Route>
       <Route path="add-items" element={<AddItems />} />
     </Routes>
-    <Nav />
   </BrowserRouter>,
   rootElement,
 );
