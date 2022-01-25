@@ -13,13 +13,21 @@ export const AddItems = () => {
 
   //set state class to modal
   const [modalClass, setmodalClass] = useState(false);
+  //set state class modal duplicated product
+  const [mssgProductDuplicated, setMssgProductDuplicated] = useState(false);
   const showModal = () => {
     setmodalClass(true);
   };
   const hideModal = () => {
     setmodalClass(false);
   };
-
+  //
+  const showModalMssgProductDuplicated = () => {
+    setMssgProductDuplicated(true);
+  };
+  const hideModalMssgProductDuplicated = () => {
+    setMssgProductDuplicated(false);
+  };
   //Handle state Product
   const handleChangeProduct = (e) => {
     const value = e.target.value;
@@ -38,6 +46,8 @@ export const AddItems = () => {
     setProduct({ ...product, name: '', lastPurch: null });
     showModal();
   };
+
+  //function evitar productos duplicados
 
   return (
     <main>
@@ -101,6 +111,11 @@ export const AddItems = () => {
           <button type="submit">Submit</button>
         </div>
       </form>
+      <Modal
+        children={'This product is duplicated'}
+        modalClass={mssgProductDuplicated}
+        handleClose={hideModalMssgProductDuplicated}
+      />
       <Modal
         children={'Your product was succesfully added'}
         modalClass={modalClass}
