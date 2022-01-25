@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Modal } from '../../components/modal/Modal';
-import { addProductToList } from '../../lib/api';
+import { addProductToList, getListFromDB } from '../../lib/api';
+import { onSnapshot } from 'firebase/firestore';
 import './Add-items.css';
 
 export const AddItems = () => {
@@ -13,21 +14,28 @@ export const AddItems = () => {
 
   //set state class to modal
   const [modalClass, setmodalClass] = useState(false);
-  //set state class modal duplicated product
-  const [mssgProductDuplicated, setMssgProductDuplicated] = useState(false);
   const showModal = () => {
     setmodalClass(true);
   };
   const hideModal = () => {
     setmodalClass(false);
   };
-  //
+  //set state class modal duplicated product
+  const [mssgProductDuplicated, setMssgProductDuplicated] = useState(false);
+  //set state product list by token
+  const [productListByToken, setProductListByToken] = useState([]);
+  const list = useRef({});
+
+  //modal hidden function modal
   const showModalMssgProductDuplicated = () => {
     setMssgProductDuplicated(true);
+    console.log('Modal was showed');
   };
   const hideModalMssgProductDuplicated = () => {
     setMssgProductDuplicated(false);
+    console.log('Modal was hidden');
   };
+
   //Handle state Product
   const handleChangeProduct = (e) => {
     const value = e.target.value;
@@ -36,6 +44,41 @@ export const AddItems = () => {
     setProduct({
       ...product,
       [name]: value,
+    });
+  };
+  console.log(product, 'product');
+  getListFromDB(product.token);
+  useEffect(() => {
+    /* Get token */
+
+    /* Get items */
+    const unsubscribe = onSnapshot(
+      getListFromDB(localStorage.getItem('token')),
+      (doc) => {
+        list.current = doc.data();
+        const listProductbyToken = list.current.items;
+        setProductListByToken(listProductbyToken);
+      },
+    );
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+  console.log(productListByToken, 'productListByToken');
+  const compareObjectProduct = () => {
+    productListByToken.map((productArray) => {
+      const objeto = {
+        howSoon: 7,
+        lastPurch: null,
+        name: 'arroz',
+        token: 'offer octet pabst',
+      };
+      return console.log(objeto === productArray);
+      // if (productArray === product) {
+      //   return console.log('Este producto esta repetido')
+      // } else {
+      //   return console.log('Este producto no esta repetido')
+      // }
     });
   };
 
@@ -108,7 +151,9 @@ export const AddItems = () => {
           </div>
         </fieldset>
         <div className="button-container">
-          <button type="submit">Submit</button>
+          <button type="submit" onClick={compareObjectProduct}>
+            Submit
+          </button>
         </div>
       </form>
       <Modal
