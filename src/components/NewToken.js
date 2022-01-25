@@ -6,9 +6,9 @@ import { doc, setDoc } from 'firebase/firestore';
 const NewToken = () => {
   let navigate = useNavigate();
 
-  function token(products) {
+  function token() {
     const getTokenStorage = getToken(words);
-    localStorage.setItem('token', JSON.stringify(getTokenStorage));
+    localStorage.setItem('token', getTokenStorage);
 
     setDoc(doc(db, 'Tokens', getTokenStorage), {});
 
