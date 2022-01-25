@@ -6,20 +6,16 @@ import { doc, setDoc } from 'firebase/firestore';
 const NewToken = () => {
   let navigate = useNavigate();
 
-  function token() {
+  const token = () => {
     const getTokenStorage = getToken(words);
     localStorage.setItem('token', getTokenStorage);
 
     setDoc(doc(db, 'Tokens', getTokenStorage), {});
 
     navigate('/list');
-  }
+  };
 
-  return (
-    <>
-      <button onClick={token}>Create a new list</button>
-    </>
-  );
+  return <button onClick={token}>Create a new list</button>;
 };
 
 export default NewToken;
