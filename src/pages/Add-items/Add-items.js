@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Modal } from '../../components/modal/Modal';
 import { addProductToList } from '../../lib/api';
 import { Nav } from '../../components/Nav';
 import './Add-items.css';
+import { useNavigate } from 'react-router-dom';
+import { Redirection } from '../../components/Redirection';
 
 export const AddItems = () => {
   const [product, setProduct] = useState({
@@ -10,6 +12,17 @@ export const AddItems = () => {
     name: '',
     howSoon: '7',
     lastPurch: null,
+  });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!product.token) {
+      console.log('no hay token en Add items');
+      setTimeout(() => {
+        navigate('/', { replace: true });
+      }, 1500);
+    } else {
+    }
   });
 
   //set state class to modal
@@ -39,6 +52,10 @@ export const AddItems = () => {
     setProduct({ ...product, name: '', lastPurch: null });
     showModal();
   };
+
+  if (!product.token) {
+    return <Redirection />;
+  }
 
   return (
     <main>
