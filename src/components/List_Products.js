@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { onSnapshot } from 'firebase/firestore';
 
 import { getListFromDB } from '../lib/api';
@@ -9,11 +9,15 @@ function ListProducts() {
   const [items, setItems] = useState([]);
   const [itemName, setItemName] = useState('');
   const list = useRef({});
+  const navigate = useNavigate();
 
   useEffect(() => {
     /* Get token */
     const token = localStorage.getItem('token');
-
+    if (!token) {
+      // navigate("/add-items",{ replace: true })
+      //history.push("/")
+    }
     /* Get items */
     const unsubscribe = onSnapshot(getListFromDB(token), (doc) => {
       list.current = doc.data();
