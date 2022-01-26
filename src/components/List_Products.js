@@ -3,7 +3,9 @@ import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { onSnapshot } from 'firebase/firestore';
 
 import { getListFromDB } from '../lib/api';
+
 import './ListProducts.css';
+import { Redirection } from './Redirection';
 
 function ListProducts() {
   const [items, setItems] = useState([]);
@@ -11,21 +13,25 @@ function ListProducts() {
   const list = useRef({});
   const navigate = useNavigate();
 
+  /* Get token */
+  const token = localStorage.getItem('token');
+
   useEffect(() => {
-    /* Get token */
-    const token = localStorage.getItem('token');
     if (!token) {
-      // navigate("/add-items",{ replace: true })
-      //history.push("/")
+      console.log('no hay token en List');
+      setTimeout(() => {
+        navigate('/', { replace: true });
+      }, 1500);
+    } else {
+      /* Get items */
+      const unsubscribe = onSnapshot(getListFromDB(token), (doc) => {
+        list.current = doc.data();
+        setItems(doc.data().items);
+      });
+      return () => {
+        unsubscribe();
+      };
     }
-    /* Get items */
-    const unsubscribe = onSnapshot(getListFromDB(token), (doc) => {
-      list.current = doc.data();
-      setItems(doc.data().items);
-    });
-    return () => {
-      unsubscribe();
-    };
   }, []);
 
   const handleChange = (e) => {
@@ -38,8 +44,13 @@ function ListProducts() {
     }
   };
 
+  if (!token) {
+    return <Redirection />;
+  }
+
   return (
     <>
+      <h1>List</h1>
       <form>
         <label htmlFor="filter">Filter items</label>
         <br />

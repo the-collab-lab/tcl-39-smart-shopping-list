@@ -13,8 +13,8 @@ export const JoinList = () => {
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      navigate('/list');
       localStorage.setItem('token', joinToken);
+      navigate('/list');
       console.log('Document data:', docSnap.data());
     } else {
       alert('No existe este token!');
