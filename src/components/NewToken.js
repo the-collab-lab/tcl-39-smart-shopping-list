@@ -4,13 +4,13 @@ import { db } from '../lib/firebase';
 import { doc, setDoc } from 'firebase/firestore';
 
 const NewToken = () => {
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const token = () => {
     const getTokenStorage = getToken(words);
     localStorage.setItem('token', getTokenStorage);
 
-    setDoc(doc(db, 'Tokens', getTokenStorage), {});
+    setDoc(doc(db, 'lists', getTokenStorage), {});
 
     navigate('/list');
   };
