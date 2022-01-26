@@ -5,6 +5,10 @@ import { onSnapshot } from 'firebase/firestore';
 import './Add-items.css';
 
 export const AddItems = () => {
+  //Normalizar input producto name
+  // const productoName = "Pimentónñ $%%%(/&)=!!!!!!!!!n";
+  // const productoNameLowerCase = productoName.toLowerCase()
+  // const productoNameNormalizado = productoNameLowerCase.normalize("NFD").replace(/[\u0300-\u036f\\'!"#$%&()*+,\-.\/:;<=>?@\[\]^_`{|}~]/g, "")
   const [product, setProduct] = useState({
     token: localStorage.getItem('token'),
     name: '',
@@ -48,6 +52,7 @@ export const AddItems = () => {
   };
   console.log(product, 'product');
   getListFromDB(product.token);
+  //get list Product by Token
   useEffect(() => {
     /* Get token */
 
@@ -68,40 +73,29 @@ export const AddItems = () => {
   console.log(productListByToken, 'productListByToken');
   console.log(product.name);
 
-  let productCompareResult = productListByToken.filter(
-    (productBytoken) => productBytoken.name === product.name,
-  );
-  console.log(productCompareResult, 'productCompareResult');
-  if (productCompareResult.length !== 0) {
-    console.log('El producto existe');
-  } else {
-    console.log('El producto no existe');
-  }
-
-  // const compareObjectProduct = () => {
-  //   productListByToken.filter((productArray) => {
-  //     const objeto = {
-  //       howSoon: 7,
-  //       lastPurch: null,
-  //       name: 'arroz',
-  //       token: 'offer octet pabst',
-  //     };
-  //     return console.log(objeto === productArray);
-  //     // if (productArray === product) {
-  //     //   return console.log('Este producto esta repetido')
-  //     // } else {
-  //     //   return console.log('Este producto no esta repetido')
-  //     // }
-  //   });
-  // };
-
   // Submit and save data to firestore
   const handleSubmit = (e) => {
     e.preventDefault();
-    addProductToList(product);
-    setProduct({ ...product, name: '', lastPurch: null });
-    showModal();
+    let productCompareResult = productListByToken.filter(
+      (productBytoken) => productBytoken.name === product.name,
+    );
+    console.log(productCompareResult, 'productCompareResult');
+    if (productCompareResult.length !== 0) {
+      console.log('El producto existe');
+      showModalMssgProductDuplicated();
+    } else {
+      console.log('El producto no existe');
+      addProductToList(product);
+      setProduct({ ...product, name: '', lastPurch: null });
+      showModal();
+    }
   };
+
+  // if (stringA.toLowerCase() === stringB.toLowerCase()){
+  //     alert("The strings are equal.")
+  // } else {
+  //     alert("The strings are NOT equal.")
+  // }
 
   //function evitar productos duplicados
 
