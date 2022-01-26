@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { onSnapshot } from 'firebase/firestore';
 
-import { getListFromDB } from '../lib/api';
+import { getListFromDB } from '../../lib/api';
 
 import './ListProducts.css';
-import { Redirection } from './Redirection';
+import { Redirection } from '../../components/Redirection';
+import { Nav } from '../../components/Nav';
 
 function ListProducts() {
   const [items, setItems] = useState([]);
@@ -41,7 +42,7 @@ function ListProducts() {
   }
 
   return (
-    <>
+    <main>
       <h1>List</h1>
       <form>
         <label htmlFor="filter">Filter items</label>
@@ -82,7 +83,8 @@ function ListProducts() {
           </div>
         ))}
       <Outlet />
-    </>
+      <Nav />
+    </main>
   );
 }
 
