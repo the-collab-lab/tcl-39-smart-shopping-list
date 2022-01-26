@@ -64,23 +64,36 @@ export const AddItems = () => {
       unsubscribe();
     };
   }, []);
+
   console.log(productListByToken, 'productListByToken');
-  const compareObjectProduct = () => {
-    productListByToken.map((productArray) => {
-      const objeto = {
-        howSoon: 7,
-        lastPurch: null,
-        name: 'arroz',
-        token: 'offer octet pabst',
-      };
-      return console.log(objeto === productArray);
-      // if (productArray === product) {
-      //   return console.log('Este producto esta repetido')
-      // } else {
-      //   return console.log('Este producto no esta repetido')
-      // }
-    });
-  };
+  console.log(product.name);
+
+  let productCompareResult = productListByToken.filter(
+    (productBytoken) => productBytoken.name === product.name,
+  );
+  console.log(productCompareResult, 'productCompareResult');
+  if (productCompareResult.length !== 0) {
+    console.log('El producto existe');
+  } else {
+    console.log('El producto no existe');
+  }
+
+  // const compareObjectProduct = () => {
+  //   productListByToken.filter((productArray) => {
+  //     const objeto = {
+  //       howSoon: 7,
+  //       lastPurch: null,
+  //       name: 'arroz',
+  //       token: 'offer octet pabst',
+  //     };
+  //     return console.log(objeto === productArray);
+  //     // if (productArray === product) {
+  //     //   return console.log('Este producto esta repetido')
+  //     // } else {
+  //     //   return console.log('Este producto no esta repetido')
+  //     // }
+  //   });
+  // };
 
   // Submit and save data to firestore
   const handleSubmit = (e) => {
@@ -151,9 +164,7 @@ export const AddItems = () => {
           </div>
         </fieldset>
         <div className="button-container">
-          <button type="submit" onClick={compareObjectProduct}>
-            Submit
-          </button>
+          <button type="submit">Submit</button>
         </div>
       </form>
       <Modal
