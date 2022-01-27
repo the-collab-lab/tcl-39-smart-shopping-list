@@ -34,7 +34,8 @@ export const JoinList = () => {
     <>
       <h3>Join list</h3>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="joinToken">Join with a token</label>
+        <p>Join an existing shopping list by entering a three word token.</p>
+        <label htmlFor="joinToken">Share token</label>
         <br />
         <input
           id="joinToken"
