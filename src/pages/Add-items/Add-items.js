@@ -2,38 +2,33 @@ import React, { useState, useEffect, useRef } from 'react';
 import { addProductToList, getListFromDB } from '../../lib/api';
 import { onSnapshot } from 'firebase/firestore';
 import { Modal } from '../../components/modal/Modal';
+import {
+  ModalFunctions,
+  ModalFunctionsMssgDuplicatedProduct,
+} from '../../components/modal/ModalFunctions';
 import normalizeInputs from '../../components/normalizeInput/NormalizeInputs';
 import './Add-items.css';
 
 export const AddItems = () => {
+  //get token from localstore
+  const token = localStorage.getItem('token');
   //set state of product items from client side
   const [product, setProduct] = useState({
-    token: localStorage.getItem('token'),
+    token: token,
     name: '',
     howSoon: '7',
     lastPurch: null,
   });
 
   //set state class to modal 'Successfully Product Added Msg'
-  const [modalClass, setmodalClass] = useState(false);
-  const showModal = () => {
-    setmodalClass(true);
-  };
-  const hideModal = () => {
-    setmodalClass(false);
-  };
+  const { modalClass, showModal, hideModal } = ModalFunctions();
+
   //set state class to modal 'Duplicated Product Msg'
-  const [msgProductDuplicatedModal, setMssgProductDuplicatedModal] =
-    useState(false);
-  //hidden and show modal 'Duplicated Product Msg' functions
-  const showModalMssgProductDuplicated = () => {
-    setMssgProductDuplicatedModal(true);
-    console.log('Modal was showed');
-  };
-  const hideModalMssgProductDuplicated = () => {
-    setMssgProductDuplicatedModal(false);
-    console.log('Modal was hidden');
-  };
+  const {
+    msgProductDuplicatedModal,
+    showModalMssgProductDuplicated,
+    hideModalMssgProductDuplicated,
+  } = ModalFunctionsMssgDuplicatedProduct();
 
   //Handle state Product from client side
   const handleChangeProduct = (e) => {
@@ -49,11 +44,10 @@ export const AddItems = () => {
   //set state products list by token given
   const [productListByToken, setProductListByToken] = useState([]);
   const list = useRef({});
-  const getToken = localStorage.getItem('token');
   //get list Products by Token given
   useEffect(() => {
     /* Get items */
-    const unsubscribe = onSnapshot(getListFromDB(getToken), (doc) => {
+    const unsubscribe = onSnapshot(getListFromDB(token), (doc) => {
       list.current = doc.data();
       const listProductsByTokenGiven = doc.data().items;
       setProductListByToken(listProductsByTokenGiven);
@@ -61,7 +55,7 @@ export const AddItems = () => {
     return () => {
       unsubscribe();
     };
-  }, [getToken]);
+  }, [token]);
 
   console.log(productListByToken, 'productListByToken');
   console.log(product.name);
