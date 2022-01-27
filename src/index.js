@@ -7,6 +7,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { ProductDetails } from './components/ProductDetails';
 import ListProducts from './pages/List/List_Products';
+import { Redirection } from './components/Redirection';
 
 const rootElement = document.getElementById('root');
 render(
@@ -17,6 +18,7 @@ render(
         <Route path=":product" element={<ProductDetails />} />
       </Route>
       <Route path="add-items" element={<AddItems />} />
+      <Route path="*" element={<Redirection />} />
     </Routes>
   </BrowserRouter>,
   rootElement,
