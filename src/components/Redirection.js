@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export const Redirection = () => {
   const navigate = useNavigate();
+
   useEffect(() => {
     setTimeout(() => {
       navigate('/', { replace: true });
