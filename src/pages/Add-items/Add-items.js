@@ -55,6 +55,7 @@ export const AddItems = () => {
         setProductListByToken(listProductsByTokenGiven);
       }
     });
+
     return () => {
       unsubscribe();
     };
