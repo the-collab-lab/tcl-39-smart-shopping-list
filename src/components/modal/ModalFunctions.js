@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 //set state class to modal 'Successfully Product Added Msg'
-export const ModalFunctions = () => {
+export const useModalFunctions = () => {
   const [modalClass, setmodalClass] = useState(false);
   const showModal = () => {
     setmodalClass(true);
@@ -16,7 +16,7 @@ export const ModalFunctions = () => {
   };
 };
 //set state class to modal 'Duplicated Product Msg'
-export const ModalFunctionsMssgDuplicatedProduct = () => {
+export const useModalFunctionsMssgDuplicatedProduct = () => {
   const [msgProductDuplicatedModal, setMssgProductDuplicatedModal] =
     useState(false);
   //hidden and show modal 'Duplicated Product Msg' functions

@@ -3,8 +3,8 @@ import { addProductToList, getListFromDB } from '../../lib/api';
 import { onSnapshot } from 'firebase/firestore';
 import { Modal } from '../../components/modal/Modal';
 import {
-  ModalFunctions,
-  ModalFunctionsMssgDuplicatedProduct,
+  useModalFunctions,
+  useModalFunctionsMssgDuplicatedProduct,
 } from '../../components/modal/ModalFunctions';
 import normalizeInputs from '../../components/normalizeInput/NormalizeInputs';
 import './Add-items.css';
@@ -21,14 +21,14 @@ export const AddItems = () => {
   });
 
   //set state class to modal 'Successfully Product Added Msg'
-  const { modalClass, showModal, hideModal } = ModalFunctions();
+  const { modalClass, showModal, hideModal } = useModalFunctions();
 
   //set state class to modal 'Duplicated Product Msg'
   const {
     msgProductDuplicatedModal,
     showModalMssgProductDuplicated,
     hideModalMssgProductDuplicated,
-  } = ModalFunctionsMssgDuplicatedProduct();
+  } = useModalFunctionsMssgDuplicatedProduct();
 
   //Handle state Product from client side
   const handleChangeProduct = (e) => {
