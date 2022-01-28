@@ -76,7 +76,6 @@ export const AddItems = () => {
     );
     if (productsListFiltered.length !== 0) {
       showModalMssgProductDuplicated();
-      setProduct({ ...product, name: '', lastPurch: null });
     } else {
       addProductToList(product);
       setProduct({ ...product, name: '', lastPurch: null });
