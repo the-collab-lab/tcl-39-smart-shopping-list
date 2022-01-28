@@ -49,6 +49,7 @@ export const AddItems = () => {
     const unsubscribe = onSnapshot(getListFromDB(token), (doc) => {
       list.current = doc.data();
       const listProductsByTokenGiven = doc.data().items;
+
       if (listProductsByTokenGiven === undefined) {
         setProductListByToken([]);
       } else {
