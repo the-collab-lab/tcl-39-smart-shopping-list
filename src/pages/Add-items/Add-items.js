@@ -14,7 +14,7 @@ export const AddItems = () => {
   const token = localStorage.getItem('token');
   //set state of product items from client side
   const [product, setProduct] = useState({
-    token: token,
+    token,
     name: '',
     howSoon: '7',
     lastPurch: null,
