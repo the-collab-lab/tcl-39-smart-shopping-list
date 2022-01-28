@@ -50,12 +50,18 @@ export const AddItems = () => {
     const unsubscribe = onSnapshot(getListFromDB(token), (doc) => {
       list.current = doc.data();
       const listProductsByTokenGiven = doc.data().items;
-      setProductListByToken(listProductsByTokenGiven);
+      if (listProductsByTokenGiven === undefined) {
+        setProductListByToken([]);
+        console.log(productListByToken, 'productListByToken');
+      } else {
+        setProductListByToken(listProductsByTokenGiven);
+        console.log(productListByToken, 'productListByToken');
+      }
     });
     return () => {
       unsubscribe();
     };
-  }, [token]);
+  }, [productListByToken, token]);
 
   console.log(productListByToken, 'productListByToken');
   console.log(product.name);
@@ -76,6 +82,7 @@ export const AddItems = () => {
     if (productsListFiltered.length !== 0) {
       console.log('This product already exist');
       showModalMssgProductDuplicated();
+      setProduct({ ...product, name: '', lastPurch: null });
     } else {
       console.log('This product does not exist');
       addProductToList(product);
