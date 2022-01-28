@@ -15,15 +15,12 @@ export const JoinList = () => {
     if (docSnap.exists()) {
       localStorage.setItem('token', joinToken);
       navigate('/list');
-      console.log('Document data:', docSnap.data());
     } else {
       alert('No existe este token!');
     }
   };
 
-  const handleChange = (e) => {
-    setJoinToken(e.target.value);
-  };
+  const handleChange = (e) => setJoinToken(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();

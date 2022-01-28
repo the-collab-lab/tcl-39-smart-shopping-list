@@ -37,9 +37,7 @@ function ListProducts() {
     }
   };
 
-  if (!token.current) {
-    return <Redirection />;
-  }
+  if (!token.current) return <Redirection />;
 
   return (
     <main>
