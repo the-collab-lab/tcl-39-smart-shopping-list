@@ -40,7 +40,6 @@ export const AddItems = () => {
       [name]: value,
     });
   };
-  console.log(product, 'product');
   //set state products list by token given
   const [productListByToken, setProductListByToken] = useState([]);
   const list = useRef({});
@@ -52,19 +51,14 @@ export const AddItems = () => {
       const listProductsByTokenGiven = doc.data().items;
       if (listProductsByTokenGiven === undefined) {
         setProductListByToken([]);
-        console.log(productListByToken, 'productListByToken');
       } else {
         setProductListByToken(listProductsByTokenGiven);
-        console.log(productListByToken, 'productListByToken');
       }
     });
     return () => {
       unsubscribe();
     };
   }, [productListByToken, token]);
-
-  console.log(productListByToken, 'productListByToken');
-  console.log(product.name);
 
   // Submit and save data to firestore
   const handleSubmit = (e) => {
@@ -78,13 +72,10 @@ export const AddItems = () => {
         return inputFirstCase === inputSecondCase;
       },
     );
-    console.log(productsListFiltered, 'productToCompareList');
     if (productsListFiltered.length !== 0) {
-      console.log('This product already exist');
       showModalMssgProductDuplicated();
       setProduct({ ...product, name: '', lastPurch: null });
     } else {
-      console.log('This product does not exist');
       addProductToList(product);
       setProduct({ ...product, name: '', lastPurch: null });
       showModal();
