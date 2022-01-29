@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { addProductToList, getListFromDB } from '../../lib/api';
-import { onSnapshot } from 'firebase/firestore';
+import React, { useState, useRef } from 'react';
+import { addProductToList, getDataOnce } from '../../lib/api';
 import { Modal } from '../../components/modal/Modal';
 import {
   useModalFunctions,
@@ -40,40 +39,24 @@ export const AddItems = () => {
       [name]: value,
     });
   };
-  //set state products list by token given
-  const [productListByToken, setProductListByToken] = useState([]);
-  const list = useRef({});
+  //set list useRef products list by token given
+  const list = useRef([]);
+  let listProduct = [];
+
   //get list Products by Token given
-  useEffect(() => {
-    /* Get items */
-    const unsubscribe = onSnapshot(getListFromDB(token), (doc) => {
-      list.current = doc.data();
-      const listProductsByTokenGiven = doc.data().items;
-
-      if (listProductsByTokenGiven === undefined) {
-        setProductListByToken([]);
-      } else {
-        setProductListByToken(listProductsByTokenGiven);
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, [productListByToken, token]);
+  getDataOnce(token, list);
+  listProduct = list.current;
 
   // Submit and save data to firestore
   const handleSubmit = (e) => {
     e.preventDefault();
     //compare products's name from client side and list products from DB
-    let productsListFiltered = productListByToken.filter(
-      (productByTokenGiven) => {
-        const productNameByToken = productByTokenGiven.name;
-        const inputFirstCase = normalizeInputs(productNameByToken);
-        const inputSecondCase = normalizeInputs(product.name);
-        return inputFirstCase === inputSecondCase;
-      },
-    );
+    let productsListFiltered = listProduct.filter((productByTokenGiven) => {
+      const productNameByToken = productByTokenGiven.name;
+      const inputFirstCase = normalizeInputs(productNameByToken);
+      const inputSecondCase = normalizeInputs(product.name);
+      return inputFirstCase === inputSecondCase;
+    });
     if (productsListFiltered.length !== 0) {
       showModalMssgProductDuplicated();
     } else {

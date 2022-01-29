@@ -1,4 +1,10 @@
-import { collection, doc, updateDoc, arrayUnion } from 'firebase/firestore';
+import {
+  getDoc,
+  collection,
+  doc,
+  updateDoc,
+  arrayUnion,
+} from 'firebase/firestore';
 
 import { db } from './firebase';
 
@@ -16,4 +22,15 @@ export const addProductToList = async (productObj) => {
   await updateDoc(list, {
     items: arrayUnion({ name, howSoon: parseInt(howSoon), lastPurch }),
   });
+};
+
+export const getDataOnce = async (token, list) => {
+  const docRef = doc(db, 'lists', token);
+  const docSnap = await getDoc(docRef);
+
+  if (docSnap.exists()) {
+    return (list.current = docSnap.data().items);
+  } else {
+    window.alert('Not document found');
+  }
 };
