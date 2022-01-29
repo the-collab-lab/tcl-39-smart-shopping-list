@@ -43,6 +43,7 @@ export const JoinList = () => {
         <br />
         <input
           id="joinToken"
+          className="joinToken"
           type="text"
           value={joinToken}
           required
