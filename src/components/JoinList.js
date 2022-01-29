@@ -40,7 +40,7 @@ export const JoinList = () => {
           value={joinToken}
           onChange={handleChange}
           placeholder="Enter your token"
-        ></input>
+        />
         <br />
         <button type="submit">Join an existing list</button>
       </form>
