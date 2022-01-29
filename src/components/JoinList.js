@@ -8,7 +8,14 @@ export const JoinList = () => {
   const [joinToken, setJoinToken] = useState('');
   const navigate = useNavigate();
 
-  const checkIfTokenExist = async (token) => {
+  const checkIfTokenExists = async (token) => {
+    const threeWordsRegexCheck = /[a-z]+ [a-z]+ [a-z]+/;
+
+    if (!threeWordsRegexCheck.test(token)) {
+      alert('Un token debe tener 3 palabras. Por favor intente de nuevo.');
+      return;
+    }
+
     const docRef = getListFromDB(token);
     const docSnap = await getDoc(docRef);
 
@@ -24,7 +31,7 @@ export const JoinList = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    checkIfTokenExist(joinToken);
+    checkIfTokenExists(joinToken);
   };
 
   return (
@@ -38,6 +45,7 @@ export const JoinList = () => {
           id="joinToken"
           type="text"
           value={joinToken}
+          required
           onChange={handleChange}
           placeholder="Enter your token"
         />
