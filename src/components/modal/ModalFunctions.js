@@ -5,6 +5,7 @@ export const useModalFunctions = () => {
   const [modalClass, setmodalClass] = useState(false);
   const showModal = () => setmodalClass(true);
   const hideModal = () => setmodalClass(false);
+
   return {
     modalClass,
     showModal,
