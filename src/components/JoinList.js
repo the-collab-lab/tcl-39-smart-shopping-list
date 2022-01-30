@@ -44,7 +44,7 @@ export const JoinList = () => {
         <br />
         <input
           id="joinToken"
-          className="joinToken"
+          className="inputField"
           type="text"
           value={joinToken}
           required

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Modal } from '../../components/modal/Modal';
 import { addProductToList } from '../../lib/api';
 import { Nav } from '../../components/Nav';
@@ -21,6 +21,13 @@ export const AddItems = () => {
   const hideModal = () => {
     setmodalClass(false);
   };
+
+  //input focus
+  const inputRef = useRef();
+
+  useEffect(() => {
+    inputRef.current.focus();
+  });
 
   //Handle state Product
   const handleChangeProduct = (e) => {
@@ -54,10 +61,12 @@ export const AddItems = () => {
           <input
             required
             id="name"
+            className="inputField"
             type="text"
             name="name"
             value={product.name}
             onChange={handleChangeProduct}
+            ref={inputRef}
           />
         </label>
         <fieldset>

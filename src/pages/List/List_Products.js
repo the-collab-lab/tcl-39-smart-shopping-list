@@ -47,6 +47,7 @@ function ListProducts() {
         <br />
         <input
           id="filter"
+          className="inputField"
           value={itemName}
           type="text"
           onChange={handleChange}
