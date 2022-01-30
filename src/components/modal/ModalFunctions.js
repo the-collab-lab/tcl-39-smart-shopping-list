@@ -11,20 +11,3 @@ export const useModalFunctions = () => {
     hideModal,
   };
 };
-//set state class to modal 'Duplicated Product Msg'
-export const useModalFunctionsMssgDuplicatedProduct = () => {
-  const [msgProductDuplicatedModal, setMssgProductDuplicatedModal] =
-    useState(false);
-  //hidden and show modal 'Duplicated Product Msg' functions
-  const showModalMssgProductDuplicated = () => {
-    setMssgProductDuplicatedModal(true);
-  };
-  const hideModalMssgProductDuplicated = () => {
-    setMssgProductDuplicatedModal(false);
-  };
-  return {
-    msgProductDuplicatedModal,
-    showModalMssgProductDuplicated,
-    hideModalMssgProductDuplicated,
-  };
-};

@@ -1,10 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { addProductToList, getDataOnce } from '../../lib/api';
 import { Modal } from '../../components/modal/Modal';
-import {
-  useModalFunctions,
-  useModalFunctionsMssgDuplicatedProduct,
-} from '../../components/modal/ModalFunctions';
+import { useModalFunctions } from '../../components/modal/ModalFunctions';
 import normalizeInputs from '../../components/normalizeInput/NormalizeInputs';
 import './Add-items.css';
 
@@ -19,15 +16,10 @@ export const AddItems = () => {
     lastPurch: null,
   });
 
-  //set state class to modal 'Successfully Product Added Msg'
-  const { modalClass, showModal, hideModal } = useModalFunctions();
-
-  //set state class to modal 'Duplicated Product Msg'
-  const {
-    msgProductDuplicatedModal,
-    showModalMssgProductDuplicated,
-    hideModalMssgProductDuplicated,
-  } = useModalFunctionsMssgDuplicatedProduct();
+  //set functions class to modal 'Successfully Product Added Msg'
+  const modalProductAdded = useModalFunctions();
+  //set functions class to modal 'Duplicated Product Msg'
+  const modalDuplicatedProductMsg = useModalFunctions();
 
   //Handle state Product from client side
   const handleChangeProduct = (e) => {
@@ -58,11 +50,11 @@ export const AddItems = () => {
       return inputFirstCase === inputSecondCase;
     });
     if (productsListFiltered.length !== 0) {
-      showModalMssgProductDuplicated();
+      modalDuplicatedProductMsg.showModal();
     } else {
       addProductToList(product);
       setProduct({ ...product, name: '', lastPurch: null });
-      showModal();
+      modalProductAdded.showModal();
     }
   };
 
@@ -130,13 +122,13 @@ export const AddItems = () => {
       </form>
       <Modal
         children={'This product is duplicated'}
-        modalClass={msgProductDuplicatedModal}
-        handleClose={hideModalMssgProductDuplicated}
+        modalClass={modalDuplicatedProductMsg.modalClass}
+        handleClose={modalDuplicatedProductMsg.hideModal}
       />
       <Modal
         children={'Your product was successfully added'}
-        modalClass={modalClass}
-        handleClose={hideModal}
+        modalClass={modalProductAdded.modalClass}
+        handleClose={modalProductAdded.hideModal}
       />
     </main>
   );
