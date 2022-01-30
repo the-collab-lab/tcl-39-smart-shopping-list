@@ -3,15 +3,16 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { getListFromDB } from '../lib/api';
+import { checkTokenFormat } from '../utils/utils';
 
 export const JoinList = () => {
   const [joinToken, setJoinToken] = useState('');
   const navigate = useNavigate();
 
   const checkIfTokenExists = async (token) => {
-    const threeWordsRegexCheck = /[a-z]+ [a-z]+ [a-z]+/;
+    const isValidToken = checkTokenFormat(token);
 
-    if (!threeWordsRegexCheck.test(token)) {
+    if (!isValidToken) {
       alert('Un token debe tener 3 palabras. Por favor intente de nuevo.');
       return;
     }
