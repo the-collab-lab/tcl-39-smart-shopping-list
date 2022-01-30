@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { addProductToList, getDataOnce } from '../../lib/api';
 import { Modal } from '../../components/modal/Modal';
 import { useModalFunctions } from '../../components/modal/ModalFunctions';
@@ -31,17 +31,12 @@ export const AddItems = () => {
       [name]: value,
     });
   };
-  //set list useRef products list by token given
-  const list = useRef([]);
-  let listProduct = [];
-
-  //get list Products by Token given
-  getDataOnce(token, list);
-  listProduct = list.current;
 
   // Submit and save data to firestore
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    //get list Products by Token given
+    let listProduct = await getDataOnce(token);
     //compare products's name from client side and list products from DB
     let productsListFiltered = listProduct.filter((productByTokenGiven) => {
       const productNameByToken = productByTokenGiven.name;

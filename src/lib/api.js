@@ -24,13 +24,27 @@ export const addProductToList = async (productObj) => {
   });
 };
 
-export const getDataOnce = async (token, list) => {
+// export const getDataOnce = async (token, list) => {
+//   const docRef = doc(db, 'lists', token);
+//   const docSnap = await getDoc(docRef);
+
+//   if (docSnap.exists()) {
+//     return (list.current = docSnap.data().items);
+//   } else {
+//     window.alert('Not document found');
+//   }
+// };
+export const getDataOnce = async (token) => {
   const docRef = doc(db, 'lists', token);
   const docSnap = await getDoc(docRef);
-
   if (docSnap.exists()) {
-    return (list.current = docSnap.data().items);
+    const { items } = docSnap.data();
+    if (items !== undefined) {
+      return items;
+    }
+    return [];
   } else {
     window.alert('Not document found');
+    return [];
   }
 };
