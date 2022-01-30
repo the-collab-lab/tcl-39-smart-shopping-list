@@ -1,6 +1,6 @@
 import {
+  getDoc,
   collection,
-  addDoc,
   doc,
   updateDoc,
   arrayUnion,
@@ -8,15 +8,7 @@ import {
 
 import { db } from './firebase';
 
-export const productsCollection = collection(db, 'Products');
 export const listsCollection = collection(db, 'lists');
-
-export const saveItem = (item) => {
-  if (item) {
-    addDoc(productsCollection, { item });
-  }
-  return;
-};
 
 export const getListFromDB = (token) => {
   const list = doc(listsCollection, token);
@@ -30,4 +22,19 @@ export const addProductToList = async (productObj) => {
   await updateDoc(list, {
     items: arrayUnion({ name, howSoon: parseInt(howSoon), lastPurch }),
   });
+};
+
+export const getDataOnce = async (token) => {
+  const docRef = doc(db, 'lists', token);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    const { items } = docSnap.data();
+    if (items !== undefined) {
+      return items;
+    }
+    return [];
+  } else {
+    window.alert('Not document found');
+    return [];
+  }
 };
