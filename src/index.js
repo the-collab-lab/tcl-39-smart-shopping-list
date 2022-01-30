@@ -7,7 +7,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { ProductDetails } from './components/ProductDetails';
 import ListProducts from './pages/List/List_Products';
-import { Redirection } from './components/Redirection';
+import { NotFound404 } from './pages/404/404';
 
 const rootElement = document.getElementById('root');
 render(
@@ -18,7 +18,7 @@ render(
         <Route path=":product" element={<ProductDetails />} />
       </Route>
       <Route path="add-items" element={<AddItems />} />
-      <Route path="*" element={<Redirection />} />
+      <Route path="*" element={<NotFound404 />} />
     </Routes>
   </BrowserRouter>,
   rootElement,
