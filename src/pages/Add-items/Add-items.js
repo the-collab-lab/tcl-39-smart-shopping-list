@@ -4,6 +4,7 @@ import { addProductToList } from '../../lib/api';
 import { Nav } from '../../components/Nav';
 import './Add-items.css';
 import { Redirection } from '../../components/Redirection';
+import { checkTokenFormat } from '../../utils/utils';
 
 export const AddItems = () => {
   const [product, setProduct] = useState({
@@ -12,6 +13,7 @@ export const AddItems = () => {
     howSoon: '7',
     lastPurch: null,
   });
+  const isValidToken = useRef(checkTokenFormat(product.token));
 
   //set state class to modal
   const [modalClass, setmodalClass] = useState(false);
@@ -26,7 +28,9 @@ export const AddItems = () => {
   const inputRef = useRef();
 
   useEffect(() => {
-    inputRef.current.focus();
+    if (isValidToken.current) {
+      inputRef.current.focus();
+    }
   });
 
   //Handle state Product
@@ -48,7 +52,7 @@ export const AddItems = () => {
     showModal();
   };
 
-  if (!product.token) {
+  if (!isValidToken.current) {
     return <Redirection />;
   }
 
