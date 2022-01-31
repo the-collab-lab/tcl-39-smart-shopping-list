@@ -1,30 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react';
+
 import { Modal } from '../../components/modal/Modal';
-import { addProductToList } from '../../lib/api';
 import { Nav } from '../../components/Nav';
+import { addProductToList, getDataOnce } from '../../lib/api';
+import { useModalFunctions } from '../../components/modal/ModalFunctions';
+import normalizeInputs from '../../components/normalizeInput/NormalizeInputs';
 import './Add-items.css';
 import { Redirection } from '../../components/Redirection';
 import { checkTokenFormat } from '../../utils/utils';
 
 export const AddItems = () => {
+  //get token from localstore
+  const token = localStorage.getItem('token');
+  //set state of product items from client side
   const [product, setProduct] = useState({
-    token: localStorage.getItem('token'),
+    token,
     name: '',
     howSoon: '7',
     lastPurch: null,
   });
   const isValidToken = useRef(checkTokenFormat(product.token));
 
-  //set state class to modal
-  const [modalClass, setmodalClass] = useState(false);
-  const showModal = () => {
-    setmodalClass(true);
-  };
-  const hideModal = () => {
-    setmodalClass(false);
-  };
+  //set functions class to modal 'Successfully Product Added Msg'
+  const modalProductAdded = useModalFunctions();
+  //set functions class to modal 'Duplicated Product Msg'
+  const modalDuplicatedProductMsg = useModalFunctions();
 
-  //input focus
+//input focus
   const inputRef = useRef();
 
   useEffect(() => {
@@ -33,7 +35,7 @@ export const AddItems = () => {
     }
   });
 
-  //Handle state Product
+
   const handleChangeProduct = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -45,11 +47,24 @@ export const AddItems = () => {
   };
 
   // Submit and save data to firestore
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    addProductToList(product);
-    setProduct({ ...product, name: '', lastPurch: null });
-    showModal();
+    //get list Products by Token given
+    let listProduct = await getDataOnce(token);
+    //compare products's name from client side and list products from DB
+    let productsListFiltered = listProduct.filter((productByTokenGiven) => {
+      const productNameByToken = productByTokenGiven.name;
+      const inputFirstCase = normalizeInputs(productNameByToken);
+      const inputSecondCase = normalizeInputs(product.name);
+      return inputFirstCase === inputSecondCase;
+    });
+    if (productsListFiltered.length !== 0) {
+      modalDuplicatedProductMsg.showModal();
+    } else {
+      addProductToList(product);
+      setProduct({ ...product, name: '', lastPurch: null });
+      modalProductAdded.showModal();
+    }
   };
 
   if (!isValidToken.current) {
@@ -121,9 +136,14 @@ export const AddItems = () => {
         </div>
       </form>
       <Modal
-        children={'Your product was succesfully added'}
-        modalClass={modalClass}
-        handleClose={hideModal}
+        children={'This product is duplicated'}
+        modalClass={modalDuplicatedProductMsg.modalClass}
+        handleClose={modalDuplicatedProductMsg.hideModal}
+      />
+      <Modal
+        children={'Your product was successfully added'}
+        modalClass={modalProductAdded.modalClass}
+        handleClose={modalProductAdded.hideModal}
       />
       <Nav />
     </main>
