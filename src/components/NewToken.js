@@ -12,7 +12,7 @@ const NewToken = () => {
 
     setDoc(doc(db, 'lists', getTokenStorage), {});
 
-    navigate('/list');
+    navigate('/add-items');
   };
 
   return <button onClick={token}>Create a new list</button>;

@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
-import { addProductToList, getDataOnce } from '../../lib/api';
+import React, { useEffect, useRef, useState } from 'react';
+
 import { Modal } from '../../components/modal/Modal';
+import { Nav } from '../../components/Nav';
+import { addProductToList, getDataOnce } from '../../lib/api';
 import { useModalFunctions } from '../../components/modal/ModalFunctions';
 import normalizeInputs from '../../components/normalizeInput/NormalizeInputs';
 import './Add-items.css';
+import { Redirection } from '../../components/Redirection';
+import { checkTokenFormat } from '../../utils/utils';
 
 export const AddItems = () => {
   //get token from localstore
@@ -15,13 +19,23 @@ export const AddItems = () => {
     howSoon: '7',
     lastPurch: null,
   });
+  const isValidToken = useRef(checkTokenFormat(product.token));
 
   //set functions class to modal 'Successfully Product Added Msg'
   const modalProductAdded = useModalFunctions();
   //set functions class to modal 'Duplicated Product Msg'
   const modalDuplicatedProductMsg = useModalFunctions();
 
-  //Handle state Product from client side
+//input focus
+  const inputRef = useRef();
+
+  useEffect(() => {
+    if (isValidToken.current) {
+      inputRef.current.focus();
+    }
+  });
+
+
   const handleChangeProduct = (e) => {
     const value = e.target.value;
     const name = e.target.name;
@@ -53,6 +67,10 @@ export const AddItems = () => {
     }
   };
 
+  if (!isValidToken.current) {
+    return <Redirection />;
+  }
+
   return (
     <main>
       <h1>Add Item</h1>
@@ -62,10 +80,12 @@ export const AddItems = () => {
           <input
             required
             id="name"
+            className="inputField"
             type="text"
             name="name"
             value={product.name}
             onChange={handleChangeProduct}
+            ref={inputRef}
           />
         </label>
         <fieldset>
@@ -125,6 +145,7 @@ export const AddItems = () => {
         modalClass={modalProductAdded.modalClass}
         handleClose={modalProductAdded.hideModal}
       />
+      <Nav />
     </main>
   );
 };

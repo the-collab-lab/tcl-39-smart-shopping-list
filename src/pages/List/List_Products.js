@@ -2,26 +2,29 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { onSnapshot } from 'firebase/firestore';
 
-import { getListFromDB } from '../lib/api';
+import { getListFromDB } from '../../lib/api';
+
 import './ListProducts.css';
+import { Redirection } from '../../components/Redirection';
+import { Nav } from '../../components/Nav';
 
 function ListProducts() {
   const [items, setItems] = useState([]);
   const [itemName, setItemName] = useState('');
   const list = useRef({});
+  const token = useRef(localStorage.getItem('token'));
 
   useEffect(() => {
-    /* Get token */
-    const token = localStorage.getItem('token');
-
-    /* Get items */
-    const unsubscribe = onSnapshot(getListFromDB(token), (doc) => {
-      list.current = doc.data();
-      setItems(doc.data().items);
-    });
-    return () => {
-      unsubscribe();
-    };
+    if (token.current) {
+      /* Get items */
+      const unsubscribe = onSnapshot(getListFromDB(token.current), (doc) => {
+        list.current = doc.data();
+        setItems(doc.data().items);
+      });
+      return () => {
+        unsubscribe();
+      };
+    }
   }, []);
 
   const handleChange = (e) => {
@@ -34,13 +37,17 @@ function ListProducts() {
     }
   };
 
+  if (!token.current) return <Redirection />;
+
   return (
-    <>
+    <main>
+      <h1>List</h1>
       <form>
         <label htmlFor="filter">Filter items</label>
         <br />
         <input
           id="filter"
+          className="inputField"
           value={itemName}
           type="text"
           onChange={handleChange}
@@ -75,7 +82,8 @@ function ListProducts() {
           </div>
         ))}
       <Outlet />
-    </>
+      <Nav />
+    </main>
   );
 }
 
