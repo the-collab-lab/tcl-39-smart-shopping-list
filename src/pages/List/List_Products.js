@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { onSnapshot } from 'firebase/firestore';
 
 import { getListFromDB } from '../../lib/api';
@@ -8,15 +8,16 @@ import './ListProducts.css';
 import { Redirection } from '../../components/Redirection';
 import { Nav } from '../../components/Nav';
 import { ProductForList } from '../../components/ProductForList';
+import { superPopulate } from '../../lib/populateDB';
 
 function ListProducts() {
   const [items, setItems] = useState([]);
   const [itemName, setItemName] = useState('');
-  const [bought, setBought] = useState(true);
   const list = useRef({});
   const token = useRef(localStorage.getItem('token'));
 
   useEffect(() => {
+    // superPopulate();
     if (token.current) {
       /* Get items */
       const unsubscribe = onSnapshot(getListFromDB(token.current), (doc) => {
@@ -31,10 +32,6 @@ function ListProducts() {
 
   const handleChange = (e) => {
     setItemName(e.target.value);
-  };
-
-  const handleCheck = (e) => {
-    setBought(!bought);
   };
 
   const handleDeleteAttempt = () => {
@@ -68,7 +65,6 @@ function ListProducts() {
           <ProductForList
             key={`${index}${item.name}`}
             item={item}
-            handleCheck={handleCheck}
             handleDeleteAttempt={handleDeleteAttempt}
           />
         ))}
