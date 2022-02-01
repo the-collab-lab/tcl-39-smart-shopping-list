@@ -7,10 +7,12 @@ import { getListFromDB } from '../../lib/api';
 import './ListProducts.css';
 import { Redirection } from '../../components/Redirection';
 import { Nav } from '../../components/Nav';
+import { ProductForList } from '../../components/ProductForList';
 
 function ListProducts() {
   const [items, setItems] = useState([]);
   const [itemName, setItemName] = useState('');
+  const [bought, setBought] = useState(true);
   const list = useRef({});
   const token = useRef(localStorage.getItem('token'));
 
@@ -29,6 +31,10 @@ function ListProducts() {
 
   const handleChange = (e) => {
     setItemName(e.target.value);
+  };
+
+  const handleCheck = (e) => {
+    setBought(!bought);
   };
 
   const handleDeleteAttempt = () => {
@@ -59,27 +65,12 @@ function ListProducts() {
       </h4>
       {items &&
         items.map((item, index) => (
-          <div
+          <ProductForList
             key={`${index}${item.name}`}
-            className="product-container"
-            aria-label={`${
-              item.howSoon === 7
-                ? 'soon'
-                : item.howSoon === 14
-                ? 'kind of soon'
-                : 'not soon'
-            }`}
-          >
-            <p>
-              Product: <span className="item-name">{item.name}</span>
-            </p>
-            <div className="btn-container">
-              <Link to={`/list/${item.name}/`} state={{ product: item }}>
-                <button>details</button>
-              </Link>
-              <button onClick={handleDeleteAttempt}>delete</button>
-            </div>
-          </div>
+            item={item}
+            handleCheck={handleCheck}
+            handleDeleteAttempt={handleDeleteAttempt}
+          />
         ))}
       <Outlet />
       <Nav />
