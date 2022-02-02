@@ -10,6 +10,16 @@ import {
 } from 'firebase/firestore';
 import { getToken, words } from '@the-collab-lab/shopping-list-utils';
 import { initializeApp } from 'firebase/app';
+import { format } from 'date-fns';
+
+function randomDate() {
+  const start = new Date(2022, 0, 31);
+  const end = new Date();
+
+  var date = new Date(+start + Math.random() * (end - start));
+
+  return date;
+}
 
 //Mock data.
 const mockData = [
@@ -17,137 +27,137 @@ const mockData = [
     token: '1',
     name: 'monica',
     items: [
-      { name: 'yucca', lastPurch: new Date(), howSoon: 7 },
-      { name: 'rice', lastPurch: new Date(), howSoon: 30 },
+      { name: 'yucca', lastPurch: randomDate(), howSoon: 7 },
+      { name: 'rice', lastPurch: randomDate(), howSoon: 30 },
     ],
   },
   {
     token: '2',
     name: 'beatriz',
     items: [
-      { name: 'bread', lastPurch: new Date(), howSoon: 14 },
-      { name: 'pizza', lastPurch: new Date(), howSoon: 7 },
-      { name: 'nuggets', lastPurch: new Date(), howSoon: 14 },
+      { name: 'bread', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'pizza', lastPurch: randomDate(), howSoon: 7 },
+      { name: 'nuggets', lastPurch: randomDate(), howSoon: 14 },
     ],
   },
   {
     token: '3',
     name: 'pacho',
     items: [
-      { name: 'yoghurt', lastPurch: new Date(), howSoon: 30 },
-      { name: 'milk', lastPurch: new Date(), howSoon: 14 },
-      { name: 'ceviche', lastPurch: new Date(), howSoon: 7 },
+      { name: 'yoghurt', lastPurch: randomDate(), howSoon: 30 },
+      { name: 'milk', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'ceviche', lastPurch: randomDate(), howSoon: 7 },
     ],
   },
   {
     token: '4',
     name: 'jorge',
-    items: [{ name: 'tomatoes', lastPurch: new Date(), howSoon: 14 }],
+    items: [{ name: 'tomatoes', lastPurch: randomDate(), howSoon: 14 }],
   },
   {
     token: '5',
     name: 'olga',
     items: [
-      { name: 'pineapple', lastPurch: new Date(), howSoon: 14 },
-      { name: 'sugar', lastPurch: new Date(), howSoon: 30 },
-      { name: 'watermelon', lastPurch: new Date(), howSoon: 14 },
-      { name: 'berries', lastPurch: new Date(), howSoon: 7 },
+      { name: 'pineapple', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'sugar', lastPurch: randomDate(), howSoon: 30 },
+      { name: 'watermelon', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'berries', lastPurch: randomDate(), howSoon: 7 },
     ],
   },
   {
     token: '6',
     name: 'pía',
     items: [
-      { name: 'cantaloupe', lastPurch: new Date(), howSoon: 7 },
-      { name: 'vinegar', lastPurch: new Date(), howSoon: 14 },
+      { name: 'cantaloupe', lastPurch: randomDate(), howSoon: 7 },
+      { name: 'vinegar', lastPurch: randomDate(), howSoon: 14 },
     ],
   },
   {
     token: '7',
     name: 'johnatan',
     items: [
-      { name: 'rice', lastPurch: new Date(), howSoon: 30 },
-      { name: 'apples', lastPurch: new Date(), howSoon: 14 },
-      { name: 'oil', lastPurch: new Date(), howSoon: 30 },
-      { name: 'lettuce', lastPurch: new Date(), howSoon: 7 },
+      { name: 'rice', lastPurch: randomDate(), howSoon: 30 },
+      { name: 'apples', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'oil', lastPurch: randomDate(), howSoon: 30 },
+      { name: 'lettuce', lastPurch: randomDate(), howSoon: 7 },
     ],
   },
   {
     token: '8',
     name: 'carlos',
     items: [
-      { name: 'tomatoes', lastPurch: new Date(), howSoon: 14 },
-      { name: 'nuggets', lastPurch: new Date(), howSoon: 14 },
-      { name: 'rice', lastPurch: new Date(), howSoon: 30 },
+      { name: 'tomatoes', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'nuggets', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'rice', lastPurch: randomDate(), howSoon: 30 },
     ],
   },
   {
     token: '9',
     name: 'david',
-    items: [{ name: 'ceviche', lastPurch: new Date(), howSoon: 7 }],
+    items: [{ name: 'ceviche', lastPurch: randomDate(), howSoon: 7 }],
   },
   {
     token: '10',
     name: 'camilo',
     items: [
-      { name: 'sugar', lastPurch: new Date(), howSoon: 30 },
-      { name: 'watermelon', lastPurch: new Date(), howSoon: 14 },
-      { name: 'pizza', lastPurch: new Date(), howSoon: 7 },
+      { name: 'sugar', lastPurch: randomDate(), howSoon: 30 },
+      { name: 'watermelon', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'pizza', lastPurch: randomDate(), howSoon: 7 },
     ],
   },
   {
     token: '11',
     name: 'kathy',
     items: [
-      { name: 'milk', lastPurch: new Date(), howSoon: 14 },
-      { name: 'ceviche', lastPurch: new Date(), howSoon: 7 },
-      { name: 'pineapple', lastPurch: new Date(), howSoon: 14 },
-      { name: 'vinegar', lastPurch: new Date(), howSoon: 14 },
+      { name: 'milk', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'ceviche', lastPurch: randomDate(), howSoon: 7 },
+      { name: 'pineapple', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'vinegar', lastPurch: randomDate(), howSoon: 14 },
     ],
   },
   {
     token: '12',
     name: 'eliana',
     items: [
-      { name: 'nuggets', lastPurch: new Date(), howSoon: 14 },
-      { name: 'rice', lastPurch: new Date(), howSoon: 30 },
-      { name: 'yoghurt', lastPurch: new Date(), howSoon: 30 },
-      { name: 'milk', lastPurch: new Date(), howSoon: 14 },
-      { name: 'oil', lastPurch: new Date(), howSoon: 30 },
+      { name: 'nuggets', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'rice', lastPurch: randomDate(), howSoon: 30 },
+      { name: 'yoghurt', lastPurch: randomDate(), howSoon: 30 },
+      { name: 'milk', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'oil', lastPurch: randomDate(), howSoon: 30 },
     ],
   },
   {
     token: '13',
     name: 'luis',
     items: [
-      { name: 'watermelon', lastPurch: new Date(), howSoon: 14 },
-      { name: 'pizza', lastPurch: new Date(), howSoon: 7 },
-      { name: 'bread', lastPurch: new Date(), howSoon: 14 },
-      { name: 'nuggets', lastPurch: new Date(), howSoon: 14 },
+      { name: 'watermelon', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'pizza', lastPurch: randomDate(), howSoon: 7 },
+      { name: 'bread', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'nuggets', lastPurch: randomDate(), howSoon: 14 },
     ],
   },
   {
     token: '14',
     name: 'eliseo',
     items: [
-      { name: 'apples', lastPurch: new Date(), howSoon: 14 },
-      { name: 'oil', lastPurch: new Date(), howSoon: 30 },
-      { name: 'cantaloupe', lastPurch: new Date(), howSoon: 7 },
-      { name: 'tangerines', lastPurch: new Date(), howSoon: 7 },
+      { name: 'apples', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'oil', lastPurch: randomDate(), howSoon: 30 },
+      { name: 'cantaloupe', lastPurch: randomDate(), howSoon: 7 },
+      { name: 'tangerines', lastPurch: randomDate(), howSoon: 7 },
     ],
   },
   {
     token: '15',
     name: 'félix',
     items: [
-      { name: 'pineapple', lastPurch: new Date(), howSoon: 14 },
-      { name: 'vinegar', lastPurch: new Date(), howSoon: 14 },
+      { name: 'pineapple', lastPurch: randomDate(), howSoon: 14 },
+      { name: 'vinegar', lastPurch: randomDate(), howSoon: 14 },
     ],
   },
   {
     token: '16',
     name: 'augusto',
-    items: [{ name: 'peppers', lastPurch: new Date(), howSoon: 7 }],
+    items: [{ name: 'peppers', lastPurch: randomDate(), howSoon: 7 }],
   },
 ];
 

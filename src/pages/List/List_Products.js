@@ -66,6 +66,7 @@ function ListProducts() {
             key={`${index}${item.name}`}
             item={item}
             handleDeleteAttempt={handleDeleteAttempt}
+            token={token.current}
           />
         ))}
       <Outlet />
