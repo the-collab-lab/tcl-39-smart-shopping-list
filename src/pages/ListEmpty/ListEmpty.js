@@ -10,7 +10,8 @@ const ListEmpty = () => {
   };
   return (
     <>
-      <h1>List empty</h1>
+      <h1>Smart Shopping List</h1>
+      <h2>Your shopping list is currently empty</h2>
       <button onClick={routeChange}>Add Item</button>
     </>
   );
