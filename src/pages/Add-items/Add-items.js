@@ -26,7 +26,7 @@ export const AddItems = () => {
   //set functions class to modal 'Duplicated Product Msg'
   const modalDuplicatedProductMsg = useModalFunctions();
 
-//input focus
+  //input focus
   const inputRef = useRef();
 
   useEffect(() => {
@@ -34,7 +34,6 @@ export const AddItems = () => {
       inputRef.current.focus();
     }
   });
-
 
   const handleChangeProduct = (e) => {
     const value = e.target.value;
@@ -72,8 +71,8 @@ export const AddItems = () => {
   }
 
   return (
-    <main>
-      <h1>Add Item</h1>
+    <>
+      <h1>Smart Shopping List</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">
           <p>Product:</p>
@@ -146,6 +145,6 @@ export const AddItems = () => {
         handleClose={modalProductAdded.hideModal}
       />
       <Nav />
-    </main>
+    </>
   );
 };

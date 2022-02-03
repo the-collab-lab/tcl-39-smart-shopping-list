@@ -4,8 +4,8 @@ import { getListFromDB } from '../../lib/api';
 import './ListProducts.css';
 import { Redirection } from '../../components/Redirection';
 import { Nav } from '../../components/Nav';
-import ListEmpty from '../ListEmpty/ListEmpty';
-import FormProducts from '../formProducts/FormProducts';
+import ListEmpty from '../../components/ListEmpty/ListEmpty';
+import FormProducts from '../../components/formProducts/FormProducts';
 
 const ListProducts = () => {
   const [itemsProducts, setItemsProducts] = useState([]);
@@ -33,14 +33,15 @@ const ListProducts = () => {
   if (!token.current) return <Redirection />;
 
   return (
-    <main>
+    <>
+      <h1>Smart Shopping List</h1>
       {itemsProducts && itemsProducts.length === 0 ? (
         <ListEmpty />
       ) : (
         <FormProducts list={list} items={itemsProducts} />
       )}
       <Nav />
-    </main>
+    </>
   );
 };
 

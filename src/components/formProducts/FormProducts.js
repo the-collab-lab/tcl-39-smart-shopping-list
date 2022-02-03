@@ -13,7 +13,7 @@ const FormProducts = ({ list, items }) => {
     }
   };
   return (
-    <main>
+    <>
       <form>
         <label htmlFor="filter">Filter items</label>
         <br />
@@ -54,7 +54,7 @@ const FormProducts = ({ list, items }) => {
           </div>
         ))}
       <Outlet />
-    </main>
+    </>
   );
 };
 
