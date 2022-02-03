@@ -1,18 +1,17 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './ListEmpty.css';
 
 const ListEmpty = () => {
-  let navigate = useNavigate();
-  const routeChange = () => {
-    let path = '/add-items';
-    navigate(path);
-  };
   return (
     <>
       <h1>Smart Shopping List</h1>
-      <h2>Your shopping list is currently empty</h2>
-      <button onClick={routeChange}>Add Item</button>
+      <p>Your shopping list is currently empty</p>
+      <button>
+        <Link className="link-button" to="/add-items">
+          Add Item
+        </Link>
+      </button>
     </>
   );
 };
