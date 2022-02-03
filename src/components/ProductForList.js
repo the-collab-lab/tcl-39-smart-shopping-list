@@ -31,36 +31,45 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
 
   const [isBought, setIsBought] = useState(getDateDiff());
 
-  const handleCheck = async (e) => {
-    if (isBought) {
-      setIsBought(!isBought);
-      return;
-    }
-
-    console.log(token);
+  const updatePurchaseTimeDB = async () => {
+    //Encuentra la lista.
     const listCollection = getListFromDB(token);
     const list = await getDoc(listCollection);
+
     if (list.exists()) {
-      console.log('Document data:', list.data());
       const itemsFromList = list.data().items;
+
+      //Encuentra el item a actualizar.
       const thisItem = itemsFromList.find((itemToCheck) => {
         return itemToCheck.name === item.name;
       });
-
-      console.log(thisItem);
 
       const listRef = doc(db, 'lists', token);
       const thisItemUpdated = { ...thisItem, lastPurch: new Date() };
       await updateDoc(listRef, { items: arrayUnion(thisItemUpdated) });
       await updateDoc(listRef, { items: arrayRemove(thisItem) });
-
-      console.log(thisItemUpdated);
-    } else {
-      // doc.data() will be undefined in this case
-      console.log('No such document!');
     }
+  };
 
+  // const updateItem = async (foundItem) => {
+  //   const listRef = doc(db, 'lists', token);
+  //   const thisItemUpdated = { ...foundItem, lastPurch: new Date() };
+  //   await updateDoc(listRef, { items: arrayUnion(thisItemUpdated) });
+  //   await updateDoc(listRef, { items: arrayRemove(foundItem) });
+
+  //   console.log(thisItemUpdated);
+  // };
+
+  const handleCheck = async () => {
+    //Si se desmarca, no actualiza la DB.
+    if (isBought) {
+      setIsBought(!isBought);
+      return;
+    }
+    //Si se marca:
+    //Lo refleja en el checkbox
     setIsBought(!isBought);
+    updatePurchaseTimeDB();
   };
 
   return (
@@ -84,7 +93,7 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
         Product: <span className="item-name">{item.name}</span>
       </p>
       <div className="btn-container">
-        <Link to={`/listCollection/${item.name}/`} state={{ product: item }}>
+        <Link to={`/list/${item.name}/`} state={{ product: item }}>
           <button>details</button>
         </Link>
         <button onClick={handleDeleteAttempt}>delete</button>

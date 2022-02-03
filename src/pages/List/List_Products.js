@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { onSnapshot } from 'firebase/firestore';
+import { getDoc } from 'firebase/firestore';
 
 import { getListFromDB } from '../../lib/api';
 
@@ -8,7 +8,6 @@ import './ListProducts.css';
 import { Redirection } from '../../components/Redirection';
 import { Nav } from '../../components/Nav';
 import { ProductForList } from '../../components/ProductForList';
-import { superPopulate } from '../../lib/populateDB';
 
 function ListProducts() {
   const [items, setItems] = useState([]);
@@ -17,16 +16,22 @@ function ListProducts() {
   const token = useRef(localStorage.getItem('token'));
 
   useEffect(() => {
-    // superPopulate();
     if (token.current) {
       /* Get items */
-      const unsubscribe = onSnapshot(getListFromDB(token.current), (doc) => {
-        list.current = doc.data();
-        setItems(doc.data().items);
-      });
-      return () => {
-        unsubscribe();
+
+      const getItemsFromList = async () => {
+        const docRef = getListFromDB(token.current);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+          const products = docSnap.data().items;
+          if (products !== undefined) {
+            setItems(products);
+            return;
+          }
+          return [];
+        }
       };
+      getItemsFromList();
     }
   }, []);
 
