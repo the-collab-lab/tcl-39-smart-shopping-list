@@ -35,7 +35,7 @@ const ListProducts = () => {
   if (!token.current) return <Redirection />;
 
   return (
-    <>
+    <main>
       <h1>Smart Shopping List</h1>
       {loading ? (
         <p>Loading</p>
@@ -45,7 +45,7 @@ const ListProducts = () => {
         <FormProducts items={itemsProducts} />
       )}
       <Nav />
-    </>
+    </main>
   );
 };
 
