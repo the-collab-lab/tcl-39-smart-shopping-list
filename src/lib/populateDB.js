@@ -13,7 +13,7 @@ import { initializeApp } from 'firebase/app';
 import { format } from 'date-fns';
 
 function randomDate() {
-  const start = new Date(2022, 0, 31);
+  const start = new Date(2022, 1, 1);
   const end = new Date();
 
   var date = new Date(+start + Math.random() * (end - start));

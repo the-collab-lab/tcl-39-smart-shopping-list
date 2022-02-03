@@ -1,4 +1,4 @@
-import { compareAsc, formatDistance, sub } from 'date-fns';
+import { compareAsc, sub } from 'date-fns';
 import { getDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
