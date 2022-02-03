@@ -51,15 +51,6 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
     }
   };
 
-  // const updateItem = async (foundItem) => {
-  //   const listRef = doc(db, 'lists', token);
-  //   const thisItemUpdated = { ...foundItem, lastPurch: new Date() };
-  //   await updateDoc(listRef, { items: arrayUnion(thisItemUpdated) });
-  //   await updateDoc(listRef, { items: arrayRemove(foundItem) });
-
-  //   console.log(thisItemUpdated);
-  // };
-
   const handleCheck = async () => {
     //Si se desmarca, no actualiza la DB.
     if (isBought) {
@@ -69,6 +60,7 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
     //Si se marca:
     //Lo refleja en el checkbox
     setIsBought(!isBought);
+    //Actualiza la DB
     updatePurchaseTimeDB();
   };
 
