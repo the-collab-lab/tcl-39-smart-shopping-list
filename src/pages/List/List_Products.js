@@ -10,6 +10,7 @@ import FormProducts from '../../components/formProducts/FormProducts';
 const ListProducts = () => {
   const [itemsProducts, setItemsProducts] = useState([]);
   const token = useRef(localStorage.getItem('token'));
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (token.current) {
@@ -17,11 +18,14 @@ const ListProducts = () => {
       const unsubscribe = onSnapshot(getListFromDB(token.current), (doc) => {
         let { items } = doc.data();
         if (items === undefined) {
+          setLoading(false);
           setItemsProducts([]);
         } else {
+          setLoading(false);
           setItemsProducts(items);
         }
       });
+
       return () => {
         unsubscribe();
       };
@@ -33,7 +37,9 @@ const ListProducts = () => {
   return (
     <>
       <h1>Smart Shopping List</h1>
-      {itemsProducts && itemsProducts.length === 0 ? (
+      {loading ? (
+        <p>Loading</p>
+      ) : itemsProducts.length === 0 ? (
         <ListEmpty />
       ) : (
         <FormProducts items={itemsProducts} />
