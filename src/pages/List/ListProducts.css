@@ -1,7 +1,7 @@
 .product-container {
   display: flex;
   height: 25px;
-  width: 100%;
+  width: auto;
   padding: 10px 0 10px 10px;
   justify-content: space-between;
   align-items: center;
@@ -38,4 +38,5 @@
   text-transform: capitalize;
   font-style: italic;
   margin-bottom: 20px;
+  padding: 0 10px;
 }

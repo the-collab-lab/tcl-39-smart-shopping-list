@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
-const FormProducts = ({ list, items }) => {
+const FormProducts = ({ items }) => {
   const [itemName, setItemName] = useState('');
   const handleChange = (e) => {
     setItemName(e.target.value);
@@ -26,9 +26,6 @@ const FormProducts = ({ list, items }) => {
           placeholder="Start typing a product..."
         />
       </form>
-      <h4 className="list-name">
-        {list.current.name && `${list.current.name}'s list`}
-      </h4>
       {items &&
         items.map((item, index) => (
           <div

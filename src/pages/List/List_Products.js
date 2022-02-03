@@ -9,7 +9,6 @@ import FormProducts from '../../components/formProducts/FormProducts';
 
 const ListProducts = () => {
   const [itemsProducts, setItemsProducts] = useState([]);
-  const list = useRef({});
   const token = useRef(localStorage.getItem('token'));
 
   useEffect(() => {
@@ -20,7 +19,6 @@ const ListProducts = () => {
         if (items === undefined) {
           setItemsProducts([]);
         } else {
-          list.current = doc.data();
           setItemsProducts(items);
         }
       });
@@ -38,7 +36,7 @@ const ListProducts = () => {
       {itemsProducts && itemsProducts.length === 0 ? (
         <ListEmpty />
       ) : (
-        <FormProducts list={list} items={itemsProducts} />
+        <FormProducts items={itemsProducts} />
       )}
       <Nav />
     </>
