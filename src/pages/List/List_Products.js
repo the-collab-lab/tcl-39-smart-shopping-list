@@ -6,6 +6,7 @@ import { Redirection } from '../../components/Redirection';
 import { Nav } from '../../components/Nav';
 import ListEmpty from '../../components/ListEmpty/ListEmpty';
 import FormProducts from '../../components/formProducts/FormProducts';
+import Loading from '../../components/loading/loading';
 
 const ListProducts = () => {
   const [itemsProducts, setItemsProducts] = useState([]);
@@ -38,7 +39,7 @@ const ListProducts = () => {
     <main>
       <h1>Smart Shopping List</h1>
       {loading ? (
-        <p>Loading</p>
+        <Loading />
       ) : itemsProducts.length === 0 ? (
         <ListEmpty />
       ) : (

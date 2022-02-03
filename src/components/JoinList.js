@@ -36,7 +36,7 @@ export const JoinList = () => {
   };
 
   return (
-    <>
+    <main>
       <h3>Join list</h3>
       <form onSubmit={handleSubmit}>
         <p>Join an existing shopping list by entering a three word token.</p>
@@ -54,6 +54,6 @@ export const JoinList = () => {
         <br />
         <button type="submit">Join an existing list</button>
       </form>
-    </>
+    </main>
   );
 };
