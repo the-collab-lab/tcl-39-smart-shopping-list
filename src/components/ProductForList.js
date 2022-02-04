@@ -13,7 +13,7 @@ import { getListFromDB } from '../lib/api';
 
 export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
   const getDateDiff = () => {
-    if (!item.lastPurch) return;
+    if (!item.lastPurch) return false;
 
     //Dates
     const currentTime = new Date();
