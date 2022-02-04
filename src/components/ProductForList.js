@@ -54,15 +54,10 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
 
   const handleCheck = async () => {
     //Si se desmarca, no actualiza la DB.
-    if (isBought) {
-      setIsBought(!isBought);
-      return;
-    }
-    //Si se marca:
-    //Lo refleja en el checkbox
     setIsBought(!isBought);
-    //Actualiza la DB
-    updatePurchaseTimeDB();
+    if (!isBought) {
+      updatePurchaseTimeDB();
+    }
   };
 
   return (
