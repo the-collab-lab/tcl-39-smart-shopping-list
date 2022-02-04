@@ -16,7 +16,6 @@ const FormProducts = ({ items }) => {
     <>
       <form>
         <label htmlFor="filter">Filter items</label>
-        <br />
         <input
           id="filter"
           className="inputField"

@@ -1,9 +1,9 @@
 import { getDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { getListFromDB } from '../lib/api';
-import { checkTokenFormat } from '../utils/utils';
+import { getListFromDB } from '../../lib/api';
+import { checkTokenFormat } from '../../utils/utils';
+import './JoinList.css';
 
 export const JoinList = () => {
   const [joinToken, setJoinToken] = useState('');
@@ -36,12 +36,11 @@ export const JoinList = () => {
   };
 
   return (
-    <main>
+    <>
       <h3>Join list</h3>
       <form onSubmit={handleSubmit}>
         <p>Join an existing shopping list by entering a three word token.</p>
         <label htmlFor="joinToken">Share token</label>
-        <br />
         <input
           id="joinToken"
           className="inputField"
@@ -51,9 +50,8 @@ export const JoinList = () => {
           onChange={handleChange}
           placeholder="Enter your token"
         />
-        <br />
         <button type="submit">Join an existing list</button>
       </form>
-    </main>
+    </>
   );
 };

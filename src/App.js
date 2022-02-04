@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { JoinList } from './components/JoinList';
+import { JoinList } from './components/joinList/JoinList';
 import CreateList from './pages/CreateList/CreateList';
 
 function App() {
