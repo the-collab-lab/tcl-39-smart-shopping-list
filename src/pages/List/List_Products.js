@@ -8,12 +8,13 @@ import './ListProducts.css';
 import { Redirection } from '../../components/Redirection';
 import { Nav } from '../../components/Nav';
 import { ProductForList } from '../../components/ProductForList';
+import { getTokenFromStorage } from '../../utils/utils';
 
 function ListProducts() {
   const [items, setItems] = useState([]);
   const [itemName, setItemName] = useState('');
   const list = useRef({});
-  const token = useRef(localStorage.getItem('token'));
+  const token = useRef(getTokenFromStorage());
 
   useEffect(() => {
     if (token.current) {

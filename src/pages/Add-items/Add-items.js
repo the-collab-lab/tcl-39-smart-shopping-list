@@ -7,11 +7,11 @@ import { useModalFunctions } from '../../components/modal/ModalFunctions';
 import normalizeInputs from '../../components/normalizeInput/NormalizeInputs';
 import './Add-items.css';
 import { Redirection } from '../../components/Redirection';
-import { checkTokenFormat } from '../../utils/utils';
+import { checkTokenFormat, getTokenFromStorage } from '../../utils/utils';
 
 export const AddItems = () => {
   //get token from localstore
-  const token = localStorage.getItem('token');
+  const token = getTokenFromStorage();
   //set state of product items from client side
   const [product, setProduct] = useState({
     token,
@@ -26,7 +26,7 @@ export const AddItems = () => {
   //set functions class to modal 'Duplicated Product Msg'
   const modalDuplicatedProductMsg = useModalFunctions();
 
-//input focus
+  //input focus
   const inputRef = useRef();
 
   useEffect(() => {
@@ -34,7 +34,6 @@ export const AddItems = () => {
       inputRef.current.focus();
     }
   });
-
 
   const handleChangeProduct = (e) => {
     const value = e.target.value;
