@@ -23,9 +23,11 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
     });
 
     const boughtLast24h = compareAsc(purchaseDate, oneDayAgo);
+
     if (boughtLast24h === -1) {
       return false;
     }
+
     return true;
   }
 
@@ -41,9 +43,9 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
       const itemsFromList = list.data().items;
 
       //Encuentra el item a actualizar.
-      const thisItem = itemsFromList.find((itemToCheck) => {
-        return itemToCheck.name === item.name;
-      });
+      const thisItem = itemsFromList.find(
+        (itemToCheck) => itemToCheck.name === item.name,
+      );
 
       const listRef = doc(db, 'lists', token);
       const thisItemUpdated = { ...thisItem, lastPurch: new Date() };

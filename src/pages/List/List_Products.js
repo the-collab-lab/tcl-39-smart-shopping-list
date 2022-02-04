@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import { getDoc } from 'firebase/firestore';
 
-import { getListFromDB } from '../../lib/api';
+import { getItemsFromList } from '../../lib/api';
 
 import './ListProducts.css';
 import { Redirection } from '../../components/Redirection';
@@ -19,20 +18,15 @@ function ListProducts() {
   useEffect(() => {
     if (token.current) {
       /* Get items */
+      const setInitialItems = async (token) => {
+        const products = await getItemsFromList(token);
 
-      const getItemsFromList = async () => {
-        const docRef = getListFromDB(token.current);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          const products = docSnap.data().items;
-          if (products !== undefined) {
-            setItems(products);
-            return;
-          }
-          return [];
+        if (products) {
+          setItems(products);
         }
       };
-      getItemsFromList();
+
+      setInitialItems(token.current);
     }
   }, []);
 
