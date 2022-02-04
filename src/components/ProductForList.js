@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 import { getListFromDB } from '../lib/api';
 
 export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
-  const getDateDiff = () => {
+  function getDateDiff() {
     if (!item.lastPurch) return false;
 
     //Dates
@@ -22,14 +22,15 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
       days: 1,
     });
 
-    const result = compareAsc(purchaseDate, oneDayAgo);
-    if (result === -1) {
+    const boughtLast24h = compareAsc(purchaseDate, oneDayAgo);
+    if (boughtLast24h === -1) {
       return false;
     }
     return true;
-  };
+  }
 
-  const [isBought, setIsBought] = useState(getDateDiff());
+  //Lazy state initialization
+  const [isBought, setIsBought] = useState(getDateDiff);
 
   const updatePurchaseTimeDB = async () => {
     //Encuentra la lista.
