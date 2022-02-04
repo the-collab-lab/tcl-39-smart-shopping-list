@@ -21,9 +21,10 @@ const ListProducts = () => {
         if (items === undefined) {
           setLoading(false);
           setItemsProducts([]);
+        } else {
+          setLoading(false);
+          setItemsProducts(items);
         }
-        setLoading(false);
-        setItemsProducts(items);
       });
 
       return () => {
