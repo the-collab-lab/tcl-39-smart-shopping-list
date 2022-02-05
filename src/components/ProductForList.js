@@ -10,7 +10,7 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
   };
   const [isBought, setIsBought] = useState(calculateLazyState);
 
-  const handleCheck = async () => {
+  const handleCheck = () => {
     setIsBought(!isBought);
     updatePurchaseTimeDB(token, item, isBought);
   };
