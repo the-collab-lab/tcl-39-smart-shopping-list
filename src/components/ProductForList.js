@@ -1,30 +1,14 @@
-import { compareAsc, sub } from 'date-fns';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { updatePurchaseTimeDB } from '../lib/api';
+import { getDateDiff } from '../utils/utils';
 
 export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
-  function getDateDiff() {
-    if (!item.lastPurch) return false;
-
-    //Dates
-    const currentTime = new Date();
-    const purchaseDate = item.lastPurch.toDate();
-    const oneDayAgo = sub(currentTime, {
-      days: 1,
-    });
-
-    const boughtLast24h = compareAsc(purchaseDate, oneDayAgo);
-
-    if (boughtLast24h === -1) {
-      return false;
-    }
-
-    return true;
-  }
-
   //Lazy state initialization
-  const [isBought, setIsBought] = useState(getDateDiff);
+  const calculateLazyState = () => {
+    return getDateDiff(item);
+  };
+  const [isBought, setIsBought] = useState(calculateLazyState);
 
   const handleCheck = async () => {
     setIsBought(!isBought);
