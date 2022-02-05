@@ -1,9 +1,11 @@
+import { sub } from 'date-fns';
 import {
   getDoc,
   collection,
   doc,
   updateDoc,
   arrayUnion,
+  arrayRemove,
 } from 'firebase/firestore';
 
 import { db } from './firebase';
@@ -32,5 +34,28 @@ export const getItemsFromList = async (token) => {
 
   if (itemsFromList) {
     return itemsFromList;
+  }
+};
+
+export const updatePurchaseTimeDB = async (token, item, state) => {
+  //Encuentra la lista.
+  const listCollection = getListFromDB(token);
+  const list = await getDoc(listCollection);
+
+  if (list.exists()) {
+    const itemsFromList = list.data().items;
+
+    //Encuentra el item a actualizar.
+    const thisItem = itemsFromList.find(
+      (itemToCheck) => itemToCheck.name === item.name,
+    );
+
+    const listRef = doc(listsCollection, token);
+    const thisItemUpdated = {
+      ...thisItem,
+      lastPurch: state ? sub(new Date(), { days: 1 }) : new Date(),
+    };
+    await updateDoc(listRef, { items: arrayUnion(thisItemUpdated) });
+    await updateDoc(listRef, { items: arrayRemove(thisItem) });
   }
 };

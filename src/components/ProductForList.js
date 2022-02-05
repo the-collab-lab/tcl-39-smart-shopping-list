@@ -1,15 +1,7 @@
 import { compareAsc, sub } from 'date-fns';
-import {
-  getDoc,
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
-  doc,
-} from 'firebase/firestore';
-import { db } from '../lib/firebase';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getListFromDB } from '../lib/api';
+import { updatePurchaseTimeDB } from '../lib/api';
 
 export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
   function getDateDiff() {
@@ -34,32 +26,9 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
   //Lazy state initialization
   const [isBought, setIsBought] = useState(getDateDiff);
 
-  const updatePurchaseTimeDB = async () => {
-    //Encuentra la lista.
-    const listCollection = getListFromDB(token);
-    const list = await getDoc(listCollection);
-
-    if (list.exists()) {
-      const itemsFromList = list.data().items;
-
-      //Encuentra el item a actualizar.
-      const thisItem = itemsFromList.find(
-        (itemToCheck) => itemToCheck.name === item.name,
-      );
-
-      const listRef = doc(db, 'lists', token);
-      const thisItemUpdated = { ...thisItem, lastPurch: new Date() };
-      await updateDoc(listRef, { items: arrayUnion(thisItemUpdated) });
-      await updateDoc(listRef, { items: arrayRemove(thisItem) });
-    }
-  };
-
   const handleCheck = async () => {
-    //Si se desmarca, no actualiza la DB.
     setIsBought(!isBought);
-    if (!isBought) {
-      updatePurchaseTimeDB();
-    }
+    updatePurchaseTimeDB(token, item, isBought);
   };
 
   return (
