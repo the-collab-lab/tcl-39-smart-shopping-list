@@ -39,8 +39,8 @@ export const getItemsFromList = async (token) => {
 
 export const updatePurchaseTimeDB = async (token, item, state) => {
   //Encuentra la lista.
-  const listCollection = getListFromDB(token);
-  const list = await getDoc(listCollection);
+  const listRef = getListFromDB(token);
+  const list = await getDoc(listRef);
 
   if (list.exists()) {
     const itemsFromList = list.data().items;
@@ -50,7 +50,6 @@ export const updatePurchaseTimeDB = async (token, item, state) => {
       (itemToCheck) => itemToCheck.name === item.name,
     );
 
-    const listRef = doc(listsCollection, token);
     const thisItemUpdated = {
       ...thisItem,
       lastPurch: state ? sub(new Date(), { days: 1 }) : new Date(),
