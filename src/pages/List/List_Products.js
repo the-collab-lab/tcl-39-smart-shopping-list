@@ -1,90 +1,53 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
 import { onSnapshot } from 'firebase/firestore';
-
 import { getListFromDB } from '../../lib/api';
-
 import './ListProducts.css';
 import { Redirection } from '../../components/Redirection';
 import { Nav } from '../../components/Nav';
+import ListEmpty from '../../components/ListEmpty/ListEmpty';
+import FormProducts from '../../components/formProducts/FormProducts';
+import Loading from '../../components/loading/loading';
 
-function ListProducts() {
-  const [items, setItems] = useState([]);
-  const [itemName, setItemName] = useState('');
-  const list = useRef({});
+const ListProducts = () => {
+  const [itemsProducts, setItemsProducts] = useState([]);
   const token = useRef(localStorage.getItem('token'));
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (token.current) {
       /* Get items */
       const unsubscribe = onSnapshot(getListFromDB(token.current), (doc) => {
-        list.current = doc.data();
-        setItems(doc.data().items);
+        let { items } = doc.data();
+        if (items === undefined) {
+          setLoading(false);
+          setItemsProducts([]);
+        } else {
+          setLoading(false);
+          setItemsProducts(items);
+        }
       });
+
       return () => {
         unsubscribe();
       };
     }
   }, []);
 
-  const handleChange = (e) => {
-    setItemName(e.target.value);
-  };
-
-  const handleDeleteAttempt = () => {
-    if (window.confirm('Do you want to delete this product?')) {
-      alert('Deleted!');
-    }
-  };
-
   if (!token.current) return <Redirection />;
 
   return (
     <main>
-      <h1>List</h1>
-      <form>
-        <label htmlFor="filter">Filter items</label>
-        <br />
-        <input
-          id="filter"
-          className="inputField"
-          value={itemName}
-          type="text"
-          onChange={handleChange}
-          placeholder="Start typing a product..."
-        />
-      </form>
-      <h4 className="list-name">
-        {list.current.name && `${list.current.name}'s list`}
-      </h4>
-      {items &&
-        items.map((item, index) => (
-          <div
-            key={`${index}${item.name}`}
-            className="product-container"
-            aria-label={`${
-              item.howSoon === 7
-                ? 'soon'
-                : item.howSoon === 14
-                ? 'kind of soon'
-                : 'not soon'
-            }`}
-          >
-            <p>
-              Product: <span className="item-name">{item.name}</span>
-            </p>
-            <div className="btn-container">
-              <Link to={`/list/${item.name}/`} state={{ product: item }}>
-                <button>details</button>
-              </Link>
-              <button onClick={handleDeleteAttempt}>delete</button>
-            </div>
-          </div>
-        ))}
-      <Outlet />
+      <h1>Smart Shopping List</h1>
+      {loading ? (
+        <Loading />
+      ) : itemsProducts.length === 0 ? (
+        <ListEmpty />
+      ) : (
+        <FormProducts items={itemsProducts} />
+      )}
       <Nav />
     </main>
   );
-}
+};
 
 export default ListProducts;
