@@ -11,3 +11,30 @@ _For an example of how to fill this template out, [see this Pull Request](https:
 ## Acceptance Criteria
 
 <!-- Include AC from the Github issue -->
+
+## Type of Changes
+
+<!-- Put an `✓` for the applicable box: -->
+
+|     | Type                       |
+| --- | -------------------------- |
+|     | :bug: Bug fix              |
+| ✓   | :sparkles: New feature     |
+|     | :hammer: Refactoring       |
+|     | :100: Add tests            |
+|     | :link: Update dependencies |
+|     | :scroll: Docs              |
+
+## Updates
+
+### Before
+
+<!-- If UI feature, take provide screenshots -->
+
+### After
+
+<!-- If UI feature, take provide screenshots -->
+
+## Testing Steps / QA Criteria
+
+<!-- Provide steps the other cohort members and mentors need to follow to properly test your additions. -->

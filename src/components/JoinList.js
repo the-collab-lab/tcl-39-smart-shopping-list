@@ -10,18 +10,19 @@ export const JoinList = () => {
   const navigate = useNavigate();
 
   const checkIfTokenExists = async (token) => {
-    const isValidToken = checkTokenFormat(token);
+    const trimmedToken = token.trim();
+    const isValidToken = checkTokenFormat(trimmedToken);
 
     if (!isValidToken) {
       alert('Un token debe tener 3 palabras. Por favor intente de nuevo.');
       return;
     }
 
-    const docRef = getListFromDB(token);
+    const docRef = getListFromDB(trimmedToken);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      localStorage.setItem('token', joinToken);
+      localStorage.setItem('token', trimmedToken);
       navigate('/list');
     } else {
       alert('No existe este token!');

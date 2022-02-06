@@ -1,7 +1,7 @@
 import { getToken, words } from '@the-collab-lab/shopping-list-utils';
 import { useNavigate } from 'react-router-dom';
-import { db } from '../lib/firebase';
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+import { listsCollection } from '../lib/api';
 
 const NewToken = () => {
   const navigate = useNavigate();
@@ -10,7 +10,9 @@ const NewToken = () => {
     const getTokenStorage = getToken(words);
     localStorage.setItem('token', getTokenStorage);
 
-    setDoc(doc(db, 'lists', getTokenStorage), {});
+    setDoc(doc(listsCollection, getTokenStorage), {
+      createdAt: serverTimestamp(),
+    });
 
     navigate('/add-items');
   };

@@ -2,16 +2,16 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { Modal } from '../../components/modal/Modal';
 import { Nav } from '../../components/Nav';
-import { addProductToList, getDataOnce } from '../../lib/api';
+import { addProductToList, getItemsFromList } from '../../lib/api';
 import { useModalFunctions } from '../../components/modal/ModalFunctions';
 import normalizeInputs from '../../components/normalizeInput/NormalizeInputs';
 import './Add-items.css';
 import { Redirection } from '../../components/Redirection';
-import { checkTokenFormat } from '../../utils/utils';
+import { checkTokenFormat, getTokenFromStorage } from '../../utils/utils';
 
 export const AddItems = () => {
   //get token from localstore
-  const token = localStorage.getItem('token');
+  const token = getTokenFromStorage();
   //set state of product items from client side
   const [product, setProduct] = useState({
     token,
@@ -26,7 +26,7 @@ export const AddItems = () => {
   //set functions class to modal 'Duplicated Product Msg'
   const modalDuplicatedProductMsg = useModalFunctions();
 
-//input focus
+  //input focus
   const inputRef = useRef();
 
   useEffect(() => {
@@ -34,7 +34,6 @@ export const AddItems = () => {
       inputRef.current.focus();
     }
   });
-
 
   const handleChangeProduct = (e) => {
     const value = e.target.value;
@@ -50,21 +49,24 @@ export const AddItems = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     //get list Products by Token given
-    let listProduct = await getDataOnce(token);
+    let listProduct = await getItemsFromList(token);
     //compare products's name from client side and list products from DB
-    let productsListFiltered = listProduct.filter((productByTokenGiven) => {
-      const productNameByToken = productByTokenGiven.name;
-      const inputFirstCase = normalizeInputs(productNameByToken);
-      const inputSecondCase = normalizeInputs(product.name);
-      return inputFirstCase === inputSecondCase;
-    });
-    if (productsListFiltered.length !== 0) {
-      modalDuplicatedProductMsg.showModal();
-    } else {
-      addProductToList(product);
-      setProduct({ ...product, name: '', lastPurch: null });
-      modalProductAdded.showModal();
+    if (listProduct) {
+      let productsListFiltered = listProduct.filter((productByTokenGiven) => {
+        const productNameByToken = productByTokenGiven.name;
+        const inputFirstCase = normalizeInputs(productNameByToken);
+        const inputSecondCase = normalizeInputs(product.name);
+        return inputFirstCase === inputSecondCase;
+      });
+
+      if (productsListFiltered.length !== 0) {
+        modalDuplicatedProductMsg.showModal();
+        return;
+      }
     }
+    addProductToList(product);
+    setProduct({ ...product, name: '', lastPurch: null });
+    modalProductAdded.showModal();
   };
 
   if (!isValidToken.current) {
