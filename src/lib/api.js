@@ -7,7 +7,6 @@ import {
   arrayUnion,
   arrayRemove,
 } from 'firebase/firestore';
-
 import { db } from './firebase';
 
 export const listsCollection = collection(db, 'lists');

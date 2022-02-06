@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Outlet } from 'react-router-dom';
+import { Nav } from '../../components/Nav';
+import { Redirection } from '../../components/Redirection';
 
+import { ProductForList } from '../../components/ProductForList';
 import { getItemsFromList } from '../../lib/api';
+import { getTokenFromStorage } from '../../utils/utils';
 
 import './ListProducts.css';
-import { Redirection } from '../../components/Redirection';
-import { Nav } from '../../components/Nav';
-import { ProductForList } from '../../components/ProductForList';
-import { getTokenFromStorage } from '../../utils/utils';
 
 function ListProducts() {
   const [items, setItems] = useState([]);

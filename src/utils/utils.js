@@ -16,8 +16,7 @@ export function getDateDiff(item) {
   const currentTime = new Date();
   const purchaseDate = item.lastPurch.toDate();
   const oneDayAgo = sub(currentTime, {
-    minutes: 2,
-    // days: 1,
+    days: 1,
   });
 
   const boughtLast24h = compareAsc(purchaseDate, oneDayAgo);
