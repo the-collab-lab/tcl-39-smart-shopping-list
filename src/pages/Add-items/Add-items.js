@@ -17,7 +17,7 @@ export const AddItems = () => {
     token,
     name: '',
     howSoon: '7',
-    lastPurch: null,
+    lastPurchase: null,
   });
   const isValidToken = useRef(checkTokenFormat(product.token));
 
@@ -65,7 +65,7 @@ export const AddItems = () => {
       }
     }
     addProductToList(product);
-    setProduct({ ...product, name: '', lastPurch: null });
+    setProduct({ ...product, name: '', lastPurchase: null });
     modalProductAdded.showModal();
   };
 
@@ -74,8 +74,8 @@ export const AddItems = () => {
   }
 
   return (
-    <main>
-      <h1>Add Item</h1>
+    <>
+      <h1>Smart Shopping List</h1>
       <form onSubmit={handleSubmit}>
         <label htmlFor="name">
           <p>Product:</p>
@@ -148,6 +148,6 @@ export const AddItems = () => {
         handleClose={modalProductAdded.hideModal}
       />
       <Nav />
-    </main>
+    </>
   );
 };

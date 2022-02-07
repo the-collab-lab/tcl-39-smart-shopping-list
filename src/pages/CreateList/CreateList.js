@@ -3,10 +3,10 @@ import NewToken from '../../components/NewToken';
 
 const CreateList = () => {
   return (
-    <main>
+    <>
       <h1>Shopping List!</h1>
       <NewToken />
-    </main>
+    </>
   );
 };
 

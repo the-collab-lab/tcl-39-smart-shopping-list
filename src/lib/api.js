@@ -17,11 +17,11 @@ export const getListFromDB = (token) => {
 };
 
 export const addProductToList = async (productObj) => {
-  const { token, name, howSoon, lastPurch } = productObj;
+  const { token, name, howSoon, lastPurchase } = productObj;
 
   const listRef = getListFromDB(token);
   await updateDoc(listRef, {
-    items: arrayUnion({ name, howSoon: parseInt(howSoon), lastPurch }),
+    items: arrayUnion({ name, howSoon: parseInt(howSoon), lastPurchase }),
   });
 };
 
@@ -51,7 +51,7 @@ export const updatePurchaseTimeDB = async (token, item, state) => {
 
     const thisItemUpdated = {
       ...thisItem,
-      lastPurch: state ? sub(new Date(), { days: 1 }) : new Date(),
+      lastPurchase: state ? sub(new Date(), { days: 1 }) : new Date(),
     };
     await updateDoc(listRef, { items: arrayUnion(thisItemUpdated) });
     await updateDoc(listRef, { items: arrayRemove(thisItem) });
