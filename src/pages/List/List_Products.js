@@ -1,35 +1,35 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { onSnapshot } from 'firebase/firestore';
-import { getListFromDB } from '../../lib/api';
-import './ListProducts.css';
-import { Redirection } from '../../components/Redirection';
 import { Nav } from '../../components/Nav';
+import { Redirection } from '../../components/Redirection';
+import './ListProducts.css';
 import ListEmpty from '../../components/ListEmpty/ListEmpty';
 import FormProducts from '../../components/formProducts/FormProducts';
 import Loading from '../../components/loading/loading';
 
-const ListProducts = () => {
-  const [itemsProducts, setItemsProducts] = useState([]);
-  const token = useRef(localStorage.getItem('token'));
+import { getItemsFromList } from '../../lib/api';
+import { getTokenFromStorage } from '../../utils/utils';
+
+import './ListProducts.css';
+
+function ListProducts() {
+  const [items, setItems] = useState([]);
+  const token = useRef(getTokenFromStorage());
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (token.current) {
       /* Get items */
-      const unsubscribe = onSnapshot(getListFromDB(token.current), (doc) => {
-        let { items } = doc.data();
-        if (items === undefined) {
-          setLoading(false);
-          setItemsProducts([]);
-        } else {
-          setLoading(false);
-          setItemsProducts(items);
-        }
-      });
+      const setInitialItems = async (token) => {
+        setLoading(true);
+        const products = await getItemsFromList(token);
 
-      return () => {
-        unsubscribe();
+        if (products) {
+          setItems(products);
+        }
+        setLoading(false);
       };
+
+      setInitialItems(token.current);
     }
   }, []);
 
@@ -40,14 +40,14 @@ const ListProducts = () => {
       <h1>Smart Shopping List</h1>
       {loading ? (
         <Loading />
-      ) : itemsProducts.length === 0 ? (
+      ) : items.length === 0 ? (
         <ListEmpty />
       ) : (
-        <FormProducts items={itemsProducts} />
+        <FormProducts items={items} />
       )}
       <Nav />
     </main>
   );
-};
+}
 
 export default ListProducts;

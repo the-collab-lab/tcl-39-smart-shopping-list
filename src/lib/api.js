@@ -1,40 +1,59 @@
+import { sub } from 'date-fns';
 import {
   getDoc,
   collection,
   doc,
   updateDoc,
   arrayUnion,
+  arrayRemove,
 } from 'firebase/firestore';
-
 import { db } from './firebase';
 
 export const listsCollection = collection(db, 'lists');
 
 export const getListFromDB = (token) => {
-  const list = doc(listsCollection, token);
-  return list;
+  const listRef = doc(listsCollection, token);
+  return listRef;
 };
 
 export const addProductToList = async (productObj) => {
-  const { token, name, howSoon, lastPurch } = productObj;
+  const { token, name, howSoon, lastPurchase } = productObj;
 
-  const list = doc(listsCollection, token);
-  await updateDoc(list, {
-    items: arrayUnion({ name, howSoon: parseInt(howSoon), lastPurch }),
+  const listRef = getListFromDB(token);
+  await updateDoc(listRef, {
+    items: arrayUnion({ name, howSoon: parseInt(howSoon), lastPurchase }),
   });
 };
 
-export const getDataOnce = async (token) => {
-  const docRef = doc(db, 'lists', token);
-  const docSnap = await getDoc(docRef);
-  if (docSnap.exists()) {
-    const { items } = docSnap.data();
-    if (items !== undefined) {
-      return items;
-    }
-    return [];
-  } else {
-    window.alert('Not document found');
-    return [];
+export const getItemsFromList = async (token) => {
+  const listRef = getListFromDB(token);
+  const list = await getDoc(listRef);
+
+  const itemsFromList = list.data().items;
+
+  if (itemsFromList) {
+    return itemsFromList;
+  }
+};
+
+export const updatePurchaseTimeDB = async (token, item, state) => {
+  //Encuentra la lista.
+  const listRef = getListFromDB(token);
+  const list = await getDoc(listRef);
+
+  if (list.exists()) {
+    const itemsFromList = list.data().items;
+
+    //Encuentra el item a actualizar.
+    const thisItem = itemsFromList.find(
+      (itemToCheck) => itemToCheck.name === item.name,
+    );
+
+    const thisItemUpdated = {
+      ...thisItem,
+      lastPurchase: state ? sub(new Date(), { days: 1 }) : new Date(),
+    };
+    await updateDoc(listRef, { items: arrayUnion(thisItemUpdated) });
+    await updateDoc(listRef, { items: arrayRemove(thisItem) });
   }
 };
