@@ -5,6 +5,12 @@ const FormProducts = ({ items }) => {
   const [itemName, setItemName] = useState('');
   const handleChange = (e) => setItemName(e.target.value);
 
+  items = !itemName
+    ? items
+    : items.filter((person) =>
+        person.name.toLowerCase().includes(itemName.toLocaleLowerCase()),
+      );
+
   const handleDeleteAttempt = () => {
     if (window.confirm('Do you want to delete this product?')) {
       alert('Deleted!');
@@ -22,6 +28,7 @@ const FormProducts = ({ items }) => {
           onChange={handleChange}
           placeholder="Start typing a product..."
         />
+        <button onClick={() => setItemName(() => '')}>Reset</button>
       </form>
       {items &&
         items.map((item, index) => (
