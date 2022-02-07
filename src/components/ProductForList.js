@@ -1,19 +1,19 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { updatePurchaseTimeDB } from '../lib/api';
-import { getDateDiff } from '../utils/utils';
+import { validateHours } from '../utils/utils';
 
 export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
-  //Lazy state initialization
-  const calculateLazyState = () => {
-    return getDateDiff(item);
-  };
-  const [isBought, setIsBought] = useState(calculateLazyState);
+  const [isBought, setIsBought] = useState(false);
 
   const handleCheck = () => {
-    setIsBought(!isBought);
+    setIsBought(true);
     updatePurchaseTimeDB(token, item, isBought);
   };
+
+  useEffect(() => {
+    setIsBought(validateHours(item, 24));
+  }, []);
 
   return (
     <div
@@ -30,6 +30,7 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
         type="checkbox"
         value="Bought"
         checked={isBought}
+        disabled={isBought}
         onChange={handleCheck}
       />
       <p>

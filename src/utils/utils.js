@@ -9,14 +9,14 @@ export const getTokenFromStorage = () => {
   return localStorage.getItem('token');
 };
 
-export function getDateDiff(item) {
-  if (!item.lastPurch) return false;
+export function validateHours(item, hours) {
+  if (!item.lastPurchase) return false;
 
   //Dates
   const currentTime = new Date();
-  const purchaseDate = item.lastPurch.toDate();
+  const purchaseDate = item.lastPurchase.toDate();
   const oneDayAgo = sub(currentTime, {
-    days: 1,
+    hours,
   });
 
   const boughtLast24h = compareAsc(purchaseDate, oneDayAgo);
