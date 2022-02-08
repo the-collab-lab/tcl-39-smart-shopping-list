@@ -23,15 +23,17 @@ const FormProducts = ({ items }) => {
     <>
       <form>
         <label htmlFor="filter">Filter items</label>
-        <input
-          id="filter"
-          className="inputField"
-          value={itemName}
-          type="text"
-          onChange={handleChange}
-          placeholder="Start typing a product..."
-        />
-        <button onClick={() => setItemName(() => '')}>Reset</button>
+        <div>
+          <input
+            id="filter"
+            className="inputField"
+            value={itemName}
+            type="text"
+            onChange={handleChange}
+            placeholder="Start typing a product..."
+          />
+          <button onClick={() => setItemName(() => '')}>x</button>
+        </div>
       </form>
       {items &&
         items.map((item, index) => (
