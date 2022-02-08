@@ -1,14 +1,32 @@
+import { calculateEstimate } from '@the-collab-lab/shopping-list-utils/dist/calculateEstimate';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { updatePurchaseTimeDB } from '../lib/api';
-import { validateHours } from '../utils/utils';
+import { calculateDaysSinceLastPurchase, validateHours } from '../utils/utils';
 
 export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
   const [isBought, setIsBought] = useState(false);
 
   const handleCheck = () => {
     setIsBought(true);
-    updatePurchaseTimeDB(token, item, isBought);
+
+    let { totalPurchases, lastPurchase, estimateToNextPurchase } = item;
+
+    const daysSinceLastTransaction =
+      calculateDaysSinceLastPurchase(lastPurchase);
+
+    //Porque null no activa el default parameter.
+    if (estimateToNextPurchase === null) {
+      estimateToNextPurchase = 14;
+    }
+
+    const newEstimateToNextPurchase = calculateEstimate(
+      estimateToNextPurchase,
+      daysSinceLastTransaction,
+      totalPurchases,
+    );
+
+    updatePurchaseTimeDB(token, item, isBought, newEstimateToNextPurchase);
   };
 
   useEffect(() => {

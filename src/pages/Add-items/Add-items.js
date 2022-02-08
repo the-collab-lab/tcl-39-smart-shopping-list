@@ -18,6 +18,8 @@ export const AddItems = () => {
     name: '',
     howSoon: '7',
     lastPurchase: null,
+    totalPurchases: 0,
+    estimateToNextPurchase: null,
   });
   const isValidToken = useRef(checkTokenFormat(product.token));
 
@@ -65,7 +67,10 @@ export const AddItems = () => {
       }
     }
     addProductToList(product);
-    setProduct({ ...product, name: '', lastPurchase: null });
+    setProduct({
+      ...product,
+      name: '',
+    });
     modalProductAdded.showModal();
   };
 
