@@ -19,7 +19,6 @@ export const AddItems = () => {
     howSoon: '7',
     lastPurchase: null,
     totalPurchases: 0,
-    estimateToNextPurchase: null,
   });
   const isValidToken = useRef(checkTokenFormat(product.token));
 

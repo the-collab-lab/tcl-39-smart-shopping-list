@@ -10,18 +10,13 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
   const handleCheck = () => {
     setIsBought(true);
 
-    let { totalPurchases, lastPurchase, estimateToNextPurchase } = item;
+    let { totalPurchases, lastPurchase, howSoon } = item;
 
     const daysSinceLastTransaction =
       calculateDaysSinceLastPurchase(lastPurchase);
 
-    //Porque null no activa el default parameter.
-    if (estimateToNextPurchase === null) {
-      estimateToNextPurchase = 14;
-    }
-
     const newEstimateToNextPurchase = calculateEstimate(
-      estimateToNextPurchase,
+      howSoon,
       daysSinceLastTransaction,
       totalPurchases,
     );
