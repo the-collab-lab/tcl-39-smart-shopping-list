@@ -69,6 +69,7 @@ export const AddItems = () => {
     setProduct({
       ...product,
       name: '',
+      howSoon: '7',
     });
     modalProductAdded.showModal();
   };
@@ -99,12 +100,12 @@ export const AddItems = () => {
           <div>
             <label htmlFor="soon">
               <input
-                defaultChecked
                 id="soon"
                 type="radio"
                 name="howSoon"
                 required
                 value={7}
+                checked={product.howSoon === '7'}
                 onChange={handleChangeProduct}
               />
               Soon
@@ -118,6 +119,7 @@ export const AddItems = () => {
                 name="howSoon"
                 required
                 value={14}
+                checked={product.howSoon === '14'}
                 onChange={handleChangeProduct}
               />
               Kind of soon
@@ -131,6 +133,7 @@ export const AddItems = () => {
                 name="howSoon"
                 required
                 value={30}
+                checked={product.howSoon === '30'}
                 onChange={handleChangeProduct}
               />
               Not soon

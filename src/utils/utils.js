@@ -31,12 +31,12 @@ export function validateHours(item, hours) {
 }
 
 export const calculateDaysSinceLastPurchase = (lastBought) => {
-  let daysSinceLastTransaction = formatDistanceToNowStrict(
+  const daysSinceLastTransaction = formatDistanceToNowStrict(
     lastBought.toDate(),
     {
       unit: 'day',
       roundingMethod: 'round',
     },
   );
-  return (daysSinceLastTransaction = +daysSinceLastTransaction.split(' ')[0]);
+  return +daysSinceLastTransaction.split(' ')[0];
 };
