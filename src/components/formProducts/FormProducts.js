@@ -12,8 +12,8 @@ const FormProducts = ({ items }) => {
   items = !itemName
     ? items
     : items.filter((filterItem) =>
-        filterItem.name.toLowerCase().includes(itemName.toLocaleLowerCase()),
-      );
+      filterItem.name.toLowerCase().includes(itemName.toLocaleLowerCase()),
+    );
 
   const resetInput = (e) => {
     e.preventDefault();
