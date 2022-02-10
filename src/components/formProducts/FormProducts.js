@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import { getTokenFromStorage } from '../../utils/utils';
 import { ProductForList } from '../ProductForList';
+import './FormProducts.css';
 
 const FormProducts = ({ items }) => {
   const [itemName, setItemName] = useState('');
@@ -10,9 +11,14 @@ const FormProducts = ({ items }) => {
 
   items = !itemName
     ? items
-    : items.filter((person) =>
-        person.name.toLowerCase().includes(itemName.toLocaleLowerCase()),
+    : items.filter((filterItem) =>
+        filterItem.name.toLowerCase().includes(itemName.toLocaleLowerCase()),
       );
+
+  const resetInput = (e) => {
+    e.preventDefault();
+    setItemName('');
+  };
 
   const handleDeleteAttempt = () => {
     if (window.confirm('Do you want to delete this product?')) {
@@ -23,7 +29,7 @@ const FormProducts = ({ items }) => {
     <>
       <form>
         <label htmlFor="filter">Filter items</label>
-        <div>
+        <div className="filter_item">
           <input
             id="filter"
             className="inputField"
@@ -32,7 +38,9 @@ const FormProducts = ({ items }) => {
             onChange={handleChange}
             placeholder="Start typing a product..."
           />
-          <button onClick={() => setItemName(() => '')}>x</button>
+          <button className="button_filteritem" onClick={resetInput}>
+            x
+          </button>
         </div>
       </form>
       {items &&
@@ -42,6 +50,7 @@ const FormProducts = ({ items }) => {
             item={item}
             handleDeleteAttempt={handleDeleteAttempt}
             token={token.current}
+            G
           />
         ))}
       <Outlet />
