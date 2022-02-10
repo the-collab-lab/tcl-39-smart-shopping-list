@@ -12,11 +12,10 @@ const FormProducts = ({ items }) => {
   items = !itemName
     ? items
     : items.filter((filterItem) =>
-      filterItem.name.toLowerCase().includes(itemName.toLocaleLowerCase()),
-    );
+        filterItem.name.toLowerCase().includes(itemName.toLocaleLowerCase()),
+      );
 
-  const resetInput = (e) => {
-    e.preventDefault();
+  const resetInput = () => {
     setItemName('');
   };
 
@@ -38,7 +37,11 @@ const FormProducts = ({ items }) => {
             onChange={handleChange}
             placeholder="Start typing a product..."
           />
-          <button className="button_filteritem" onClick={resetInput}>
+          <button
+            type="button"
+            className="button_filteritem"
+            onClick={resetInput}
+          >
             x
           </button>
         </div>
