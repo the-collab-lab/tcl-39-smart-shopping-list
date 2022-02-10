@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-
+import { addProductToList, getItemsFromList } from '../../lib/api';
 import { Modal } from '../../components/modal/Modal';
 import { Nav } from '../../components/Nav';
-import { addProductToList, getItemsFromList } from '../../lib/api';
 import { useModalFunctions } from '../../components/modal/ModalFunctions';
 import normalizeInputs from '../../components/normalizeInput/NormalizeInputs';
-import './Add-items.css';
 import { Redirection } from '../../components/Redirection';
 import { checkTokenFormat, getTokenFromStorage } from '../../utils/utils';
+import './Add-items.css';
 
 export const AddItems = () => {
   //get token from localstore

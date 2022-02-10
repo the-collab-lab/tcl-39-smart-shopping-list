@@ -9,7 +9,7 @@ export const getTokenFromStorage = () => {
   return localStorage.getItem('token');
 };
 
-export function validateHours(item, hours) {
+export const validateHours = (item, hours) => {
   //Modificarlo para que no marque cuando totalPurchases es 0
 
   if (item.totalPurchases === 0) return false;
@@ -28,7 +28,7 @@ export function validateHours(item, hours) {
   }
 
   return true;
-}
+};
 
 export const calculateDaysSinceLastPurchase = (lastBought) => {
   const daysSinceLastTransaction = formatDistanceToNowStrict(
