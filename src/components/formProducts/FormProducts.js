@@ -15,9 +15,7 @@ const FormProducts = ({ items }) => {
         filterItem.name.toLowerCase().includes(itemName.toLocaleLowerCase()),
       );
 
-  const resetInput = () => {
-    setItemName('');
-  };
+  const resetInput = () => setItemName('');
 
   const handleDeleteAttempt = () => {
     if (window.confirm('Do you want to delete this product?')) {
