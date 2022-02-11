@@ -50,17 +50,17 @@ export const updatePurchaseTimeDB = async (token, item, state, estimate) => {
     const itemsFromList = list.data().items;
 
     //Encuentra el item a actualizar.
-    const thisItem = itemsFromList.find(
+    const itemFinded = itemsFromList.find(
       (itemToCheck) => itemToCheck.name === item.name,
     );
 
     const thisItemUpdated = {
-      ...thisItem,
+      ...itemFinded,
       lastPurchase: state ? sub(new Date(), { days: 1 }) : new Date(),
-      totalPurchases: thisItem.totalPurchases + 1,
+      totalPurchases: itemFinded.totalPurchases + 1,
       howSoon: estimate,
     };
     await updateDoc(listRef, { items: arrayUnion(thisItemUpdated) });
-    await updateDoc(listRef, { items: arrayRemove(thisItem) });
+    await updateDoc(listRef, { items: arrayRemove(itemFinded) });
   }
 };
