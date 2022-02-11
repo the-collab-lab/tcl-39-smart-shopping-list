@@ -10,11 +10,8 @@ export const getTokenFromStorage = () => {
 };
 
 export const validateHours = (item, hours) => {
-  //Modificarlo para que no marque cuando totalPurchases es 0
-
   if (item.totalPurchases === 0) return false;
 
-  //Dates
   const currentTime = new Date();
   const purchaseDate = item.lastPurchase.toDate();
   const oneDayAgo = sub(currentTime, {
