@@ -16,8 +16,6 @@ export const AddItems = () => {
     token,
     name: '',
     howSoon: '7',
-    lastPurchase: null,
-    totalPurchases: 0,
   });
   const isValidToken = useRef(checkTokenFormat(product.token));
 

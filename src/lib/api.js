@@ -17,7 +17,7 @@ export const getListFromDB = (token) => {
 };
 
 export const addProductToList = async (productObj) => {
-  const { token, name, howSoon, totalPurchases } = productObj;
+  const { token, name, howSoon } = productObj;
 
   const listRef = getListFromDB(token);
   await updateDoc(listRef, {
@@ -25,7 +25,7 @@ export const addProductToList = async (productObj) => {
       name,
       howSoon: parseInt(howSoon),
       lastPurchase: new Date(),
-      totalPurchases,
+      totalPurchases: 0,
     }),
   });
 };
