@@ -101,7 +101,7 @@ export const AddItems = () => {
                 type="radio"
                 name="howSoon"
                 required
-                value={'7'}
+                value="7"
                 checked={product.howSoon === '7'}
                 onChange={handleChangeProduct}
               />
@@ -115,7 +115,7 @@ export const AddItems = () => {
                 type="radio"
                 name="howSoon"
                 required
-                value={'14'}
+                value="14"
                 checked={product.howSoon === '14'}
                 onChange={handleChangeProduct}
               />
@@ -129,7 +129,7 @@ export const AddItems = () => {
                 type="radio"
                 name="howSoon"
                 required
-                value={'30'}
+                value="30"
                 checked={product.howSoon === '30'}
                 onChange={handleChangeProduct}
               />
