@@ -3,7 +3,7 @@ import './App.css';
 import { JoinList } from './components/joinList/JoinList';
 import CreateList from './pages/CreateList/CreateList';
 
-function App() {
+const App = () => {
   return (
     <main>
       <h1>Welcome to our Smart Shopping List!</h1>
@@ -12,6 +12,6 @@ function App() {
       <JoinList />
     </main>
   );
-}
+};
 
 export default App;

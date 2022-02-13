@@ -1,14 +1,27 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { calculateEstimate } from '@the-collab-lab/shopping-list-utils/dist/calculateEstimate';
 import { updatePurchaseTimeDB } from '../lib/api';
-import { validateHours } from '../utils/utils';
+import { calculateDaysSinceLastPurchase, validateHours } from '../utils/utils';
 
 export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
   const [isBought, setIsBought] = useState(false);
 
   const handleCheck = () => {
     setIsBought(true);
-    updatePurchaseTimeDB(token, item, isBought);
+
+    let { totalPurchases, lastPurchase, howSoon } = item;
+
+    const daysSinceLastTransaction =
+      calculateDaysSinceLastPurchase(lastPurchase);
+
+    const newEstimateToNextPurchase = calculateEstimate(
+      howSoon,
+      daysSinceLastTransaction,
+      totalPurchases,
+    );
+
+    updatePurchaseTimeDB(token, item, isBought, newEstimateToNextPurchase);
   };
 
   useEffect(() => {

@@ -1,6 +1,6 @@
-import { getDoc } from 'firebase/firestore';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { getDoc } from 'firebase/firestore';
 import { getListFromDB } from '../../lib/api';
 import { checkTokenFormat } from '../../utils/utils';
 import './JoinList.css';

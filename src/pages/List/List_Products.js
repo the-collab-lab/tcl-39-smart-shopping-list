@@ -1,17 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Nav } from '../../components/Nav';
 import { Redirection } from '../../components/Redirection';
-import './ListProducts.css';
 import ListEmpty from '../../components/ListEmpty/ListEmpty';
 import FormProducts from '../../components/formProducts/FormProducts';
 import Loading from '../../components/loading/loading';
-
 import { getItemsFromList } from '../../lib/api';
 import { getTokenFromStorage } from '../../utils/utils';
-
 import './ListProducts.css';
 
-function ListProducts() {
+const ListProducts = () => {
   const [items, setItems] = useState([]);
   const token = useRef(getTokenFromStorage());
   const [loading, setLoading] = useState(true);
@@ -48,6 +45,6 @@ function ListProducts() {
       <Nav />
     </main>
   );
-}
+};
 
 export default ListProducts;
