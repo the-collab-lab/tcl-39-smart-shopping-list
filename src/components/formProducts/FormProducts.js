@@ -8,11 +8,6 @@ const FormProducts = ({ items }) => {
   const handleChange = (e) => setItemName(e.target.value);
   const token = useRef(getTokenFromStorage());
 
-  const handleDeleteAttempt = () => {
-    if (window.confirm('Do you want to delete this product?')) {
-      alert('Deleted!');
-    }
-  };
   return (
     <>
       <form>
@@ -30,8 +25,8 @@ const FormProducts = ({ items }) => {
         items.map((item, index) => (
           <ProductForList
             key={`${index}${item.name}`}
+            name={item.name}
             item={item}
-            handleDeleteAttempt={handleDeleteAttempt}
             token={token.current}
           />
         ))}
