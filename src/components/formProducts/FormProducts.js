@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { getTokenFromStorage } from '../../utils/utils';
 import { ProductForList } from '../ProductForList';
@@ -8,12 +8,19 @@ const FormProducts = ({ items }) => {
   const [itemName, setItemName] = useState('');
   const handleChange = (e) => setItemName(e.target.value);
   const token = useRef(getTokenFromStorage());
+  const [itemsFiltered, setItemsFiltered] = useState([items]);
 
-  items = !itemName
-    ? items
-    : items.filter((filterItem) =>
-        filterItem.name.toLowerCase().includes(itemName.toLocaleLowerCase()),
+  useEffect(() => {
+    if (itemName === '') {
+      setItemsFiltered(items);
+    } else {
+      setItemsFiltered(
+        items.filter((filterItem) =>
+          filterItem.name.toLowerCase().includes(itemName.toLocaleLowerCase()),
+        ),
       );
+    }
+  }, [itemName]);
 
   const resetInput = () => setItemName('');
 
@@ -44,8 +51,8 @@ const FormProducts = ({ items }) => {
           </button>
         </div>
       </form>
-      {items &&
-        items.map((item, index) => (
+      {itemsFiltered &&
+        itemsFiltered.map((item, index) => (
           <ProductForList
             key={`${index}${item.name}`}
             item={item}
