@@ -15,6 +15,7 @@ export const ProductForList = ({ item, token }) => {
       const name = e.target.getAttribute('name');
       const itemtoDelete = await getItemsFromList(token);
       const itemFinded = itemtoDelete.find((item) => item.name === name);
+      console.log(itemFinded);
       const washingtonRef = doc(db, 'lists', token);
       // Atomically remove a region from the "regions" array field.
       await updateDoc(washingtonRef, {
@@ -43,7 +44,7 @@ export const ProductForList = ({ item, token }) => {
 
   useEffect(() => {
     setIsBought(validateHours(item, 24));
-  }, []);
+  }, [item]);
 
   return (
     <div

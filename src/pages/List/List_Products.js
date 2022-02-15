@@ -7,26 +7,34 @@ import Loading from '../../components/loading/loading';
 import { getItemsFromList } from '../../lib/api';
 import { getTokenFromStorage } from '../../utils/utils';
 import './ListProducts.css';
+import { doc, onSnapshot } from 'firebase/firestore';
+import { db } from '../../lib/firebase';
 
 const ListProducts = () => {
   const [items, setItems] = useState([]);
   const token = useRef(getTokenFromStorage());
   const [loading, setLoading] = useState(true);
+  const listProducts = useRef();
 
   useEffect(() => {
     if (token.current) {
       /* Get items */
-      const setInitialItems = async (token) => {
-        setLoading(true);
-        const products = await getItemsFromList(token);
+      const setInitialItems = (token) => {
+        // setLoading(true);
+        onSnapshot(doc(db, 'lists', token.current), (doc) => {
+          listProducts.current = doc.data().items;
 
-        if (products) {
-          setItems(products);
-        }
-        setLoading(false);
+          if (listProducts.current === undefined) {
+            setItems([]);
+            setLoading(false);
+          } else {
+            setItems(listProducts.current);
+            setLoading(false);
+          }
+        });
       };
 
-      setInitialItems(token.current);
+      setInitialItems(token);
     }
   }, []);
 
