@@ -19,7 +19,6 @@ const ListProducts = () => {
     if (token.current) {
       /* Get items */
       const setInitialItems = (token) => {
-        // setLoading(true);
         onSnapshot(doc(db, 'lists', token.current), (doc) => {
           listProducts.current = doc.data().items;
 
