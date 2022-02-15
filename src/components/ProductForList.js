@@ -3,24 +3,17 @@ import { Link } from 'react-router-dom';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils/dist/calculateEstimate';
 import { updatePurchaseTimeDB, getItemsFromList } from '../lib/api';
 import { calculateDaysSinceLastPurchase, validateHours } from '../utils/utils';
-import { doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
-import { db } from '../lib/firebase';
+import { deleteItems } from '../lib/api';
 
 export const ProductForList = ({ item, token }) => {
   const [isBought, setIsBought] = useState(false);
-  // console.log(token, item)
 
   const handleDeleteAttempt = async (e) => {
     if (window.confirm('Do you want to delete this product?')) {
       const name = e.target.getAttribute('name');
       const itemtoDelete = await getItemsFromList(token);
       const itemFinded = itemtoDelete.find((item) => item.name === name);
-      console.log(itemFinded);
-      const washingtonRef = doc(db, 'lists', token);
-      // Atomically remove a region from the "regions" array field.
-      await updateDoc(washingtonRef, {
-        items: arrayRemove(itemFinded),
-      });
+      await deleteItems(token, itemFinded);
       alert('Deleted!');
     }
   };
