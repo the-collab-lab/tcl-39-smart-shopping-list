@@ -4,7 +4,6 @@ import { Redirection } from '../../components/Redirection';
 import ListEmpty from '../../components/ListEmpty/ListEmpty';
 import FormProducts from '../../components/formProducts/FormProducts';
 import Loading from '../../components/loading/loading';
-import { getItemsFromList } from '../../lib/api';
 import { getTokenFromStorage } from '../../utils/utils';
 import './ListProducts.css';
 import { doc, onSnapshot } from 'firebase/firestore';
