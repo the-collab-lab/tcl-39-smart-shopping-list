@@ -26,7 +26,7 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
 
   useEffect(() => {
     setIsBought(validateHours(item, 24));
-  }, []);
+  }, [item]);
 
   return (
     <div
