@@ -33,6 +33,10 @@
   background-color: yellowgreen;
 }
 
+[aria-label='inactive'] {
+  background-color: lightgray;
+}
+
 .list-name,
 .item-name {
   text-transform: capitalize;

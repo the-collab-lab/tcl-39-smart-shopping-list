@@ -54,7 +54,6 @@ export const getItemsFromList = async (token) => {
       return a.howSoon - b.howSoon;
     });
 
-    console.log(itemsFromList);
     return itemsFromList;
   }
 };

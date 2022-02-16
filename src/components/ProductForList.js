@@ -2,10 +2,15 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils/dist/calculateEstimate';
 import { updatePurchaseTimeDB } from '../lib/api';
-import { calculateDaysSinceLastPurchase, validateHours } from '../utils/utils';
+import {
+  calculateDaysSinceLastPurchase,
+  validateActive,
+  validateHours,
+} from '../utils/utils';
 
 export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
   const [isBought, setIsBought] = useState(false);
+  const [isInactive, setIsInactive] = useState(false);
 
   const handleCheck = () => {
     setIsBought(true);
@@ -26,17 +31,20 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
 
   useEffect(() => {
     setIsBought(validateHours(item, 24));
+    setIsInactive(validateActive(item));
   }, []);
 
   return (
     <div
       className="product-container"
       aria-label={`${
-        item.howSoon === 7
-          ? 'soon'
-          : item.howSoon === 14
+        isInactive
+          ? 'inactive'
+          : item.howSoon > 30
+          ? 'not soon'
+          : item.howSoon > 6
           ? 'kind of soon'
-          : 'not soon'
+          : 'soon'
       }`}
     >
       <input

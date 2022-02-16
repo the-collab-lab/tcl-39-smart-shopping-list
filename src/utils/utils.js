@@ -27,6 +27,19 @@ export const validateHours = (item, hours) => {
   return true;
 };
 
+export const validateActive = (item) => {
+  if (item.totalPurchases === 1) {
+    return true;
+  }
+
+  const daysSinceLastPurchase = calculateDaysSinceLastPurchase(
+    item.lastPurchase,
+  );
+  if (daysSinceLastPurchase >= item.howSoon * 2) {
+    return true;
+  }
+};
+
 export const calculateDaysSinceLastPurchase = (lastBought) => {
   const daysSinceLastTransaction = formatDistanceToNowStrict(
     lastBought.toDate(),
