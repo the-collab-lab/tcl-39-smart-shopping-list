@@ -37,6 +37,10 @@ export const getItemsFromList = async (token) => {
   const itemsFromList = list.data().items;
 
   if (itemsFromList) {
+    itemsFromList.sort((a, b) => {
+      return a.howSoon - b.howSoon;
+    });
+    console.log(itemsFromList);
     return itemsFromList;
   }
 };
