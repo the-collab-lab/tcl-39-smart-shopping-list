@@ -1,4 +1,4 @@
-import { compareAsc, sub } from 'date-fns';
+import { compareAsc, formatDistanceToNowStrict, sub } from 'date-fns';
 
 export const checkTokenFormat = (token) => {
   const threeWordsRegexCheck = /[a-z]+ [a-z]+ [a-z]+/;
@@ -9,10 +9,9 @@ export const getTokenFromStorage = () => {
   return localStorage.getItem('token');
 };
 
-export function validateHours(item, hours) {
-  if (!item.lastPurchase) return false;
+export const validateHours = (item, hours) => {
+  if (item.totalPurchases === 0) return false;
 
-  //Dates
   const currentTime = new Date();
   const purchaseDate = item.lastPurchase.toDate();
   const oneDayAgo = sub(currentTime, {
@@ -26,4 +25,15 @@ export function validateHours(item, hours) {
   }
 
   return true;
-}
+};
+
+export const calculateDaysSinceLastPurchase = (lastBought) => {
+  const daysSinceLastTransaction = formatDistanceToNowStrict(
+    lastBought.toDate(),
+    {
+      unit: 'day',
+      roundingMethod: 'round',
+    },
+  );
+  return +daysSinceLastTransaction.split(' ')[0];
+};

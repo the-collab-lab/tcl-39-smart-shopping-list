@@ -1,13 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-
+import { addProductToList, getItemsFromList } from '../../lib/api';
 import { Modal } from '../../components/modal/Modal';
 import { Nav } from '../../components/Nav';
-import { addProductToList, getItemsFromList } from '../../lib/api';
 import { useModalFunctions } from '../../components/modal/ModalFunctions';
 import normalizeInputs from '../../components/normalizeInput/NormalizeInputs';
-import './Add-items.css';
 import { Redirection } from '../../components/Redirection';
 import { checkTokenFormat, getTokenFromStorage } from '../../utils/utils';
+import './Add-items.css';
 
 export const AddItems = () => {
   //get token from localstore
@@ -17,7 +16,6 @@ export const AddItems = () => {
     token,
     name: '',
     howSoon: '7',
-    lastPurchase: null,
   });
   const isValidToken = useRef(checkTokenFormat(product.token));
 
@@ -65,7 +63,11 @@ export const AddItems = () => {
       }
     }
     addProductToList(product);
-    setProduct({ ...product, name: '', lastPurchase: null });
+    setProduct({
+      ...product,
+      name: '',
+      howSoon: '7',
+    });
     modalProductAdded.showModal();
   };
 
@@ -95,12 +97,12 @@ export const AddItems = () => {
           <div>
             <label htmlFor="soon">
               <input
-                defaultChecked
                 id="soon"
                 type="radio"
                 name="howSoon"
                 required
-                value={7}
+                value="7"
+                checked={product.howSoon === '7'}
                 onChange={handleChangeProduct}
               />
               Soon
@@ -113,7 +115,8 @@ export const AddItems = () => {
                 type="radio"
                 name="howSoon"
                 required
-                value={14}
+                value="14"
+                checked={product.howSoon === '14'}
                 onChange={handleChangeProduct}
               />
               Kind of soon
@@ -126,7 +129,8 @@ export const AddItems = () => {
                 type="radio"
                 name="howSoon"
                 required
-                value={30}
+                value="30"
+                checked={product.howSoon === '30'}
                 onChange={handleChangeProduct}
               />
               Not soon
