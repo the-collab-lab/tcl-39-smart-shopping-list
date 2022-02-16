@@ -20,7 +20,7 @@ const FormProducts = ({ items }) => {
         ),
       );
     }
-  }, [itemName]);
+  }, [itemName, items]);
 
   const resetInput = () => setItemName('');
 
@@ -51,7 +51,7 @@ const FormProducts = ({ items }) => {
           </button>
         </div>
       </form>
-      {itemsFiltered &&
+      {itemsFiltered?.length > 0 ? (
         itemsFiltered.map((item, index) => (
           <ProductForList
             key={`${index}${item.name}`}
@@ -59,7 +59,13 @@ const FormProducts = ({ items }) => {
             handleDeleteAttempt={handleDeleteAttempt}
             token={token.current}
           />
-        ))}
+        ))
+      ) : (
+        <p>
+          No results. There isn't any product with '{itemName}' as the name in
+          the database.
+        </p>
+      )}
       <Outlet />
     </>
   );
