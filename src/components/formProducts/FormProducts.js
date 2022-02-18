@@ -47,13 +47,8 @@ const FormProducts = ({ items }) => {
         </div>
       </form>
       {itemsFiltered?.length > 0 ? (
-        itemsFiltered.map((item, index) => (
-          <ProductForList
-            key={`${index}${item.name}`}
-            name={item.name}
-            item={item}
-            token={token.current}
-          />
+        itemsFiltered.map((item) => (
+          <ProductForList item={item} token={token.current} />
         ))
       ) : (
         <p>
