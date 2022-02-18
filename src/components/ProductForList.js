@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils/dist/calculateEstimate';
 import { updatePurchaseTimeDB, getItemsFromList } from '../lib/api';
 import { calculateDaysSinceLastPurchase, validateHours } from '../utils/utils';
-import { deleteItems } from '../lib/api';
+import { deleteItem } from '../lib/api';
 
 export const ProductForList = ({ item, token }) => {
   const [isBought, setIsBought] = useState(false);
@@ -11,10 +11,10 @@ export const ProductForList = ({ item, token }) => {
   const handleDelete = async (e) => {
     if (window.confirm('Do you want to delete this product?')) {
       const name = e.target.getAttribute('name');
-      const itemtoDelete = await getItemsFromList(token);
-      const itemFinded = itemtoDelete.find((item) => item.name === name);
+      const itemsFromList = await getItemsFromList(token);
+      const itemToDelete = itemsFromList.find((item) => item.name === name);
 
-      await deleteItems(token, itemFinded);
+      await deleteItem(token, itemToDelete);
       alert('Deleted!');
     }
   };
