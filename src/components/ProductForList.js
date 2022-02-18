@@ -8,7 +8,7 @@ import { deleteItems } from '../lib/api';
 export const ProductForList = ({ item, token }) => {
   const [isBought, setIsBought] = useState(false);
 
-  const handleDeleteAttempt = async (e) => {
+  const handleDelete = async (e) => {
     if (window.confirm('Do you want to delete this product?')) {
       const name = e.target.getAttribute('name');
       const itemtoDelete = await getItemsFromList(token);
@@ -65,7 +65,7 @@ export const ProductForList = ({ item, token }) => {
         <Link to={`/list/${item.name}/`} state={{ product: item }}>
           <button>details</button>
         </Link>
-        <button onClick={handleDeleteAttempt} name={item.name}>
+        <button onClick={handleDelete} name={item.name}>
           delete
         </button>
       </div>
