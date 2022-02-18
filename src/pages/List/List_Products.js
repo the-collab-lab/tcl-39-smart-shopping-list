@@ -16,10 +16,11 @@ const ListProducts = () => {
   const listProducts = useRef();
 
   useEffect(() => {
+    let unsub = null;
     if (token.current) {
       /* Get items */
       const setInitialItems = (token) => {
-        onSnapshot(doc(db, 'lists', token.current), (doc) => {
+        unsub = onSnapshot(doc(db, 'lists', token.current), (doc) => {
           listProducts.current = doc.data().items;
 
           if (listProducts.current === undefined) {
@@ -34,6 +35,12 @@ const ListProducts = () => {
 
       setInitialItems(token);
     }
+    return () => {
+      // Stop listening to changes when no longer in use
+      if (unsub) {
+        unsub();
+      }
+    };
   }, []);
 
   if (!token.current) return <Redirection />;
