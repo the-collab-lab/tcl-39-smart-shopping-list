@@ -42,7 +42,6 @@ export const ProductForList = ({ item, token }) => {
 
   return (
     <div
-      name={item.name}
       className="product-container"
       aria-label={`${
         item.howSoon === 7
