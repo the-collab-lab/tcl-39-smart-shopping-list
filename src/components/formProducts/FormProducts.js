@@ -8,7 +8,7 @@ const FormProducts = ({ items }) => {
   const [itemName, setItemName] = useState('');
   const handleChange = (e) => setItemName(e.target.value);
   const token = useRef(getTokenFromStorage());
-  const [itemsFiltered, setItemsFiltered] = useState([items]);
+  const [itemsFiltered, setItemsFiltered] = useState(items);
 
   useEffect(() => {
     if (itemName === '') {
