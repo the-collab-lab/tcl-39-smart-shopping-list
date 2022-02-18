@@ -13,6 +13,7 @@ export const ProductForList = ({ item, token }) => {
       const name = e.target.getAttribute('name');
       const itemtoDelete = await getItemsFromList(token);
       const itemFinded = itemtoDelete.find((item) => item.name === name);
+
       await deleteItems(token, itemFinded);
       alert('Deleted!');
     }
