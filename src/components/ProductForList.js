@@ -32,7 +32,7 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
   useEffect(() => {
     setIsBought(validateHours(item, 24));
     setIsInactive(validateActive(item));
-  }, []);
+  }, [item]);
 
   return (
     <div
