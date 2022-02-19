@@ -55,7 +55,10 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
         onChange={handleCheck}
       />
       <p>
-        Product: <span className="item-name">{item.name}</span>
+        Product:{' '}
+        <span aria-labelledby={item.name} className="item-name">
+          {item.name}
+        </span>
       </p>
       <div className="btn-container">
         <Link to={`/list/${item.name}/`} state={{ product: item }}>

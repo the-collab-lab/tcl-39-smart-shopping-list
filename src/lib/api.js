@@ -50,9 +50,7 @@ export const getItemsFromList = async (token) => {
       return 0;
     });
 
-    itemsFromList.sort((a, b) => {
-      return a.howSoon - b.howSoon;
-    });
+    itemsFromList.sort((a, b) => a.howSoon - b.howSoon);
 
     return itemsFromList;
   }

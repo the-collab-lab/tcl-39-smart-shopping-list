@@ -28,16 +28,12 @@ export const validateHours = (item, hours) => {
 };
 
 export const validateActive = (item) => {
-  if (item.totalPurchases === 1) {
-    return true;
-  }
+  if (item.totalPurchases === 1) return true;
 
   const daysSinceLastPurchase = calculateDaysSinceLastPurchase(
     item.lastPurchase,
   );
-  if (daysSinceLastPurchase >= item.howSoon * 2) {
-    return true;
-  }
+  if (daysSinceLastPurchase >= item.howSoon * 2) return true;
 };
 
 export const calculateDaysSinceLastPurchase = (lastBought) => {
