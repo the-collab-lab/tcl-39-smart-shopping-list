@@ -41,9 +41,13 @@ export const getItemsFromList = async (token) => {
       const fa = a.name.toLowerCase(),
         fb = b.name.toLowerCase();
 
-      if (fa < fb) return -1;
-      else if (fa > fb) return 1;
-      else return 0;
+      if (fa < fb) {
+        return -1;
+      } else if (fa > fb) {
+        return 1;
+      } else {
+        return 0;
+      }
     });
 
     itemsFromList.sort((a, b) => a.howSoon - b.howSoon);
