@@ -48,7 +48,7 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
         onChange={handleCheck}
       />
       <p>
-        Product:{' '}
+        <span>Product: </span>
         <span aria-labelledby={item.name} className="item-name">
           {item.name}
         </span>
