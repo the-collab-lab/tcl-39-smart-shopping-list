@@ -46,3 +46,9 @@ export const calculateDaysSinceLastPurchase = (lastBought) => {
   );
   return +daysSinceLastTransaction.split(' ')[0];
 };
+
+export const setProductStatus = (isInactive, howSoon) => {
+  if (isInactive) return 'inactive';
+
+  return howSoon > 30 ? 'not soon' : howSoon > 6 ? 'kind of soon' : 'soon';
+};

@@ -4,6 +4,7 @@ import { calculateEstimate } from '@the-collab-lab/shopping-list-utils/dist/calc
 import { updatePurchaseTimeDB } from '../lib/api';
 import {
   calculateDaysSinceLastPurchase,
+  setProductStatus,
   validateActive,
   validateHours,
 } from '../utils/utils';
@@ -37,15 +38,7 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
   return (
     <div
       className="product-container"
-      aria-label={`${
-        isInactive
-          ? 'inactive'
-          : item.howSoon > 30
-          ? 'not soon'
-          : item.howSoon > 6
-          ? 'kind of soon'
-          : 'soon'
-      }`}
+      aria-label={setProductStatus(isInactive, item.howSoon)}
     >
       <input
         type="checkbox"
