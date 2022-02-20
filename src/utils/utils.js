@@ -48,7 +48,13 @@ export const calculateDaysSinceLastPurchase = (lastBought) => {
 };
 
 export const setProductStatus = (isInactive, howSoon) => {
-  if (isInactive) return 'inactive';
-
-  return howSoon > 30 ? 'not soon' : howSoon > 6 ? 'kind of soon' : 'soon';
+  if (isInactive) {
+    return 'inactive';
+  } else if (howSoon < 7) {
+    return 'soon';
+  } else if (howSoon >= 7 && howSoon <= 30) {
+    return 'kind of soon';
+  } else if (howSoon > 30) {
+    return 'not soon';
+  }
 };
