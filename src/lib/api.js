@@ -38,16 +38,12 @@ export const getItemsFromList = async (token) => {
 
   if (itemsFromList) {
     itemsFromList.sort((a, b) => {
-      let fa = a.name.toLowerCase(),
+      const fa = a.name.toLowerCase(),
         fb = b.name.toLowerCase();
 
-      if (fa < fb) {
-        return -1;
-      }
-      if (fa > fb) {
-        return 1;
-      }
-      return 0;
+      if (fa < fb) return -1;
+      else if (fa > fb) return 1;
+      else return 0;
     });
 
     itemsFromList.sort((a, b) => a.howSoon - b.howSoon);
