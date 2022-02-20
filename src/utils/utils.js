@@ -27,7 +27,7 @@ export const validateHours = (item, hours) => {
   return true;
 };
 
-export const validateActive = (item) => {
+export const checkIfInactive = (item) => {
   if (item.totalPurchases === 1) return true;
 
   const daysSinceLastPurchase = calculateDaysSinceLastPurchase(

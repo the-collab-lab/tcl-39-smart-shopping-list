@@ -7,6 +7,7 @@ import {
   arrayUnion,
   arrayRemove,
 } from 'firebase/firestore';
+import { checkIfInactive } from '../utils/utils';
 import { db } from './firebase';
 
 export const listsCollection = collection(db, 'lists');
@@ -52,7 +53,19 @@ export const getItemsFromList = async (token) => {
 
     itemsFromList.sort((a, b) => a.howSoon - b.howSoon);
 
-    return itemsFromList;
+    const activeItems = [];
+    const inactiveItems = [];
+
+    itemsFromList.forEach((item) => {
+      if (checkIfInactive(item)) {
+        inactiveItems.push(item);
+      } else {
+        activeItems.push(item);
+      }
+    });
+
+    const sortedItems = [...activeItems, ...inactiveItems];
+    return sortedItems;
   }
 };
 

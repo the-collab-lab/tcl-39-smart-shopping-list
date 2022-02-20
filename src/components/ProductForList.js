@@ -5,7 +5,7 @@ import { updatePurchaseTimeDB } from '../lib/api';
 import {
   calculateDaysSinceLastPurchase,
   setProductStatus,
-  validateActive,
+  checkIfInactive,
   validateHours,
 } from '../utils/utils';
 
@@ -32,7 +32,7 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
 
   useEffect(() => {
     setIsBought(validateHours(item, 24));
-    setIsInactive(validateActive(item));
+    setIsInactive(checkIfInactive(item));
   }, [item]);
 
   return (
