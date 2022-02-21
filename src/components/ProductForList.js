@@ -1,11 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils/dist/calculateEstimate';
-import { updatePurchaseTimeDB } from '../lib/api';
+import { updatePurchaseTimeDB, getItemsFromList } from '../lib/api';
 import { calculateDaysSinceLastPurchase, validateHours } from '../utils/utils';
+import { deleteItem } from '../lib/api';
 
-export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
+export const ProductForList = ({ item, token }) => {
   const [isBought, setIsBought] = useState(false);
+
+  const handleDelete = async (e) => {
+    if (window.confirm('Do you want to delete this product?')) {
+      const name = e.target.getAttribute('name');
+      const itemsFromList = await getItemsFromList(token);
+      const itemToDelete = itemsFromList.find((item) => item.name === name);
+
+      await deleteItem(token, itemToDelete);
+      alert('Deleted!');
+    }
+  };
 
   const handleCheck = () => {
     setIsBought(true);
@@ -53,7 +65,9 @@ export const ProductForList = ({ item, handleDeleteAttempt, token }) => {
         <Link to={`/list/${item.name}/`} state={{ product: item }}>
           <button>details</button>
         </Link>
-        <button onClick={handleDeleteAttempt}>delete</button>
+        <button onClick={handleDelete} name={item.name}>
+          delete
+        </button>
       </div>
     </div>
   );

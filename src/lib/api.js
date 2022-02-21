@@ -64,3 +64,11 @@ export const updatePurchaseTimeDB = async (token, item, state, estimate) => {
     await updateDoc(listRef, { items: arrayRemove(itemFinded) });
   }
 };
+
+export const deleteItem = async (token, itemToDelete) => {
+  const dbRef = doc(db, 'lists', token);
+
+  await updateDoc(dbRef, {
+    items: arrayRemove(itemToDelete),
+  });
+};

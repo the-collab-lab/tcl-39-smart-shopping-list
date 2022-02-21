@@ -24,11 +24,6 @@ const FormProducts = ({ items }) => {
 
   const resetInput = () => setItemName('');
 
-  const handleDeleteAttempt = () => {
-    if (window.confirm('Do you want to delete this product?')) {
-      alert('Deleted!');
-    }
-  };
   return (
     <>
       <form>
@@ -54,9 +49,8 @@ const FormProducts = ({ items }) => {
       {itemsFiltered?.length > 0 ? (
         itemsFiltered.map((item, index) => (
           <ProductForList
-            key={`${index}${item.name}`}
+            key={`${index}-${item.name}`}
             item={item}
-            handleDeleteAttempt={handleDeleteAttempt}
             token={token.current}
           />
         ))
