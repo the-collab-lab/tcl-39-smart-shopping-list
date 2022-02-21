@@ -47,8 +47,12 @@ const FormProducts = ({ items }) => {
         </div>
       </form>
       {itemsFiltered?.length > 0 ? (
-        itemsFiltered.map((item) => (
-          <ProductForList item={item} token={token.current} />
+        itemsFiltered.map((item, index) => (
+          <ProductForList
+            key={`${index}-${item.name}`}
+            item={item}
+            token={token.current}
+          />
         ))
       ) : (
         <p>
