@@ -1,9 +1,14 @@
 :root {
+  --blue-light: #9f9dc2;
+  --blue-dark: #4d478b;
   --grey: #d2d5dc;
+  --grey-light: #dedede;
   --pink: #d10766;
   --green-light: #8ee881;
   --green-dark: #68d918;
   --yellow: #fed60d;
+  --pink-light: #fecfd0;
+  --pink-dark: #fd8383;
   --blue: #6691ed;
   --blue-light: #95bfef;
   --blue-dark: #4c78b5;
