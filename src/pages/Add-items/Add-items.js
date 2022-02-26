@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { addProductToList, getItemsFromList } from '../../lib/api';
 import { Modal } from '../../components/modal/Modal';
 import { Nav } from '../../components/Nav';
@@ -142,15 +143,21 @@ export const AddItems = () => {
         </div>
       </form>
       <Modal
-        children={'This product is duplicated'}
+        children={'Your product already exists'}
         modalClass={modalDuplicatedProductMsg.modalClass}
         handleClose={modalDuplicatedProductMsg.hideModal}
+        iconMaterial={'error'}
+        colorIcon={'md-light_error'}
       />
       <Modal
         children={'Your product was successfully added'}
         modalClass={modalProductAdded.modalClass}
         handleClose={modalProductAdded.hideModal}
-      />
+        iconMaterial={'check_circle'}
+        colorIcon={'md-light_success'}
+      >
+      </Modal>
+
       <Nav />
     </>
   );

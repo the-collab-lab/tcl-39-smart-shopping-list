@@ -1,23 +1,33 @@
+p {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 25px;
+  color: var(--grey-dark);
+}
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background-color: var(--light);
 }
 
 .modal-main {
   display: flex;
-  align-items: flex-end;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: fixed;
-  background: white;
-  width: auto;
-  height: auto;
+  background: var(--grey);
+  width: 341px;
+  height: 98px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.container-modal-mssg{
+  display: flex;
 }
 
 .display-block {
@@ -29,8 +39,26 @@
 }
 
 .button_close {
+  position: absolute;
+  top: 0;
+  right: 0;
   border: none;
   font-size: 14px;
   padding: 6px;
   margin: 2px;
+  background-color: transparent;
+  color: var(--grey-dark);
+  font-weight: bold;
+}
+
+.material-icons{
+  padding: 0 8px;
+}
+
+.material-icons.md-light_error{
+  color: #d10766;
+}
+
+.material-icons.md-light_success{
+  color: #68d918;
 }
