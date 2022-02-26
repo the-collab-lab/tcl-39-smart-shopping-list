@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { addProductToList, getItemsFromList } from '../../lib/api';
 import { Modal } from '../../components/modal/Modal';
 import { Nav } from '../../components/Nav';

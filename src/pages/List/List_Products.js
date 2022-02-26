@@ -48,14 +48,13 @@ const ListProducts = () => {
   return (
     <main>
       <h1>Smart Shopping List</h1>
-      <Loading />
-      {/* {loading ? (
+      {loading ? (
         <Loading />
       ) : items.length === 0 ? (
         <ListEmpty />
       ) : (
         <FormProducts items={items} />
-      )} */}
+      )}
       <Nav />
     </main>
   );
