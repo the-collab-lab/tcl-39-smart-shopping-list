@@ -1,20 +1,37 @@
-.h1-container {
-  font-family: Roboto;
-  font-style: normal;
+main.main-404-container{
+    margin: 2rem 0;
+}
+h1.h1-container {
   font-weight: 500;
   font-size: 64px;
   line-height: 25px;
   color: var(--black);
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
-.button-container {
-  height: 49px;
-  width: 193px;
-  border-radius: 8px;
-  background: linear-gradient(98.81deg, #6691ed -0.82%, #4d478b 101.53%);
+h2.h2-container {
   font-weight: 500;
   font-size: 16px;
   line-height: 25px;
-  color: #FFFFFF;
+  color: var(--black);
+
+}
+p.p-container {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 25px;
+  color: var(--grey-dark);
+  margin: 0;
+}
+button.button-container {
+  height: 49px;
+  width: 193px;
+  border-radius: 8px;
+  background: linear-gradient(98.81deg, var(--blue) -0.82%, var(--blue-dark) 101.53%);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 25px;
+  color: var(--white);
   border: none;
+  align-items: center;
+  margin-top: 3rem;
 }
