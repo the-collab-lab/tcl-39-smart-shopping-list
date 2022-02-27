@@ -1,9 +1,12 @@
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
+
 import './Nav.css';
 
 export const Nav = () => {
-
+  const removeLocalStorage = () => {
+    localStorage.removeItem('token');
+  };
   return (
     <nav>
       <NavLink
@@ -13,7 +16,10 @@ export const Nav = () => {
         })}
         to="/list"
       >
-        <span class="material-icons md-36">view_list</span>
+        <div className="nav-link_span">
+          <span className="material-icons md-36">view_list</span>
+          <span>List</span>
+        </div>
       </NavLink>
       <NavLink
         className="nav-link"
@@ -22,16 +28,23 @@ export const Nav = () => {
         })}
         to="/add-items"
       >
-        <span class="material-icons md-36">add_circle</span>
+        <div className="nav-link_span">
+          <span className="material-icons md-36">add_circle</span>
+          <span>Add</span>
+        </div>
       </NavLink>
       <NavLink
         className="nav-link"
+        onClick={removeLocalStorage}
         style={({ isActive }) => ({
           color: isActive ? '#6691ED' : '#DEDEDE',
         })}
         to="/"
       >
-        <span class="material-icons md-36">exit_to_app</span>
+        <div className="nav-link_span">
+          <span className="material-icons md-36">exit_to_app</span>
+          <span>Exit</span>
+        </div>
       </NavLink>
     </nav>
   );

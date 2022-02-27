@@ -18,3 +18,11 @@ nav {
   font-size: 36px;
   padding: 0 35px;
 }
+.nav-link {
+  text-decoration: none;
+}
+.nav-link_span {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
