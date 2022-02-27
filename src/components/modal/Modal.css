@@ -28,6 +28,7 @@ p {
 }
 .container-modal-mssg{
   display: flex;
+  align-items: center;
 }
 
 .display-block {
