@@ -12,7 +12,7 @@ const ListEmpty = () => {
   return (
     <>
       <p>Your shopping list is currently empty</p>
-      <button onClick={routeChange} className="link-button">
+      <button onClick={routeChange} className="button-container">
         Add Item
       </button>
     </>

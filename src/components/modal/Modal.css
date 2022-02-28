@@ -19,16 +19,17 @@ p {
   justify-content: center;
   align-items: center;
   position: fixed;
-  background: var(--grey);
   width: 341px;
   height: 98px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  background: linear-gradient(180deg, #d2d5dc 0%, rgba(210, 213, 220, 0) 100%);
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
 }
-.container-modal-mssg{
+.container-modal-mssg {
   display: flex;
   align-items: center;
 }
@@ -54,14 +55,14 @@ p {
   font-weight: bold;
 }
 
-.material-icons{
+.material-icons {
   padding: 0 8px;
 }
 
-.material-icons.md-light_error{
+.material-icons.md-light_error {
   color: #d10766;
 }
 
-.material-icons.md-light_success{
+.material-icons.md-light_success {
   color: #68d918;
 }
