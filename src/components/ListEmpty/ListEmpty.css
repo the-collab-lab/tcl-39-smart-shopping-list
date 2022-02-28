@@ -1,6 +1,1 @@
-button {
-  cursor: pointer;
-}
-.link-button {
-  text-decoration: none;
-}
+@import url(../button/button.css);

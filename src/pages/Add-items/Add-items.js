@@ -4,7 +4,7 @@ import { Modal } from '../../components/modal/Modal';
 import { Nav } from '../../components/Nav';
 import { useModalFunctions } from '../../components/modal/ModalFunctions';
 import normalizeInputs from '../../components/normalizeInput/NormalizeInputs';
-import { Redirection } from '../../components/Redirection';
+import { Redirection } from '../../components/redirection/Redirection';
 import { checkTokenFormat, getTokenFromStorage } from '../../utils/utils';
 import './Add-items.css';
 

@@ -2,10 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 10rem;
 }
 .loading_text{
-    padding: 4rem 0 0 1rem;
+    padding: 1rem 0 0 1rem;
     font-size: 24px;
     font-weight: bold;
     color: var(--blue-dark);

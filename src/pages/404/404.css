@@ -1,0 +1,26 @@
+@import url(../../components/button/button.css);
+main.main-404-container{
+    margin: 2rem 0;
+}
+h1.h1-container {
+  font-weight: 500;
+  font-size: 64px;
+  line-height: 25px;
+  color: var(--black);
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+h2.h2-container {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 25px;
+  color: var(--black);
+
+}
+p.p-container {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 25px;
+  color: var(--grey-dark);
+  margin: 0;
+}
+

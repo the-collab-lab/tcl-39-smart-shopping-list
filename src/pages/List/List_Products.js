@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Nav } from '../../components/Nav';
-import { Redirection } from '../../components/Redirection';
+import { Redirection } from '../../components/redirection/Redirection';
 import ListEmpty from '../../components/ListEmpty/ListEmpty';
 import FormProducts from '../../components/formProducts/FormProducts';
 import Loading from '../../components/loading/loading';

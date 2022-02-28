@@ -1,7 +1,6 @@
 @import './design/fonts.css';
 @import './design/palette.css';
 
-
 body {
   font-family: var(--common-font);
   background-color: var(--light);

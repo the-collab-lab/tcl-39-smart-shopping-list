@@ -8,7 +8,7 @@ export const Modal = ({ handleClose, modalClass, children, iconMaterial, colorIc
   return (
     <div className={showHideClassName}>
       <section className="modal-main">
-        <button className="button_close" onClick={handleClose}>
+        <button aria-label="Close" className="button_close" onClick={handleClose}>
           X
         </button>
         <div className='container-modal-mssg'>
