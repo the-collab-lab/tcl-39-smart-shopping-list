@@ -8,7 +8,7 @@ export const Nav = () => {
     localStorage.removeItem('token');
   };
   return (
-    <nav>
+    <nav aria-label="botton nav">
       <NavLink
         className="nav-link"
         style={({ isActive }) => ({

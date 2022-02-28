@@ -11,6 +11,7 @@ export const NotFound404 = () => {
       <p className='p-container'>Fear no more, we can help you 🏡</p>
       <button
         className='button-container'
+        aria-label="go home"
         onClick={() => {
           navigate('/');
         }}
