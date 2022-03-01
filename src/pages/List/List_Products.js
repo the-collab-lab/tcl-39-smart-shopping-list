@@ -47,7 +47,6 @@ const ListProducts = () => {
 
   return (
     <main>
-      <h1>Smart Shopping List</h1>
       {loading ? (
         <Loading />
       ) : items.length === 0 ? (

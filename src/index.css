@@ -1,6 +1,12 @@
 @import './design/fonts.css';
 @import './design/palette.css';
 
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: var(--common-font);
   background-color: var(--light);

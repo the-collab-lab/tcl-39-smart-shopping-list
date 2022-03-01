@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils/dist/calculateEstimate';
 import { updatePurchaseTimeDB, getItemsFromList } from '../lib/api';
 import { calculateDaysSinceLastPurchase, validateHours } from '../utils/utils';
 import { deleteItem } from '../lib/api';
+import './ProductForList.css';
+import DeleteIcon from '@material-ui/icons/Delete';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 export const ProductForList = ({ item, token }) => {
   const [isBought, setIsBought] = useState(false);
@@ -41,33 +43,34 @@ export const ProductForList = ({ item, token }) => {
   }, [item]);
 
   return (
-    <div
-      className="product-container"
-      aria-label={`${
-        item.howSoon === 7
-          ? 'soon'
-          : item.howSoon === 14
-          ? 'kind of soon'
-          : 'not soon'
-      }`}
-    >
-      <input
-        type="checkbox"
-        value="Bought"
-        checked={isBought}
-        disabled={isBought}
-        onChange={handleCheck}
+    <div className="product-container">
+      <div
+        className="color-mark"
+        aria-label={`${
+          item.howSoon === 7
+            ? 'soon'
+            : item.howSoon === 14
+            ? 'kind of soon'
+            : 'not soon'
+        }`}
       />
-      <p>
-        Product: <span className="item-name">{item.name}</span>
-      </p>
-      <div className="btn-container">
-        <Link to={`/list/${item.name}/`} state={{ product: item }}>
-          <button>details</button>
-        </Link>
-        <button onClick={handleDelete} name={item.name}>
-          delete
-        </button>
+      <div className="main-elements-container">
+        <CheckCircleIcon
+          className={isBought ? 'checked' : 'unchecked'}
+          onClick={handleCheck}
+        />
+        <p className="name-container">
+          <span className="item-name">
+            {item.name.length < 11
+              ? item.name
+              : `${item.name.substring(0, 10)}...`}
+          </span>
+        </p>
+        <DeleteIcon
+          className="delete-icon"
+          onClick={handleDelete}
+          name={item.name}
+        />
       </div>
     </div>
   );
