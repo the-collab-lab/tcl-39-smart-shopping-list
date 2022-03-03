@@ -1,3 +1,32 @@
 form {
   display: grid;
 }
+
+.join-list {
+  padding: 39px 145px 0 145px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 0px;
+  text-align: center;
+  color: #4d478b;
+}
+
+.join-list-text {
+  padding: 27px 25px 0 25px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 24px;
+  color: #4d478b;
+}
+
+.input-join {
+  margin: 27px 17px 11px 17px;
+  padding: 22px 0px 22px 25px;
+  background: linear-gradient(0deg, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    #ffffff;
+  border-radius: 8px;
+}
+
+.button-join {
+  margin: auto;
+}
