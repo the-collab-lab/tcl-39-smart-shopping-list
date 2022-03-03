@@ -7,6 +7,8 @@ import normalizeInputs from '../../components/normalizeInput/NormalizeInputs';
 import { Redirection } from '../../components/redirection/Redirection';
 import { checkTokenFormat, getTokenFromStorage } from '../../utils/utils';
 import './Add-items.css';
+import '../../components/button/button.css';
+import '../../components/formProducts/FormProducts.css';
 
 export const AddItems = () => {
   //get token from localstore
@@ -77,70 +79,78 @@ export const AddItems = () => {
 
   return (
     <>
-      <h1>Smart Shopping List</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">
-          <p>Product:</p>
-          <input
-            required
-            id="name"
-            className="inputField"
-            type="text"
-            name="name"
-            value={product.name}
-            onChange={handleChangeProduct}
-            ref={inputRef}
-          />
-        </label>
-        <fieldset>
-          <p>How soon will you buy this again?</p>
-          <div>
-            <label htmlFor="soon">
+      <form className="filter-form" onSubmit={handleSubmit}>
+        <div className="list-header">
+          <label htmlFor="name">
+            Add new products to your list:
+            <div className="filter-item inputField">
               <input
-                id="soon"
-                type="radio"
-                name="howSoon"
                 required
-                value="7"
-                checked={product.howSoon === '7'}
+                id="name"
+                className="filter-input"
+                type="text"
+                name="name"
+                value={product.name}
                 onChange={handleChangeProduct}
+                ref={inputRef}
+                placeholder="New product"
               />
-              Soon
-            </label>
-          </div>
-          <div>
-            <label htmlFor="kindOfSoon">
-              <input
-                id="kindOfSoon"
-                type="radio"
-                name="howSoon"
-                required
-                value="14"
-                checked={product.howSoon === '14'}
-                onChange={handleChangeProduct}
-              />
-              Kind of soon
-            </label>
-          </div>
-          <div>
-            <label htmlFor="notSoon">
-              <input
-                id="notSoon"
-                type="radio"
-                name="howSoon"
-                required
-                value="30"
-                checked={product.howSoon === '30'}
-                onChange={handleChangeProduct}
-              />
-              Not soon
-            </label>
-          </div>
-        </fieldset>
+            </div>
+          </label>
+
+          <p className="how-soon">How soon will you buy this again?</p>
+          <fieldset>
+            <div>
+              <label htmlFor="soon">
+                <input
+                  id="soon"
+                  type="radio"
+                  name="howSoon"
+                  required
+                  value="7"
+                  checked={product.howSoon === '7'}
+                  onChange={handleChangeProduct}
+                />
+                Weekly
+              </label>
+            </div>
+            <div>
+              <label htmlFor="kindOfSoon">
+                <input
+                  id="kindOfSoon"
+                  type="radio"
+                  name="howSoon"
+                  required
+                  value="14"
+                  checked={product.howSoon === '14'}
+                  onChange={handleChangeProduct}
+                />
+                Biweekly
+              </label>
+            </div>
+            <div>
+              <label htmlFor="notSoon">
+                <input
+                  id="notSoon"
+                  type="radio"
+                  name="howSoon"
+                  required
+                  value="30"
+                  checked={product.howSoon === '30'}
+                  onChange={handleChangeProduct}
+                />
+                Monthly
+              </label>
+            </div>
+          </fieldset>
+        </div>
         <div className="button-container">
-          <button type="submit">Submit</button>
+          <button className="button-container" type="submit">
+            Submit
+          </button>
         </div>
       </form>
+
       <Modal
         children={'Your product already exists'}
         modalClass={modalDuplicatedProductMsg.modalClass}
@@ -154,8 +164,7 @@ export const AddItems = () => {
         handleClose={modalProductAdded.hideModal}
         iconMaterial={'check_circle'}
         colorIcon={'md-light_success'}
-      >
-      </Modal>
+      ></Modal>
 
       <Nav />
     </>
