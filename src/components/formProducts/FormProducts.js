@@ -1,10 +1,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { getTokenFromStorage } from '../../utils/utils';
-import { ProductForList } from '../ProductForList';
 import './FormProducts.css';
 import SearchIcon from '@material-ui/icons/Search';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import { ProductForList } from './../productForList/ProductForList';
 
 const FormProducts = ({ items }) => {
   const [itemName, setItemName] = useState('');

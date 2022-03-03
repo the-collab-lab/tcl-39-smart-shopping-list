@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Nav } from '../../components/Nav';
+import { Nav } from '../../components/nav/Nav';
 import { Redirection } from '../../components/redirection/Redirection';
 import ListEmpty from '../../components/ListEmpty/ListEmpty';
 import FormProducts from '../../components/formProducts/FormProducts';

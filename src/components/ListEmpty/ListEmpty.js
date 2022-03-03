@@ -10,12 +10,12 @@ const ListEmpty = () => {
   };
 
   return (
-    <>
+    <div className='empty_list-container'>
       <p>Your shopping list is currently empty</p>
       <button aria-label="add-item" onClick={routeChange} className="button-container">
         Add Item
       </button>
-    </>
+    </div>
   );
 };
 

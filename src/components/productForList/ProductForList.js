@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils/dist/calculateEstimate';
-import { updatePurchaseTimeDB, getItemsFromList } from '../lib/api';
-import { calculateDaysSinceLastPurchase, validateHours } from '../utils/utils';
-import { deleteItem } from '../lib/api';
+import { updatePurchaseTimeDB, getItemsFromList } from '../../lib/api';
+import { calculateDaysSinceLastPurchase, validateHours } from '../../utils/utils';
+import { deleteItem } from '../../lib/api';
 import './ProductForList.css';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';

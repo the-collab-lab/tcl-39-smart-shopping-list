@@ -3,8 +3,7 @@
 nav {
   display: flex;
   flex-direction: row;
-  align-content: center;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: fixed;
   bottom: 0rem;
@@ -16,7 +15,7 @@ nav {
 
 .material-icons.md-36 {
   font-size: 36px;
-  padding: 0 35px;
+  padding: 0 4rem;
 }
 .nav-link {
   text-decoration: none;

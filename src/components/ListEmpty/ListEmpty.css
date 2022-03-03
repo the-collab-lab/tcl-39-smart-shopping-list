@@ -1,1 +1,7 @@
 @import url(../button/button.css);
+.empty_list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50%;
+}
