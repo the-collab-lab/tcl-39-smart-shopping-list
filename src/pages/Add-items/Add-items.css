@@ -8,7 +8,11 @@ form {
 
 fieldset {
   border: none;
-  margin: 1rem 0;
+  /* margin: 1rem 0; */
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  padding: 2% 8%;
 }
 input {
   border: 1px solid #9e9e9e;
@@ -21,4 +25,14 @@ input {
 }
 button {
   padding: 0.25rem 1rem;
+}
+
+.how-soon {
+  margin: 28px 0px 1px;
+  font-size: 14px;
+  color: white;
+}
+
+.inputField {
+  margin-top: 2%;
 }
