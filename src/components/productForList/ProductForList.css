@@ -68,4 +68,16 @@
 .delete-icon:hover {
   color: #fd8383;
 }
+.material-icons.md-14 {
+  font-size: 24px;
+}
+
+button.button_delete{
+    display: flex;
+    background-color: transparent;
+    border: none;
+    color: var(--grey-light);
+    cursor: pointer;
+    padding: 0;
+}
 

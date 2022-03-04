@@ -15,8 +15,9 @@ export const ProductForList = ({ item, token }) => {
       const name = e.target.getAttribute('name');
       const itemsFromList = await getItemsFromList(token);
       const itemToDelete = itemsFromList.find((item) => item.name === name);
-
+      console.table(name, itemsFromList, itemToDelete)
       await deleteItem(token, itemToDelete);
+       
       alert('Deleted!');
     }
   };
@@ -66,11 +67,14 @@ export const ProductForList = ({ item, token }) => {
               : `${item.name.substring(0, 10)}...`}
           </span>
         </p>
-        <DeleteIcon
-          className="delete-icon"
+        <button
           onClick={handleDelete}
           name={item.name}
-        />
+          className="button_delete"
+        >
+          <span className="material-icons md-14"  name={item.name}>add_circle</span>
+        </button>
+
       </div>
     </div>
   );
