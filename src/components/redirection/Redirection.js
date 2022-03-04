@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import "./Redirection.css"
 
 export const Redirection = () => {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     navigate('/', { replace: true });
-  //   }, 1500);
-  // });
+  useEffect(() => {
+    setTimeout(() => {
+      navigate('/', { replace: true });
+    }, 1500);
+  });
 
   return (
     <main>

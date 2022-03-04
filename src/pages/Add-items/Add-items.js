@@ -79,9 +79,9 @@ export const AddItems = () => {
   }
 
   return (
-    <>
-      <form className="filter-form" onSubmit={handleSubmit}>
-        <div className="list-header">
+    <main>
+      <form className="filter-form-add-items" onSubmit={handleSubmit}>
+        <div className="list-header-add-items">
           <label htmlFor="name">
             Add new products to your list:
             <div className="filter-item inputField">
@@ -168,6 +168,6 @@ export const AddItems = () => {
       ></Modal>
 
       <Nav />
-    </>
+    </main>
   );
 };

@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  margin-top: 50%;
+  margin-top: 1rem;
 }
 h1.h1-container {
   font-weight: 500;

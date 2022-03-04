@@ -9,4 +9,6 @@
 
 .background-style {
   background-image: url(./fondohome.png);
+  display: grid;
+  justify-items: center;
 }

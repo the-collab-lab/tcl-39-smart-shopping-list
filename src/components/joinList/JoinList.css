@@ -1,5 +1,6 @@
 form {
   display: grid;
+  justify-content: center;
 }
 
 .join-list {
@@ -17,6 +18,7 @@ form {
   font-size: 18px;
   line-height: 24px;
   color: #4d478b;
+  text-align: center;
 }
 
 .input-join {
@@ -30,3 +32,4 @@ form {
 .button-join {
   margin: auto;
 }
+

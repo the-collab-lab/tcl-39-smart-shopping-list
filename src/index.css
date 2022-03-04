@@ -12,7 +12,18 @@ body {
   background-color: var(--light);
 }
 
-#root {
+/* main {
   display: grid;
   justify-items: center;
+} */
+/* #root {
+  display: grid;
+  justify-items: center;
+} */
+
+@media only screen and (min-width: 600px) {
+  main {
+    display: grid;
+    justify-items: center;
+  }
 }
