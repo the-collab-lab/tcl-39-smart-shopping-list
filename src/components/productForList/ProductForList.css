@@ -65,7 +65,7 @@
   transition: 0.2s ease-in-out all !important;
 }
 
-.delete-icon:hover {
+.material-icons.md-14:active {
   color: #fd8383;
 }
 .material-icons.md-14 {
@@ -80,4 +80,5 @@ button.button_delete{
     cursor: pointer;
     padding: 0;
 }
+
 

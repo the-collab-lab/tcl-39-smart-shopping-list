@@ -72,7 +72,7 @@ export const ProductForList = ({ item, token }) => {
           name={item.name}
           className="button_delete"
         >
-          <span className="material-icons md-14"  name={item.name}>add_circle</span>
+          <span className="material-icons md-14"  name={item.name}>delete</span>
         </button>
 
       </div>
