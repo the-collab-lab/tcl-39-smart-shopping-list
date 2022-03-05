@@ -43,7 +43,7 @@ const FormProducts = ({ items }) => {
       <div className="list-header">
         <h1 className="title">HELLO!</h1>
         <form className="filter-form">
-          <label htmlFor="filter">Filter your shopping list.</label>
+          <label htmlFor="filter">Filter your shopping list:</label>
           <div className="filter-item">
             <input
               id="filter"
@@ -51,7 +51,7 @@ const FormProducts = ({ items }) => {
               value={itemName}
               type="text"
               onChange={handleChange}
-              placeholder="SEARCH"
+              placeholder="Search a product by name"
             />
             {isFiltering ? (
               <HighlightOffIcon onClick={resetInput} />
