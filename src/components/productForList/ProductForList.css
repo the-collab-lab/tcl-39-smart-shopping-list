@@ -18,7 +18,7 @@
 }
 
 .color-mark {
-  width: 7px;
+  width: 12px;
   height: 100%;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
@@ -73,13 +73,13 @@
   font-size: 24px;
 }
 
-button.button_delete{
-    display: flex;
-    background-color: transparent;
-    border: none;
-    color: var(--grey-light);
-    cursor: pointer;
-    padding: 0;
+button.button_delete {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  color: var(--grey-light);
+  cursor: pointer;
+  padding: 0;
 }
 .button_delete:hover{
   color: var(--dark);

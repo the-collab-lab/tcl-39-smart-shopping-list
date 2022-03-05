@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react';
 import { calculateEstimate } from '@the-collab-lab/shopping-list-utils/dist/calculateEstimate';
-import { updatePurchaseTimeDB, getItemsFromList } from '../../lib/api';
-import { calculateDaysSinceLastPurchase, validateHours } from '../../utils/utils';
-import { deleteItem } from '../../lib/api';
+import { updatePurchaseTimeDB } from '../../lib/api';
+import {
+  calculateDaysSinceLastPurchase,
+  validateHours,
+} from '../../utils/utils';
+import { deleteItem, getItemsFromList } from '../../lib/api';
 import './ProductForList.css';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
@@ -71,9 +74,10 @@ export const ProductForList = ({ item, token }) => {
           name={item.name}
           className="button_delete"
         >
-          <span className="material-icons md-14"  name={item.name}>delete</span>
+          <span className="material-icons md-14" name={item.name}>
+            delete
+          </span>
         </button>
-
       </div>
     </div>
   );
