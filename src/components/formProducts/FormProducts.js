@@ -41,7 +41,7 @@ const FormProducts = ({ items }) => {
   return (
     <>
       <div className="list-header">
-        <h3 className="title">HELLO!</h3>
+        <h1 className="title">HELLO!</h1>
         <form className="filter-form">
           <label htmlFor="filter">Filter your shopping list.</label>
           <div className="filter-item">
