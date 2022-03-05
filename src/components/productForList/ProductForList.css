@@ -14,7 +14,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  width: 300px;
+  width: 250px;
 }
 
 .color-mark {
@@ -25,21 +25,22 @@
 }
 
 .name-container {
-  width: 40%;
+  width: 50%;
 }
 
 .item-name {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 700;
   text-transform: capitalize;
+  
 }
 
 .checked {
-  color: #68d918;
+  color: var(--green-dark);
 }
 
 .unchecked {
-  color: #dedede;
+  color: #a09e9e;
   transition: 0.2s ease-in-out all !important;
 }
 
@@ -48,15 +49,15 @@
 }
 
 [aria-label='soon'] {
-  background-color: aquamarine;
+  background-color: var(--green-light);
 }
 
 [aria-label='kind of soon'] {
-  background-color: antiquewhite;
+  background-color: var(--yellow);
 }
 
 [aria-label='not soon'] {
-  background-color: yellowgreen;
+  background-color: var(--pink);
 }
 
 .delete-icon {
@@ -80,5 +81,7 @@ button.button_delete{
     cursor: pointer;
     padding: 0;
 }
-
+.button_delete:hover{
+  color: var(--dark);
+}
 

@@ -10,7 +10,6 @@ import './Add-items.css';
 import '../../components/button/button.css';
 import '../../components/formProducts/FormProducts.css';
 
-
 export const AddItems = () => {
   //get token from localstore
   const token = getTokenFromStorage();
@@ -79,7 +78,8 @@ export const AddItems = () => {
   }
 
   return (
-    <main>
+    <>
+        <main>
       <form className="filter-form-add-items" onSubmit={handleSubmit}>
         <div className="list-header-add-items">
           <label htmlFor="name">
@@ -112,7 +112,7 @@ export const AddItems = () => {
                   checked={product.howSoon === '7'}
                   onChange={handleChangeProduct}
                 />
-                Weekly
+                Soon 
               </label>
             </div>
             <div>
@@ -126,7 +126,7 @@ export const AddItems = () => {
                   checked={product.howSoon === '14'}
                   onChange={handleChangeProduct}
                 />
-                Biweekly
+                Kind of soon 
               </label>
             </div>
             <div>
@@ -140,7 +140,7 @@ export const AddItems = () => {
                   checked={product.howSoon === '30'}
                   onChange={handleChangeProduct}
                 />
-                Monthly
+                Not soon 
               </label>
             </div>
           </fieldset>
@@ -167,7 +167,10 @@ export const AddItems = () => {
         colorIcon={'md-light_success'}
       ></Modal>
 
-      <Nav />
+     
     </main>
+    <Nav />
+    </>
+
   );
 };

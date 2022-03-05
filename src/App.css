@@ -7,7 +7,7 @@
   color: rgba(77, 71, 139, 0.5);
 }
 
-.background-style {
+.App {
   background-image: url(./fondohome.png);
   display: grid;
   justify-items: center;

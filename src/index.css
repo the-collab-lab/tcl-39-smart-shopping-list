@@ -1,5 +1,5 @@
-@import './design/fonts.css';
-@import './design/palette.css';
+@import './design/variables.css';
+
 
 * {
   padding: 0;
@@ -11,15 +11,6 @@ body {
   font-family: var(--common-font);
   background-color: var(--light);
 }
-
-/* main {
-  display: grid;
-  justify-items: center;
-} */
-/* #root {
-  display: grid;
-  justify-items: center;
-} */
 
 @media only screen and (min-width: 600px) {
   main {

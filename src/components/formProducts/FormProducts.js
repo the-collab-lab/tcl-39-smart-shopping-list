@@ -41,9 +41,9 @@ const FormProducts = ({ items }) => {
   return (
     <>
       <div className="list-header">
-        <h3 className="title">HELLO!</h3>
+        <h1 className="title">HELLO!</h1>
         <form className="filter-form">
-          <label htmlFor="filter">Filter your shopping list.</label>
+          <label htmlFor="filter">Search a product by name</label>
           <div className="filter-item">
             <input
               id="filter"
@@ -51,7 +51,7 @@ const FormProducts = ({ items }) => {
               value={itemName}
               type="text"
               onChange={handleChange}
-              placeholder="SEARCH"
+              placeholder="Product's name to search"
             />
             {isFiltering ? (
               <HighlightOffIcon onClick={resetInput} />
@@ -61,22 +61,62 @@ const FormProducts = ({ items }) => {
           </div>
         </form>
       </div>
-      <div className="products-container">
-        {itemsFiltered?.length > 0 ? (
-          itemsFiltered.map((item, index) => (
-            <ProductForList
-              key={`${index}-${item.name}`}
-              item={item}
-              token={token.current}
-            />
-          ))
-        ) : (
-          <p>
-            No results. There isn't any product with '{itemName}' as the name in
-            the database.
-          </p>
-        )}
+      <div className="parent_list_view">
+        <div className="table_view">
+          <table className="table-container">
+            <thead>
+              <tr>
+                <th>Color</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span className="circle soon"></span>
+                </td>
+                <td>
+                  <span>Soon</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="circle kindOfSoon"></span>
+                </td>
+                <td>
+                  <span>Kind of Soon</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="circle notSoon"></span>
+                </td>
+                <td>
+                  <span>Not Soon</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div className="productos_view products-container">
+          {itemsFiltered?.length > 0 ? (
+            itemsFiltered.map((item, index) => (
+              <ProductForList
+                key={`${index}-${item.name}`}
+                item={item}
+                token={token.current}
+              />
+            ))
+          ) : (
+            <div className="mssg_result_empty">
+              <p>
+                No results. There isn't any product with '{itemName}' as the
+                name in the database.
+              </p>
+            </div>
+          )}
+        </div>
       </div>
+
       <Outlet />
     </>
   );

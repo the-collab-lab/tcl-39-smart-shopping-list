@@ -5,7 +5,7 @@ import CreateList from './pages/CreateList/CreateList';
 
 const App = () => {
   return (
-    <main className="background-style">
+    <main className="App">
       <CreateList />
       <p className="or">- or -</p>
       <JoinList />

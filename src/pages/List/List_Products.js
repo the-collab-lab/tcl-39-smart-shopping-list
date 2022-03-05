@@ -46,16 +46,18 @@ const ListProducts = () => {
   if (!token.current) return <Redirection />;
 
   return (
-    <main>
-      {loading ? (
-        <Loading />
-      ) : items.length === 0 ? (
-        <ListEmpty />
-      ) : (
-        <FormProducts items={items} />
-      )}
+    <>
+      <main>
+        {loading ? (
+          <Loading />
+        ) : items.length === 0 ? (
+          <ListEmpty />
+        ) : (
+          <FormProducts items={items} />
+        )}
+      </main>
       <Nav />
-    </main>
+    </>
   );
 };
 

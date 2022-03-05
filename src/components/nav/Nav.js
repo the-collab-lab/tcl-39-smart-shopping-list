@@ -7,12 +7,14 @@ export const Nav = () => {
   const removeLocalStorage = () => {
     localStorage.removeItem('token');
   };
+  const colorDesactive = '#a09e9e';
+  const colorActive = '#6691ed'
   return (
     <nav aria-label="botton nav">
       <NavLink
         className="nav-link"
         style={({ isActive }) => ({
-          color: isActive ? '#6691ED' : '#DEDEDE',
+          color: isActive ? `${colorActive}` : `${colorDesactive}`,
         })}
         to="/list"
       >
@@ -24,7 +26,7 @@ export const Nav = () => {
       <NavLink
         className="nav-link"
         style={({ isActive }) => ({
-          color: isActive ? '#6691ED' : '#DEDEDE',
+          color: isActive ? `${colorActive}` : `${colorDesactive}`,
         })}
         to="/add-items"
       >
@@ -37,7 +39,7 @@ export const Nav = () => {
         className="nav-link"
         onClick={removeLocalStorage}
         style={({ isActive }) => ({
-          color: isActive ? '#6691ED' : '#DEDEDE',
+          color: isActive ? `${colorActive}` : `${colorDesactive}`,
         })}
         to="/"
       >
