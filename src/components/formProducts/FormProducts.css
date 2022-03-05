@@ -23,10 +23,6 @@
 
 .products-container {
   padding: 40px 10px 0 10px;
-  display: grid;
-  /* align-items: center; */
-  /* justify-items: center; */
-  justify-content: space-around;
 }
 
 .filter-item {
@@ -55,6 +51,18 @@
 .filter-input::placeholder {
   color: white;
   opacity: 0.5;
+}
+
+.no-results-text {
+  margin: 20%;
+  font-weight: 300;
+  font-size: 18px;
+  width: 50%;
+  overflow-wrap: break-word;
+}
+
+.no-results-name {
+  font-weight: normal;
 }
 
 @media only screen and (min-width: 600px) {

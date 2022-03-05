@@ -71,9 +71,10 @@ const FormProducts = ({ items }) => {
             />
           ))
         ) : (
-          <p>
-            No results. There isn't any product with '{itemName}' as the name in
-            the database.
+          <p className="no-results-text">
+            No results. There isn't a{' '}
+            <span className="no-results-name">'{itemName}'</span> product in the
+            database.
           </p>
         )}
       </div>
