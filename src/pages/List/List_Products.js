@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Nav } from '../../components/Nav';
-import { Redirection } from '../../components/Redirection';
+import { Nav } from '../../components/nav/Nav';
+import { Redirection } from '../../components/redirection/Redirection';
 import ListEmpty from '../../components/ListEmpty/ListEmpty';
 import FormProducts from '../../components/formProducts/FormProducts';
 import Loading from '../../components/loading/loading';
@@ -8,12 +8,14 @@ import { getTokenFromStorage } from '../../utils/utils';
 import './ListProducts.css';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
+import { useNavigate } from 'react-router-dom';
 
 const ListProducts = () => {
   const [items, setItems] = useState([]);
   const token = useRef(getTokenFromStorage());
   const [loading, setLoading] = useState(true);
-  const listProducts = useRef();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     let unsub = null;
@@ -21,15 +23,16 @@ const ListProducts = () => {
       /* Get items */
       const setInitialItems = (token) => {
         unsub = onSnapshot(doc(db, 'lists', token.current), (doc) => {
-          listProducts.current = doc.data().items;
-
-          if (listProducts.current === undefined) {
+          const data = doc.data();
+          if (data === undefined) {
             setItems([]);
-            setLoading(false);
+            localStorage.removeItem('token');
+            navigate('/');
           } else {
-            setItems(listProducts.current);
-            setLoading(false);
+            let { items } = doc.data();
+            setItems(items);
           }
+          setLoading(false);
         });
       };
 
@@ -41,22 +44,22 @@ const ListProducts = () => {
         unsub();
       }
     };
-  }, []);
-
+  }, [navigate]);
   if (!token.current) return <Redirection />;
 
   return (
-    <main>
-      <h1>Smart Shopping List</h1>
-      {loading ? (
-        <Loading />
-      ) : items.length === 0 ? (
-        <ListEmpty />
-      ) : (
-        <FormProducts items={items} />
-      )}
+    <>
+      <main>
+        {loading ? (
+          <Loading />
+        ) : items.length === 0 ? (
+          <ListEmpty />
+        ) : (
+          <FormProducts items={items} />
+        )}
+      </main>
       <Nav />
-    </main>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './Redirection.css';
 
 export const Redirection = () => {
   const navigate = useNavigate();
@@ -10,5 +11,9 @@ export const Redirection = () => {
     }, 1500);
   });
 
-  return <h1>You're being redirected now! 🛫</h1>;
+  return (
+    <div className='container_redirection'>
+        <h1 className="h1-redirected"> You're being redirected now! 🛫</h1>
+    </div>
+  );
 };

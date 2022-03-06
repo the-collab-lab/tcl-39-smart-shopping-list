@@ -1,0 +1,27 @@
+.title-home {
+  padding: 20px 81px 0 81px;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #4d478b;
+}
+
+.second-title {
+  padding: 18px 85px 36px 85px;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #4d478b;
+}
+.image-home {
+  width: 75px;
+  height: 114px;
+}
+
+.fondo {
+  background-color: black;
+}

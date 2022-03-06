@@ -1,16 +1,11 @@
-import { css } from '@emotion/react';
 import PuffLoader from 'react-spinners/PuffLoader';
-
-// Can be a string as well. Need to ensure each key-value pair ends with ;
-const override = css`
-  display: block;
-  margin: 0 auto;
-`;
+import "./loading.css"
 
 const Loading = () => {
   return (
-    <div>
-      <PuffLoader css={override} size={60} />
+    <div className='container-loading'>
+      <PuffLoader size={160} color='#7A7A7A' />
+      <p className='loading_text'>Loading</p>
     </div>
   );
 };

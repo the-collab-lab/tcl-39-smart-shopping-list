@@ -1,18 +1,22 @@
-main {
-  display: grid;
-  justify-items: center;
-}
 form {
   padding: 2rem 0;
 }
-
-fieldset {
-  border: none;
-  margin: 1rem 0;
+.filter-form-add-items {
+  justify-content: stretch;
+  padding: 0;
+  justify-items: center;
 }
-input {
-  border: 1px solid #9e9e9e;
-  background-color: #ececec;
+
+.frequency-fields {
+  border: none;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  padding: 10px 10px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .button-container {
@@ -21,4 +25,24 @@ input {
 }
 button {
   padding: 0.25rem 1rem;
+}
+
+.how-soon {
+  margin: 28px 0px 1px;
+  font-size: 14px;
+  color: white;
+}
+
+.inputField {
+  margin-top: 2%;
+}
+
+.list-header-add-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #6691ed;
+  width: 100%;
+  color: white;
+  padding: 20px;
 }

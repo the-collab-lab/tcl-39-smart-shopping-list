@@ -5,10 +5,9 @@ import CreateList from './pages/CreateList/CreateList';
 
 const App = () => {
   return (
-    <main>
-      <h1>Welcome to our Smart Shopping List!</h1>
+    <main className="App">
       <CreateList />
-      <p>- or -</p>
+      <p className="or">- or -</p>
       <JoinList />
     </main>
   );

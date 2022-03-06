@@ -38,20 +38,23 @@ export const JoinList = () => {
 
   return (
     <>
-      <h3>Join list</h3>
+      <h3 className="join-list">Join list</h3>
       <form onSubmit={handleSubmit}>
-        <p>Join an existing shopping list by entering a three word token.</p>
-        <label htmlFor="joinToken">Share token</label>
+        <label htmlFor="joinToken" className="join-list-text">
+          Join an existing shopping list by entering a three word token.
+        </label>
         <input
           id="joinToken"
-          className="inputField"
+          className="inputField input-join"
           type="text"
           value={joinToken}
           required
           onChange={handleChange}
           placeholder="Enter your token"
         />
-        <button type="submit">Join an existing list</button>
+        <button type="submit" className="button-container button-join">
+          Join an existing list
+        </button>
       </form>
     </>
   );

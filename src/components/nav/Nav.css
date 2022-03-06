@@ -1,0 +1,27 @@
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  bottom: 0rem;
+  width: 100%;
+  height: 70px;
+  border-top: 1px solid var(--grey-light);
+  background-color: var(--white);
+}
+
+.material-icons.md-36 {
+  font-size: 36px;
+  padding: 0 4rem;
+}
+.nav-link {
+  text-decoration: none;
+}
+.nav-link_span {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}

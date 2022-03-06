@@ -5,7 +5,6 @@ import App from './App';
 import { AddItems } from './pages/Add-items/Add-items';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import { ProductDetails } from './components/ProductDetails';
 import ListProducts from './pages/List/List_Products';
 import { NotFound404 } from './pages/404/404';
 
@@ -14,9 +13,7 @@ render(
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="list" element={<ListProducts />}>
-        <Route path=":product" element={<ProductDetails />} />
-      </Route>
+      <Route path="list" element={<ListProducts />} />
       <Route path="add-items" element={<AddItems />} />
       <Route path="*" element={<NotFound404 />} />
     </Routes>

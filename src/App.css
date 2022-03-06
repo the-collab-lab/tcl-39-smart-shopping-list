@@ -1,0 +1,14 @@
+.or {
+  padding: 34px 145px 0 145px;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 0px;
+  text-align: center;
+  color: rgba(77, 71, 139, 0.5);
+}
+
+.App {
+  background-image: url(./fondohome.png);
+  display: grid;
+  justify-items: center;
+}

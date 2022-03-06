@@ -1,0 +1,88 @@
+.product-container {
+  display: flex;
+  height: 40px;
+  width: 300px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.main-elements-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  width: inherit;
+}
+
+.color-mark {
+  width: 12px;
+  height: 100%;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  
+}
+
+.name-container {
+  width: 50%;
+}
+
+.item-name {
+  font-size: 15px;
+  font-weight: 700;
+  text-transform: capitalize;
+  
+}
+
+.checked {
+  color: var(--green-dark);
+}
+
+.unchecked {
+  color: #a09e9e;
+  transition: 0.2s ease-in-out all !important;
+}
+
+.unchecked:hover {
+  color: #706b7e;
+}
+
+[aria-label='soon'] {
+  background-color: var(--green-light);
+}
+
+[aria-label='kind of soon'] {
+  background-color: var(--yellow);
+}
+
+[aria-label='not soon'] {
+  background-color: var(--pink);
+}
+
+.delete-icon {
+  display: block;
+  color: #dedede;
+  transition: 0.2s ease-in-out all !important;
+}
+
+.material-icons.md-14:active {
+  color: #fd8383;
+}
+.material-icons.md-14 {
+  font-size: 24px;
+}
+
+button.button_delete {
+  display: flex;
+  background-color: transparent;
+  border: none;
+  color: var(--grey-light);
+  cursor: pointer;
+  padding: 0;
+}
+.button_delete:hover{
+  color: var(--dark);
+}
+

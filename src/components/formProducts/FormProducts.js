@@ -1,14 +1,25 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { getTokenFromStorage } from '../../utils/utils';
-import { ProductForList } from '../ProductForList';
 import './FormProducts.css';
+import SearchIcon from '@material-ui/icons/Search';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import { ProductForList } from './../productForList/ProductForList';
 
 const FormProducts = ({ items }) => {
   const [itemName, setItemName] = useState('');
-  const handleChange = (e) => setItemName(e.target.value);
+  const handleChange = (e) => {
+    setItemName(e.target.value);
+    setIsFiltering(true);
+
+    if (e.target.value === '') {
+      setIsFiltering(false);
+    }
+  };
+
   const token = useRef(getTokenFromStorage());
   const [itemsFiltered, setItemsFiltered] = useState(items);
+  const [isFiltering, setIsFiltering] = useState(false);
 
   useEffect(() => {
     if (itemName === '') {
@@ -22,44 +33,89 @@ const FormProducts = ({ items }) => {
     }
   }, [itemName, items]);
 
-  const resetInput = () => setItemName('');
+  const resetInput = () => {
+    setItemName('');
+    setIsFiltering(false);
+  };
 
   return (
     <>
-      <form>
-        <label htmlFor="filter">Filter items</label>
-        <div className="filter_item">
-          <input
-            id="filter"
-            className="inputField"
-            value={itemName}
-            type="text"
-            onChange={handleChange}
-            placeholder="Start typing a product..."
-          />
-          <button
-            type="button"
-            className="button_filteritem"
-            onClick={resetInput}
-          >
-            x
-          </button>
+      <div className="list-header">
+        <h1 className="title">HELLO!</h1>
+        <form className="filter-form">
+          <label htmlFor="filter">Filter your shopping list:</label>
+          <div className="filter-item">
+            <input
+              id="filter"
+              className="filter-input"
+              value={itemName}
+              type="text"
+              onChange={handleChange}
+              placeholder="Search a product by name"
+            />
+            {isFiltering ? (
+              <HighlightOffIcon onClick={resetInput} />
+            ) : (
+              <SearchIcon />
+            )}
+          </div>
+        </form>
+      </div>
+      <div className="parent_list_view">
+        <div className="table_view">
+          <table className="table-container">
+            <thead>
+              <tr>
+                <th>Color</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span className="circle soon"></span>
+                </td>
+                <td>
+                  <span>Soon</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="circle kindOfSoon"></span>
+                </td>
+                <td>
+                  <span>Kind of Soon</span>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <span className="circle notSoon"></span>
+                </td>
+                <td>
+                  <span>Not Soon</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </form>
-      {itemsFiltered?.length > 0 ? (
-        itemsFiltered.map((item, index) => (
-          <ProductForList
-            key={`${index}-${item.name}`}
-            item={item}
-            token={token.current}
-          />
-        ))
-      ) : (
-        <p>
-          No results. There isn't any product with '{itemName}' as the name in
-          the database.
-        </p>
-      )}
+        <div className="productos_view products-container">
+          {itemsFiltered?.length > 0 ? (
+            itemsFiltered.map((item, index) => (
+              <ProductForList
+                key={`${index}-${item.name}`}
+                item={item}
+                token={token.current}
+              />
+            ))
+          ) : (
+            <p className="no-results-text">
+            No results. There isn't a{' '}
+            <span className="no-results-name">'{itemName}'</span> product in the
+            database.
+          </p>
+          )}
+        </div>
+      </div>
+
       <Outlet />
     </>
   );

@@ -1,12 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { addProductToList, getItemsFromList } from '../../lib/api';
 import { Modal } from '../../components/modal/Modal';
-import { Nav } from '../../components/Nav';
+import { Nav } from './../../components/nav/Nav';
 import { useModalFunctions } from '../../components/modal/ModalFunctions';
 import normalizeInputs from '../../components/normalizeInput/NormalizeInputs';
-import { Redirection } from '../../components/Redirection';
+import { Redirection } from '../../components/redirection/Redirection';
 import { checkTokenFormat, getTokenFromStorage } from '../../utils/utils';
 import './Add-items.css';
+import '../../components/button/button.css';
+import '../../components/formProducts/FormProducts.css';
 
 export const AddItems = () => {
   //get token from localstore
@@ -77,80 +79,94 @@ export const AddItems = () => {
 
   return (
     <>
-      <h1>Smart Shopping List</h1>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="name">
-          <p>Product:</p>
-          <input
-            required
-            id="name"
-            className="inputField"
-            type="text"
-            name="name"
-            value={product.name}
-            onChange={handleChangeProduct}
-            ref={inputRef}
-          />
-        </label>
-        <fieldset>
-          <p>How soon will you buy this again?</p>
-          <div>
-            <label htmlFor="soon">
-              <input
-                id="soon"
-                type="radio"
-                name="howSoon"
-                required
-                value="7"
-                checked={product.howSoon === '7'}
-                onChange={handleChangeProduct}
-              />
-              Soon
+      <main>
+        <form className="filter-form-add-items" onSubmit={handleSubmit}>
+          <div className="list-header-add-items">
+            <label htmlFor="name">
+              Add new products to your list:
+              <div className="filter-item inputField">
+                <input
+                  required
+                  id="name"
+                  className="filter-input"
+                  type="text"
+                  name="name"
+                  value={product.name}
+                  onChange={handleChangeProduct}
+                  ref={inputRef}
+                  placeholder="New product"
+                />
+              </div>
             </label>
+
+            <p className="how-soon">How soon will you buy this again?</p>
+            <fieldset className="frequency-fields">
+              <div>
+                <label htmlFor="soon">
+                  <input
+                    id="soon"
+                    type="radio"
+                    name="howSoon"
+                    required
+                    value="7"
+                    checked={product.howSoon === '7'}
+                    onChange={handleChangeProduct}
+                  />
+                  Soon
+                </label>
+              </div>
+              <div>
+                <label htmlFor="kindOfSoon">
+                  <input
+                    id="kindOfSoon"
+                    type="radio"
+                    name="howSoon"
+                    required
+                    value="14"
+                    checked={product.howSoon === '14'}
+                    onChange={handleChangeProduct}
+                  />
+                  Kind of soon
+                </label>
+              </div>
+              <div>
+                <label htmlFor="notSoon">
+                  <input
+                    id="notSoon"
+                    type="radio"
+                    name="howSoon"
+                    required
+                    value="30"
+                    checked={product.howSoon === '30'}
+                    onChange={handleChangeProduct}
+                  />
+                  Not soon
+                </label>
+              </div>
+            </fieldset>
           </div>
-          <div>
-            <label htmlFor="kindOfSoon">
-              <input
-                id="kindOfSoon"
-                type="radio"
-                name="howSoon"
-                required
-                value="14"
-                checked={product.howSoon === '14'}
-                onChange={handleChangeProduct}
-              />
-              Kind of soon
-            </label>
+          <div className="button-container">
+            <button className="button-container" type="submit">
+              Submit
+            </button>
           </div>
-          <div>
-            <label htmlFor="notSoon">
-              <input
-                id="notSoon"
-                type="radio"
-                name="howSoon"
-                required
-                value="30"
-                checked={product.howSoon === '30'}
-                onChange={handleChangeProduct}
-              />
-              Not soon
-            </label>
-          </div>
-        </fieldset>
-        <div className="button-container">
-          <button type="submit">Submit</button>
-        </div>
-      </form>
-      <Modal
-        children={'This product is duplicated'}
-        modalClass={modalDuplicatedProductMsg.modalClass}
-        handleClose={modalDuplicatedProductMsg.hideModal}
-      />
-      <Modal
-        children={'Your product was successfully added'}
-        modalClass={modalProductAdded.modalClass}
-        handleClose={modalProductAdded.hideModal}
-      />
+        </form>
+
+        <Modal
+          children={'Your product already exists'}
+          modalClass={modalDuplicatedProductMsg.modalClass}
+          handleClose={modalDuplicatedProductMsg.hideModal}
+          iconMaterial={'error'}
+          colorIcon={'md-light_error'}
+        />
+        <Modal
+          children={'Your product was successfully added'}
+          modalClass={modalProductAdded.modalClass}
+          handleClose={modalProductAdded.hideModal}
+          iconMaterial={'check_circle'}
+          colorIcon={'md-light_success'}
+        ></Modal>
+      </main>
       <Nav />
     </>
   );
