@@ -8,12 +8,14 @@ import { getTokenFromStorage } from '../../utils/utils';
 import './ListProducts.css';
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../lib/firebase';
+import { useNavigate } from 'react-router-dom';
 
 const ListProducts = () => {
   const [items, setItems] = useState([]);
   const token = useRef(getTokenFromStorage());
   const [loading, setLoading] = useState(true);
-  const listProducts = useRef();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     let unsub = null;
@@ -21,15 +23,16 @@ const ListProducts = () => {
       /* Get items */
       const setInitialItems = (token) => {
         unsub = onSnapshot(doc(db, 'lists', token.current), (doc) => {
-          listProducts.current = doc.data().items;
-
-          if (listProducts.current === undefined) {
+          const data = doc.data();
+          if (data === undefined) {
             setItems([]);
-            setLoading(false);
+            localStorage.removeItem('token');
+            navigate('/');
           } else {
-            setItems(listProducts.current);
-            setLoading(false);
+            let { items } = doc.data();
+            setItems(items);
           }
+          setLoading(false);
         });
       };
 
@@ -41,8 +44,7 @@ const ListProducts = () => {
         unsub();
       }
     };
-  }, []);
-
+  }, [navigate]);
   if (!token.current) return <Redirection />;
 
   return (
