@@ -9,6 +9,19 @@
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.inactive .name-container {
+  text-decoration: line-through;
+  color: #a09e9e;
+}
+
+.inactive .color-mark {
+  background-color: #a09e9e;
+}
+
+.inactive .checked {
+  color: #a09e9e;
+}
+
 .main-elements-container {
   display: flex;
   flex-direction: row;
@@ -22,7 +35,6 @@
   height: 100%;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
-  
 }
 
 .name-container {
@@ -33,7 +45,6 @@
   font-size: 15px;
   font-weight: 700;
   text-transform: capitalize;
-  
 }
 
 .checked {
@@ -41,7 +52,7 @@
 }
 
 .unchecked {
-  color: #a09e9e;
+  color: gray;
   transition: 0.2s ease-in-out all !important;
 }
 
@@ -82,7 +93,7 @@ button.button_delete {
   cursor: pointer;
   padding: 0;
 }
-.button_delete:hover{
+
+.button_delete:hover {
   color: var(--dark);
 }
-
