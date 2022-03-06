@@ -12,7 +12,7 @@
 
 .title {
   margin-bottom: 10px;
-  text-align: center;
+  font-size: 1.3em;
 }
 
 .filter-form {
@@ -28,14 +28,13 @@
 
 .products-container {
   padding: 10px 10px 0 10px;
-  display: grid;
-  justify-content: space-around;
+  margin-bottom: 20vh;
 }
 
 .filter-item {
   display: flex;
   justify-content: space-between;
-
+  opacity: 0.5;
   background: rgba(255, 255, 255, 0.45);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(4px);
@@ -58,6 +57,17 @@
 .filter-input::placeholder {
   color: white;
   opacity: 0.5;
+}
+.no-results-text {
+  margin: 20%;
+  font-weight: 300;
+  font-size: 18px;
+  width: 50%;
+  overflow-wrap: break-word;
+}
+
+.no-results-name {
+  font-weight: normal;
 }
 
 .circle {
@@ -82,6 +92,15 @@ table.table-container {
   padding: 18px;
   justify-content: space-around;
 }
+thead {
+  padding: 10px;
+}
+
+.parent_list_view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 @media only screen and (min-width: 600px) {
   .filter-form-add-items {
@@ -89,10 +108,11 @@ table.table-container {
   }
   .parent_list_view {
     display: grid;
-    grid-template-columns: 1fr 4fr;
+    grid-template-columns: 1fr 2fr;
     grid-template-rows: 1fr;
     grid-column-gap: 20px;
     grid-row-gap: 8px;
+    align-items: start;
   }
 
   .table_view {

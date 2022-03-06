@@ -43,7 +43,7 @@ const FormProducts = ({ items }) => {
       <div className="list-header">
         <h1 className="title">HELLO!</h1>
         <form className="filter-form">
-          <label htmlFor="filter">Search a product by name</label>
+          <label htmlFor="filter">Filter your shopping list:</label>
           <div className="filter-item">
             <input
               id="filter"
@@ -51,7 +51,7 @@ const FormProducts = ({ items }) => {
               value={itemName}
               type="text"
               onChange={handleChange}
-              placeholder="Product's name to search"
+              placeholder="Search a product by name"
             />
             {isFiltering ? (
               <HighlightOffIcon onClick={resetInput} />
@@ -107,12 +107,11 @@ const FormProducts = ({ items }) => {
               />
             ))
           ) : (
-            <div className="mssg_result_empty">
-              <p>
-                No results. There isn't any product with '{itemName}' as the
-                name in the database.
-              </p>
-            </div>
+            <p className="no-results-text">
+            No results. There isn't a{' '}
+            <span className="no-results-name">'{itemName}'</span> product in the
+            database.
+          </p>
           )}
         </div>
       </div>

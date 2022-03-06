@@ -5,7 +5,7 @@ import {
   calculateDaysSinceLastPurchase,
   validateHours,
 } from '../../utils/utils';
-import { deleteItem, getItemsFromList } from '../../lib/api';
+import { deleteItem } from '../../lib/api';
 import './ProductForList.css';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
@@ -14,11 +14,9 @@ export const ProductForList = ({ item, token }) => {
 
   const handleDelete = async (e) => {
     if (window.confirm('Do you want to delete this product?')) {
-      const name = e.target.getAttribute('name');
-      const itemsFromList = await getItemsFromList(token);
-      const itemToDelete = itemsFromList.find((item) => item.name === name);
+      
 
-      await deleteItem(token, itemToDelete);
+      await deleteItem(token, item);
        
       alert('Deleted!');
     }

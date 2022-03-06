@@ -1,7 +1,7 @@
 .product-container {
   display: flex;
   height: 40px;
-  width: 100%;
+  width: 260px;
   border-radius: 8px;
   margin-bottom: 10px;
   background-color: #ffffff;
@@ -22,6 +22,7 @@
   height: 100%;
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
+  
 }
 
 .name-container {
