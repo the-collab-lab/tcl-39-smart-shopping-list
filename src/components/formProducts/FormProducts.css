@@ -34,16 +34,15 @@
 .filter-item {
   display: flex;
   justify-content: space-between;
-  opacity: 0.5;
+  align-items: center;
   background: rgba(255, 255, 255, 0.45);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .filter-input {
+  font-size: 16px;
   padding: 5px;
   color: white;
   border: none;
@@ -56,7 +55,7 @@
 
 .filter-input::placeholder {
   color: white;
-  opacity: 0.5;
+  opacity: 0.7;
 }
 .no-results-text {
   margin: 20%;
