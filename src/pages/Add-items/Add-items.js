@@ -79,98 +79,95 @@ export const AddItems = () => {
 
   return (
     <>
-        <main>
-      <form className="filter-form-add-items" onSubmit={handleSubmit}>
-        <div className="list-header-add-items">
-          <label htmlFor="name">
-            Add new products to your list:
-            <div className="filter-item inputField">
-              <input
-                required
-                id="name"
-                className="filter-input"
-                type="text"
-                name="name"
-                value={product.name}
-                onChange={handleChangeProduct}
-                ref={inputRef}
-                placeholder="New product"
-              />
-            </div>
-          </label>
-
-          <p className="how-soon">How soon will you buy this again?</p>
-          <fieldset>
-            <div>
-              <label htmlFor="soon">
+      <main>
+        <form className="filter-form-add-items" onSubmit={handleSubmit}>
+          <div className="list-header-add-items">
+            <label htmlFor="name">
+              Add new products to your list:
+              <div className="filter-item inputField">
                 <input
-                  id="soon"
-                  type="radio"
-                  name="howSoon"
                   required
-                  value="7"
-                  checked={product.howSoon === '7'}
+                  id="name"
+                  className="filter-input"
+                  type="text"
+                  name="name"
+                  value={product.name}
                   onChange={handleChangeProduct}
+                  ref={inputRef}
+                  placeholder="New product"
                 />
-                Soon 
-              </label>
-            </div>
-            <div>
-              <label htmlFor="kindOfSoon">
-                <input
-                  id="kindOfSoon"
-                  type="radio"
-                  name="howSoon"
-                  required
-                  value="14"
-                  checked={product.howSoon === '14'}
-                  onChange={handleChangeProduct}
-                />
-                Kind of soon 
-              </label>
-            </div>
-            <div>
-              <label htmlFor="notSoon">
-                <input
-                  id="notSoon"
-                  type="radio"
-                  name="howSoon"
-                  required
-                  value="30"
-                  checked={product.howSoon === '30'}
-                  onChange={handleChangeProduct}
-                />
-                Not soon 
-              </label>
-            </div>
-          </fieldset>
-        </div>
-        <div className="button-container">
-          <button className="button-container" type="submit">
-            Submit
-          </button>
-        </div>
-      </form>
+              </div>
+            </label>
 
-      <Modal
-        children={'Your product already exists'}
-        modalClass={modalDuplicatedProductMsg.modalClass}
-        handleClose={modalDuplicatedProductMsg.hideModal}
-        iconMaterial={'error'}
-        colorIcon={'md-light_error'}
-      />
-      <Modal
-        children={'Your product was successfully added'}
-        modalClass={modalProductAdded.modalClass}
-        handleClose={modalProductAdded.hideModal}
-        iconMaterial={'check_circle'}
-        colorIcon={'md-light_success'}
-      ></Modal>
+            <p className="how-soon">How soon will you buy this again?</p>
+            <fieldset className="frequency-fields">
+              <div>
+                <label htmlFor="soon">
+                  <input
+                    id="soon"
+                    type="radio"
+                    name="howSoon"
+                    required
+                    value="7"
+                    checked={product.howSoon === '7'}
+                    onChange={handleChangeProduct}
+                  />
+                  Soon
+                </label>
+              </div>
+              <div>
+                <label htmlFor="kindOfSoon">
+                  <input
+                    id="kindOfSoon"
+                    type="radio"
+                    name="howSoon"
+                    required
+                    value="14"
+                    checked={product.howSoon === '14'}
+                    onChange={handleChangeProduct}
+                  />
+                  Kind of soon
+                </label>
+              </div>
+              <div>
+                <label htmlFor="notSoon">
+                  <input
+                    id="notSoon"
+                    type="radio"
+                    name="howSoon"
+                    required
+                    value="30"
+                    checked={product.howSoon === '30'}
+                    onChange={handleChangeProduct}
+                  />
+                  Not soon
+                </label>
+              </div>
+            </fieldset>
+          </div>
+          <div className="button-container">
+            <button className="button-container" type="submit">
+              Submit
+            </button>
+          </div>
+        </form>
 
-     
-    </main>
-    <Nav />
+        <Modal
+          children={'Your product already exists'}
+          modalClass={modalDuplicatedProductMsg.modalClass}
+          handleClose={modalDuplicatedProductMsg.hideModal}
+          iconMaterial={'error'}
+          colorIcon={'md-light_error'}
+        />
+        <Modal
+          children={'Your product was successfully added'}
+          modalClass={modalProductAdded.modalClass}
+          handleClose={modalProductAdded.hideModal}
+          iconMaterial={'check_circle'}
+          colorIcon={'md-light_success'}
+        ></Modal>
+      </main>
+      <Nav />
     </>
-
   );
 };
