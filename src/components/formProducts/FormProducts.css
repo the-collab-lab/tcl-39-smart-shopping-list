@@ -113,6 +113,7 @@ thead {
     grid-column-gap: 20px;
     grid-row-gap: 8px;
     align-items: start;
+    width: 600px;
   }
 
   .table_view {
