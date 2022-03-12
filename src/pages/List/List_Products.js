@@ -24,14 +24,18 @@ const ListProducts = () => {
       const setInitialItems = (token) => {
         unsub = onSnapshot(doc(db, 'lists', token.current), (doc) => {
           const data = doc.data();
+          const { items } = data;
+
           if (data === undefined) {
             setItems([]);
             localStorage.removeItem('token');
             navigate('/');
+          } else if (!items) {
+            setItems([]);
           } else {
-            let { items } = doc.data();
             setItems(items);
           }
+
           setLoading(false);
         });
       };
@@ -45,6 +49,7 @@ const ListProducts = () => {
       }
     };
   }, [navigate]);
+
   if (!token.current) return <Redirection />;
 
   return (
