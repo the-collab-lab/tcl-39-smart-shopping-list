@@ -114,7 +114,6 @@ const FormProducts = ({ items }) => {
               />
               <ProductsByEstimation
                 items={itemsFiltered}
-                start={16}
                 end={31}
                 title="Not Soon"
                 estimationType="not-soon"
