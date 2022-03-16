@@ -1,10 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
-import { getTokenFromStorage } from '../../utils/utils';
 import './FormProducts.css';
 import SearchIcon from '@material-ui/icons/Search';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
-import { ProductForList } from './../productForList/ProductForList';
+import ProductsByEstimation from '../ProductsByEstimation/ProductsByEstimation';
 
 const FormProducts = ({ items }) => {
   const [itemName, setItemName] = useState('');
@@ -17,7 +16,6 @@ const FormProducts = ({ items }) => {
     }
   };
 
-  const token = useRef(getTokenFromStorage());
   const [itemsFiltered, setItemsFiltered] = useState(items);
   const [isFiltering, setIsFiltering] = useState(false);
 
@@ -99,19 +97,39 @@ const FormProducts = ({ items }) => {
         </div>
         <div className="productos_view products-container">
           {itemsFiltered?.length > 0 ? (
-            itemsFiltered.map((item, index) => (
-              <ProductForList
-                key={`${index}-${item.name}`}
-                item={item}
-                token={token.current}
+            <>
+              <ProductsByEstimation
+                items={itemsFiltered}
+                start={0}
+                end={6}
+                title="Soon"
+                estimationType="soon"
               />
-            ))
+              <ProductsByEstimation
+                items={itemsFiltered}
+                start={7}
+                end={30}
+                title="Kind of Soon"
+                estimationType="kind-of-soon"
+              />
+              <ProductsByEstimation
+                items={itemsFiltered}
+                end={31}
+                title="Not Soon"
+                estimationType="not-soon"
+              />
+              <ProductsByEstimation
+                items={itemsFiltered}
+                title="Inactive"
+                estimationType="inactive"
+              />
+            </>
           ) : (
             <p className="no-results-text">
-            No results. There isn't a{' '}
-            <span className="no-results-name">'{itemName}'</span> product in the
-            database.
-          </p>
+              No results. There isn't a{' '}
+              <span className="no-results-name">'{itemName}'</span> product in
+              the database.
+            </p>
           )}
         </div>
       </div>

@@ -9,15 +9,13 @@ import { deleteItem } from '../../lib/api';
 import './ProductForList.css';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
-export const ProductForList = ({ item, token }) => {
+export const ProductForList = ({ item, token, estimationType }) => {
   const [isBought, setIsBought] = useState(false);
 
   const handleDelete = async (e) => {
     if (window.confirm('Do you want to delete this product?')) {
-      
-
       await deleteItem(token, item);
-       
+
       alert('Deleted!');
     }
   };
@@ -44,10 +42,11 @@ export const ProductForList = ({ item, token }) => {
   }, [item]);
 
   return (
-    <div className="product-container">
+    <div className={`product-container ${estimationType}`}>
       <div
         className="color-mark"
-        aria-label={`${
+        aria-label={estimationType}
+      />
           item.howSoon === 7
             ? 'soon'
             : item.howSoon === 14
