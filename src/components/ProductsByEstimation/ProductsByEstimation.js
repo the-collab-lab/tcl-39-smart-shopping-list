@@ -23,14 +23,14 @@ export default function ProductsByEstimation({
     setLoading(true);
 
     let resultProducts = [];
-    if (estimationType !== 'inactive') {
+    if (estimationType === 'inactive') {
+      resultProducts = getInactiveProducts(items);
+    } else {
       if (estimationType === 'not-soon') {
         resultProducts = getProductsEstimated(items, start);
       } else {
         resultProducts = getProductsEstimatedWithRange(items, start, end);
       }
-    } else {
-      resultProducts = getInactiveProducts(items);
     }
 
     const productsSorted = sortProductsByName(resultProducts);
