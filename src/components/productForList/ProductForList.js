@@ -45,7 +45,8 @@ export const ProductForList = ({ item, token, estimationType }) => {
     <div className={`product-container ${estimationType}`}>
       <div
         className="color-mark"
-        aria-label={`${
+        aria-label={estimationType}
+      />
           item.howSoon === 7
             ? 'soon'
             : item.howSoon === 14
