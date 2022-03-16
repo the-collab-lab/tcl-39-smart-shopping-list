@@ -42,11 +42,8 @@ export const ProductForList = ({ item, token, estimationType }) => {
   }, [item]);
 
   return (
-    <div className={`product-container ${estimationType}`}>
-      <div
-        className="color-mark"
-        aria-label={estimationType}
-      />
+    <div className={`product-container`}>
+      <div className={`color-mark ${estimationType}`} />
       <div className="main-elements-container">
         <CheckCircleIcon
           className={isBought ? 'checked' : 'unchecked'}
