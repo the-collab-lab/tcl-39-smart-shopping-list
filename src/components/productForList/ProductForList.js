@@ -47,13 +47,6 @@ export const ProductForList = ({ item, token, estimationType }) => {
         className="color-mark"
         aria-label={estimationType}
       />
-          item.howSoon === 7
-            ? 'soon'
-            : item.howSoon === 14
-            ? 'kind of soon'
-            : 'not soon'
-        }`}
-      />
       <div className="main-elements-container">
         <CheckCircleIcon
           className={isBought ? 'checked' : 'unchecked'}
