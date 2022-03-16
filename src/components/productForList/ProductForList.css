@@ -14,10 +14,6 @@
   color: #a09e9e;
 }
 
-.inactive .color-mark {
-  background-color: #a09e9e;
-}
-
 .inactive .checked {
   color: #a09e9e;
 }
@@ -60,16 +56,20 @@
   color: #706b7e;
 }
 
-[aria-label='soon'] {
+.soon {
   background-color: var(--green-light);
 }
 
-[aria-label='kind of soon'] {
+.kind-of-soon {
   background-color: var(--yellow);
 }
 
-[aria-label='not soon'] {
+.not-soon {
   background-color: var(--pink);
+}
+
+.inactive {
+  background-color: #a09e9e;
 }
 
 .delete-icon {
