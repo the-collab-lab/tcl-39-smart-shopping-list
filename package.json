@@ -26,6 +26,9 @@
     "lint-staged": "^10.5.3",
     "prettier": "^2.2.1"
   },
+  "overrides": {
+    "@svgr/webpack": "^6.2.1"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "CI= react-scripts build",
