@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { calculateEstimate } from '@the-collab-lab/shopping-list-utils/dist/calculateEstimate';
+import { calculateEstimate } from '@the-collab-lab/shopping-list-utils';
 import { updatePurchaseTimeDB } from '../../lib/api';
 import {
   calculateDaysSinceLastPurchase,
@@ -14,10 +14,8 @@ export const ProductForList = ({ item, token }) => {
 
   const handleDelete = async (e) => {
     if (window.confirm('Do you want to delete this product?')) {
-      
-
       await deleteItem(token, item);
-       
+
       alert('Deleted!');
     }
   };

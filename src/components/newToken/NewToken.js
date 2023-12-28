@@ -1,21 +1,22 @@
-import { getToken, words } from '@the-collab-lab/shopping-list-utils';
-import { useNavigate } from 'react-router-dom';
-import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
-import { listsCollection } from '../../lib/api';
+// import { getToken, words } from '@the-collab-lab/shopping-list-utils';
+// import { useNavigate } from 'react-router-dom';
+// import { doc, serverTimestamp, setDoc } from 'firebase/firestore';
+// import { listsCollection } from '../../lib/api';
 import './NewToken.css';
 
 const NewToken = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const token = () => {
-    const getTokenStorage = getToken(words);
-    localStorage.setItem('token', getTokenStorage);
+    console.log('Creating new lists is disabled');
+    // const getTokenStorage = getToken(words);
+    // localStorage.setItem('token', getTokenStorage);
 
-    setDoc(doc(listsCollection, getTokenStorage), {
-      createdAt: serverTimestamp(),
-    });
+    // setDoc(doc(listsCollection, getTokenStorage), {
+    //   createdAt: serverTimestamp(),
+    // });
 
-    navigate('/add-items');
+    // navigate('/add-items');
   };
 
   return (
